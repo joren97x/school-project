@@ -20,6 +20,10 @@
                 $back = new backend();
                 echo $back->loginUser($_POST["firstName"], $_POST["lastName"]);
                 break;
+            case 'createRoom':
+                $back = new backend();
+                echo $back->createRoom($_POST["roomName"],$_POST["roomDetails"],$_POST["roomPrice"],$_POST["roomImg"]);
+                break;
             case 'view':
                 $back = new backend();
                 echo $back->viewApplicants();

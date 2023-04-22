@@ -17,10 +17,15 @@
         {
             return self::loginAdmin($user, $pass);
         }
-
+        //eeeeeeeeee
         public function loginUser($firstName, $lastName)
         {
             return self::loginUserFunction($firstName, $lastName);
+        }
+        //tiwasonon
+        public function createRoom($roomName, $roomDetails, $roomPrice, $roomImg)
+        {
+            return self::createRoomFunction($roomName, $roomDetails, $roomPrice, $roomImg);
         }
 
         public function viewApplicants()
@@ -170,7 +175,7 @@
                 return $e;
             }
         }
-
+        //eeeeeeeeee
         private function loginUserFunction($firstName, $lastName)
         {
             try {
@@ -254,6 +259,36 @@
                 return $e;
             }
         }
+        //tiwasonon
+        private function createRoomFunction($roomName, $roomDetails, $roomPrice, $roomImg) 
+        {
+            try {
+                if($this->checkRoom($roomName, $roomDetails, $roomPrice, $roomImg)) {
+                    $db = new database();
+                    if($db->getStatus()) {
+                        $stmt = $db->getConn()->prepare($this->createRoomQuery());
+                        $stmt->execute(array($roomName, $roomDetails, $roomPrice, $roomImg));
+                        $res = $stmt->fetch();
+                        if(!$res) {
+                            $db->closeConn();
+                            return '200';
+                        }
+                        else {
+                            $db->closeConn();
+                            return '404';
+                        }
+                    }
+                    else {
+                        return '403';
+                    }
+            }
+            else {
+                return '403';
+            }
+            }catch(PDOException $e) {
+                return $e;
+            }
+        }
 
         private function getAdminID()
         {
@@ -286,6 +321,11 @@
             return ($lastname != '' && $firstname != '' && $midname != '' && $birthdate != '' && $mailadd != '' && $region != '' && $city != '' && $municipality != '' && $zipcode != '' && $streetname != '' && $contact != '' && $fathername != '' && $mothername != '' && $gender != '' && $age != '') ? true : false;
         }
 
+        private function checkRoom($roomName, $roomDetails, $roomPrice, $roomImg)
+        {
+            return ($roomName != '' && $roomDetails != '' && $roomPrice != '' && $roomImg);
+        }
+
         private function checkAdminRegister($username, $password, $email)
         {
             return ($username != '' && $password != '' && $email != '') ? true : false;
@@ -311,11 +351,16 @@
             return "INSERT INTO `useradmin` (`username`, `password`, `email`, `date_created`) VALUES (?,?,?,?);";
         }
 
+        private function createRoomQuery()
+        {
+            return "INSERT INTO `rooms` (`room_name`, `room_details`, `room_price`, `room_img`) VALUES (?,?,?,?);";
+        }
+
         private function loginAdminQuery()
         {
             return "SELECT * FROM `useradmin` WHERE `username` = ? AND `password` = ?;";
         }
-
+        //eeeeeeeeee
         private function loginUserQuery()
         {
             return "SELECT * FROM `registers` WHERE `firstname` = ? AND `lastname` = ?;";

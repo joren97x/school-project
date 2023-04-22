@@ -24,6 +24,7 @@ var loginRequest = () => {
             }
         },
         error: (xhr, ajaxOptions, thrownError) => {console.log(thrownError)}
+        
     })
 
 }
