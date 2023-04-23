@@ -1,5 +1,5 @@
 <?php 
-    require './database.php';
+    require '../src/database.php';
 
     class backend
     {
@@ -48,6 +48,16 @@
             return self::displayIdCard($number, $email);
         }
 
+        public function displayRooms()
+        {
+            return self::getAllRooms();
+        }
+
+        public function viewDetails($roomId)
+        {   
+            return self::viewRoomDetails($roomId);
+        }
+
         private function displayIdCard($number, $email)
         {
             try {
@@ -66,6 +76,31 @@
                     return "403";
                 }
             } catch (PDOException $e) {
+                return $e;
+            }
+        }
+
+        private function viewRoomDetails($roomId)
+        {
+            try {
+                if($roomId != '') {
+                    $db = new database();
+                    if($db->getStatus()) {
+                        $stmt = $db->getConn()->prepare($this->roomDetailsQuery());
+                        $stmt->execute(array($roomId));
+                        $res = $stmt->fetch();
+                        return json_encode($res);
+                        $db->closeConn();
+                    }
+                    else {
+                        return '403';
+                    }
+                }
+                else {
+                    return '403';
+                }
+            }
+            catch(PDOException $e) {
                 return $e;
             }
         }
@@ -142,6 +177,26 @@
                     return "403";
                 }
             } catch (PDOException $e) {
+                return $e;
+            }
+        }
+
+        private function getAllRooms()
+        {
+            try {
+                $db = new database();
+                if($db->getStatus()) {
+                    $stmt = $db->getConn()->prepare($this->getAllRoomQuery());
+                    $stmt->execute();
+                    $var = $stmt->fetchAll();
+                    $db->closeConn();
+                    return json_encode($var);
+                }
+                else {
+                    return "403";
+                }
+            }
+            catch(PDOException $e) {
                 return $e;
             }
         }
@@ -288,7 +343,11 @@
             }catch(PDOException $e) {
                 return $e;
             }
+
+
         }
+
+        
 
         private function getAdminID()
         {
@@ -371,9 +430,19 @@
             return "SELECT * FROM `registers`;";
         }
 
+        private function getAllRoomQuery()
+        {
+            return "SELECT * FROM `rooms`";
+        }
+
         private function applicantQuery()
         {
             return "SELECT * FROM `registers` WHERE `contact` = ? AND `mailadd` = ?;";
+        }
+
+        private function roomDetailsQuery()
+        {
+            return "SELECT * FROM `rooms` WHERE `room_id` = ?";
         }
 
         private function changeAdminPassQuery()

@@ -35,6 +35,8 @@
           <button class="navbar-toggler" id="navburger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
+          <a href="roomSelection.html">Guest Rooms</a>
+          <a href="roomCreation.html">Create Rooms</a>
         </div>
     </nav>
 
