@@ -20,7 +20,7 @@ var loginRequest = () => {
         success: (data) => {
             console.log(data)
             if (data == "200") {
-                window.location.href = 'public/dashboard.html'
+                window.location.href = 'public/dashboard.php'
             }
         },
         error: (xhr, ajaxOptions, thrownError) => {console.log(thrownError)}

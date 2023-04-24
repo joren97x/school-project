@@ -212,6 +212,7 @@
                         $stmt->execute(array($user, $tmp));
                         $res = $stmt->fetch();
                         if ($res) {
+                            $_SESSION["userType"] = "admin";
                             $_SESSION["username"] = $user;
                             $_SESSION["password"] = $tmp;
                             $db->closeConn();
@@ -242,6 +243,7 @@
                         $stmt->execute(array($firstName, $tmp));
                         $res = $stmt->fetchAll();
                         if ($res) {
+                            $_SESSION["userType"] = "user"; 
                             $_SESSION["username"] = $firstName;
                             $_SESSION["password"] = $tmp;
                             $db->closeConn();

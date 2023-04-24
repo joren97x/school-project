@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,8 +39,8 @@
           <button class="navbar-toggler" id="navburger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <a href="roomSelection.html">Guest Rooms</a>
-          <a href="roomCreation.html">Create Rooms</a>
+          <a href="roomSelection.php">Guest Rooms</a>
+          <a href="roomCreation.php">Create Rooms</a>
         </div>
     </nav>
 
@@ -46,7 +50,6 @@
                 <div class="col-lg-12">
                     <div class="text-center pt-2 mb-0">
                         <h3>GUEST HOUSE REGISTRATION SYSTEM</h3>
-
                     </div>
                 </div>
             </div>

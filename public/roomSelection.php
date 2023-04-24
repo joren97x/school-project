@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,6 +111,7 @@
 				<div class="room-name">Standard Room</div>
 				<div class="room-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor malesuada tellus.</div>
 				<div class="room-price">P 10,000 </div>
+				
             </div>
         </div>
     </div>
