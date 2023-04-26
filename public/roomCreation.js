@@ -1,14 +1,16 @@
 $(document).ready(function() {
     $(document).on('click', '#createRoom', ()=>{
         if (checkRoom()) {
-            createRoom()
+            var fileName = document.getElementById('roomImg').files[0].name;
+            createRoom(fileName)
         } else {
             alert('Please fill up the missing credentials')
         }
     })
 })
 
-const createRoom = () => {
+const createRoom = (fileName) => {
+    //console.log($('#roomImg').val())
     $.ajax({
         type: 'POST',
         url: '../src/router.php',
@@ -17,7 +19,7 @@ const createRoom = () => {
             roomName: $('#roomName').val(),
             roomDetails: $('#roomDetails').val(),
             roomPrice: $('#roomPrice').val(),
-            roomImg: $('#roomImg').val()
+            roomImg: fileName
         },
         success: (data) => {
             console.log(data);

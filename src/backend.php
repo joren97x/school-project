@@ -3,9 +3,9 @@
 
     class backend
     {
-        public function register($lastname, $firstname, $midname, $birthdate, $mailadd, $region, $city, $municipality, $zipcode, $streetname, $contact, $fathername, $mothername, $gender, $age)
+        public function register($lastname, $firstname, $midname, $birthdate, $mailadd, $region, $city, $municipality, $zipcode, $streetname, $contact, $fathername, $mothername, $gender, $age, $username, $password)
         {
-            return self::registerApplicant($lastname, $firstname, $midname, $birthdate, $mailadd, $region, $city, $municipality, $zipcode, $streetname, $contact, $fathername, $mothername, $gender, $age);
+            return self::registerApplicant($lastname, $firstname, $midname, $birthdate, $mailadd, $region, $city, $municipality, $zipcode, $streetname, $contact, $fathername, $mothername, $gender, $age, $username, $password);
         }
 
         public function registeradmin($username, $password, $email)
@@ -290,14 +290,14 @@
             }
         }
 
-        private function registerApplicant($lastname, $firstname, $midname, $birthdate, $mailadd, $region, $city, $municipality, $zipcode, $streetname, $contact, $fathername, $mothername, $gender, $age)
+        private function registerApplicant($lastname, $firstname, $midname, $birthdate, $mailadd, $region, $city, $municipality, $zipcode, $streetname, $contact, $fathername, $mothername, $gender, $age, $username, $password)
         {
             try {
-                if ($this->checkApplicants($lastname, $firstname, $midname, $birthdate, $mailadd, $region, $city, $municipality, $zipcode, $streetname, $contact, $fathername, $mothername, $gender, $age)) {
+                if ($this->checkApplicants($lastname, $firstname, $midname, $birthdate, $mailadd, $region, $city, $municipality, $zipcode, $streetname, $contact, $fathername, $mothername, $gender, $age, $username, $password)) {
                     $db = new database();
                     if ($db->getStatus()) {
                         $stmt = $db->getConn()->prepare($this->registerApplicantsQuery());
-                        $stmt->execute(array($lastname, $firstname, $midname, $birthdate, $mailadd, $region, $city, $municipality, $zipcode, $streetname, $contact, $fathername, $mothername, $gender, $age, $this->getDateNow()));
+                        $stmt->execute(array($lastname, $firstname, $midname, $birthdate, $mailadd, $region, $city, $municipality, $zipcode, $streetname, $contact, $fathername, $mothername, $gender, $age, $this->getDateNow(), $username, $password));
                         $res = $stmt->fetch();
                         if (!$res) {
                             $db->closeConn();
@@ -404,7 +404,7 @@
 
         private function registerApplicantsQuery()
         {
-            return "INSERT INTO `registers` (`lastname`,`firstname`,`midname`,`birthdate`,`mailadd`,`region`,`city`,`municipality`,`zipcode`,`streetname`,`contact`,`fathername`,`mothername`,`gender`,`age`,`date_registered`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            return "INSERT INTO `registers` (`lastname`,`firstname`,`midname`,`birthdate`,`mailadd`,`region`,`city`,`municipality`,`zipcode`,`streetname`,`contact`,`fathername`,`mothername`,`gender`,`age`,`date_registered`, `username`, `password`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
         }
 
         private function registerAdminQuery()

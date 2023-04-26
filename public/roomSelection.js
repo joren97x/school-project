@@ -14,14 +14,14 @@ var viewRooms = () => {
             var str = ''
             
             jsonData.forEach(room => {
-                str += '<a href="roomDetails.html?room_id='+room.room_id+'" style="text-decoration: none;" class="text-dark">'+
+                str += '<a href="roomDetails.php?room_id='+room.room_id+'" style="text-decoration: none;" class="text-dark">'+
                         '<div class="container">' +
                             '<div class="room">' +
                                 '<div class="room-card">' +
-                                    '<img class="room-img" src="'+ room.room_img +'" alt="Room Image">' +
+                                    '<img class="room-img" src="../images/'+room.room_img+'" alt="Room Image">' +
                                 ' <div class="room-name">'+ room.room_name +'</div>' +
                                     '<div class="room-desc">'+ room.room_details +'</div>' +
-                                ' <div class="room-price">'+room.room_price+'</div>' +
+                                     '<div class="room-price d-flex justify-content-end"><button class="btn btn-success"> ₱'+room.room_price+'</button></div>'+
                                 '</div>' +
                             '</div>' +
                         '</div>'

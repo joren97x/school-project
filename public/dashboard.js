@@ -100,7 +100,7 @@ var logout = () => {
             choice: 'logout'
         },
         success: (data) => {
-            window.location.href = './login.html'
+            window.location.href = './login.php'
         },
         error: (xhr, ajaxOptions, thrownError) => {console.log(thrownError);}
     })

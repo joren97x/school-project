@@ -26,6 +26,7 @@
 			margin: 0 auto;
 			max-width: 1200px;
 			padding: 20px;
+			background-color: gray;
 		}
 
 		/* room styles */
@@ -110,11 +111,11 @@
 				<img class="room-img" src="https://via.placeholder.com/500x300.png?text=Room+Image" alt="Room Image">
 				<div class="room-name">Standard Room</div>
 				<div class="room-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor malesuada tellus.</div>
-				<div class="room-price">P 10,000 </div>
-				
+				<div class="room-price d-flex justify-content-end"><button class="btn btn-success">P10,000</button></div>
             </div>
         </div>
     </div>
+	
 	<div class="roomDiv" id="roomDiv" name="roomDiv">
 
 	</div>
