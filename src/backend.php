@@ -3,25 +3,20 @@
 
     class backend
     {
-        public function register($lastname, $firstname, $midname, $birthdate, $mailadd, $region, $city, $municipality, $zipcode, $streetname, $contact, $fathername, $mothername, $gender, $age, $username, $password)
+        public function register($firstname, $lastname, $email, $password, $userType)
         {
-            return self::registerApplicant($lastname, $firstname, $midname, $birthdate, $mailadd, $region, $city, $municipality, $zipcode, $streetname, $contact, $fathername, $mothername, $gender, $age, $username, $password);
+            return self::registerApplicant($firstname, $lastname, $email, $password, $userType);
         }
 
-        public function registeradmin($username, $password, $email)
+        public function login($email, $password)
         {
-            return self::registrationAdmin($username, $password, $email);
+            return self::loginRequest($email, $password);
         }
-
-        public function login($user, $pass)
-        {
-            return self::loginAdmin($user, $pass);
-        }
-        //eeeeeeeeee
-        public function loginUser($firstName, $lastName)
-        {
-            return self::loginUserFunction($firstName, $lastName);
-        }
+        // //eeeeeeeeee
+        // public function loginUser($firstName, $lastName)
+        // {
+        //     return self::loginUserFunction($firstName, $lastName);
+        // }
         //tiwasonon
         public function createRoom($roomName, $roomDetails, $roomPrice, $roomImg)
         {
@@ -201,20 +196,18 @@
             }
         }
 
-        private function loginAdmin($user, $pass)
+        private function loginRequest($email, $password)
         {
             try {
-                if ($this->checkLogin($user, $pass)) {
+                if ($this->checkLogin($email, $password)) {
                     $db = new database();
                     if ($db->getStatus()) {
-                        $tmp = md5($pass);
-                        $stmt = $db->getConn()->prepare($this->loginAdminQuery());
-                        $stmt->execute(array($user, $tmp));
+                        $tmp = md5($password);
+                        $stmt = $db->getConn()->prepare($this->loginApplicantQuery());
+                        $stmt->execute(array($email, $password));
                         $res = $stmt->fetch();
                         if ($res) {
-                            $_SESSION["userType"] = "admin";
-                            $_SESSION["username"] = $user;
-                            $_SESSION["password"] = $tmp;
+                            $_SESSION["userType"] = $res['userType'];
                             $db->closeConn();
                             return "200";
                         } else {
@@ -232,91 +225,92 @@
             }
         }
         //eeeeeeeeee
-        private function loginUserFunction($firstName, $lastName)
-        {
-            try {
-                if ($this->checkLogin($firstName, $lastName)) {
-                    $db = new database();
-                    if ($db->getStatus()) {
-                        $tmp = md5($lastName);
-                        $stmt = $db->getConn()->prepare("SELECT * FROM registers WHERE firstname = '$firstName' AND lastname = '$lastName'; " );
-                        $stmt->execute(array($firstName, $tmp));
-                        $res = $stmt->fetchAll();
-                        if ($res) {
-                            $_SESSION["userType"] = "user"; 
-                            $_SESSION["username"] = $firstName;
-                            $_SESSION["password"] = $tmp;
-                            $db->closeConn();
-                            return "200";
-                        } else {
-                            $db->closeConn();
-                            return "404";
-                        }
-                    } else {
-                        return "403";
-                    }
-                } else {
-                    return "403";
-                }
-            } catch (PDOException $e) {
-                return $e;
-            }
-        }
+        // private function loginUserFunction($firstName, $lastName)
+        // {
+        //     try {
+        //         if ($this->checkLogin($firstName, $lastName)) {
+        //             $db = new database();
+        //             if ($db->getStatus()) {
+        //                 $tmp = md5($lastName);
+        //                 $stmt = $db->getConn()->prepare("SELECT * FROM registers WHERE firstname = '$firstName' AND lastname = '$lastName'; " );
+        //                 $stmt->execute(array($firstName, $tmp));
+        //                 $res = $stmt->fetchAll();
+        //                 if ($res) {
+        //                     $_SESSION["userType"] = "user"; 
+        //                     $_SESSION["username"] = $firstName;
+        //                     $_SESSION["password"] = $tmp;
+        //                     $db->closeConn();
+        //                     return "200";
+        //                 } else {
+        //                     $db->closeConn();
+        //                     return "404";
+        //                 }
+        //             } else {
+        //                 return "403";
+        //             }
+        //         } else {
+        //             return "403";
+        //         }
+        //     } catch (PDOException $e) {
+        //         return $e;
+        //     }
+        // }
 
-        private function registrationAdmin($username, $password, $email)
+        private function registerApplicant($firstname, $lastname, $email, $password, $userType)
         {
             try {
-                if ($this->checkAdminRegister($username, $password, $email)) {
-                    $db = new database();
-                    if ($db->getStatus()) {
-                        $stmt = $db->getConn()->prepare($this->registerAdminQuery());
-                        $stmt->execute(array($username, md5($password), $email, $this->getDateNow()));
-                        $res = $stmt->fetch();
-                        if (!$res) {
-                            $db->closeConn();
-                            return "200";
-                        } else {
-                            $db->closeConn();
-                            return "404";
-                        }
-                    } else {
-                        return "403";
-                    }
-                } else {
-                    return "403";
-                }
-            } catch (PDOException $e) {
-                return $e;
-            }
-        }
-
-        private function registerApplicant($lastname, $firstname, $midname, $birthdate, $mailadd, $region, $city, $municipality, $zipcode, $streetname, $contact, $fathername, $mothername, $gender, $age, $username, $password)
-        {
-            try {
-                if ($this->checkApplicants($lastname, $firstname, $midname, $birthdate, $mailadd, $region, $city, $municipality, $zipcode, $streetname, $contact, $fathername, $mothername, $gender, $age, $username, $password)) {
+                if ($this->checkRegister($firstname, $lastname, $email, $password, $userType)) {
                     $db = new database();
                     if ($db->getStatus()) {
                         $stmt = $db->getConn()->prepare($this->registerApplicantsQuery());
-                        $stmt->execute(array($lastname, $firstname, $midname, $birthdate, $mailadd, $region, $city, $municipality, $zipcode, $streetname, $contact, $fathername, $mothername, $gender, $age, $this->getDateNow(), $username, $password));
+                        $stmt->execute(array($firstname, $lastname, $email, $password, $userType));
                         $res = $stmt->fetch();
                         if (!$res) {
+                            $_SESSION["userType"] = $res['userType'];
                             $db->closeConn();
-                            return '200';
+                            return "200";
                         } else {
                             $db->closeConn();
-                            return '404';
+                            return "404";
                         }
                     } else {
-                        return '403';
+                        return "403";
                     }
                 } else {
-                    return '403';
+                    return "403";
                 }
             } catch (PDOException $e) {
                 return $e;
             }
         }
-        //tiwasonon
+
+        // private function registerUser($firstname, $lastname, $email, $password, $userType)
+        // {
+        //     try {
+        //         if ($this->checkRegister($firstname, $lastname, $email, $password, $userType)) {
+        //             $db = new database();
+        //             if ($db->getStatus()) {
+        //                 $stmt = $db->getConn()->prepare($this->registerApplicantsQuery());
+        //                 $stmt->execute(array($firstname, $lastname, $email, $password, $userType));
+        //                 $res = $stmt->fetch();
+        //                 if (!$res) {
+        //                     $db->closeConn();
+        //                     return '200';
+        //                 } else {
+        //                     $db->closeConn();
+        //                     return '404';
+        //                 }
+        //             } else {
+        //                 return '403';
+        //             }
+        //         } else {
+        //             return '403';
+        //         }
+        //     } catch (PDOException $e) {
+        //         return $e;
+        //     }
+        // }
+        
         private function createRoomFunction($roomName, $roomDetails, $roomPrice, $roomImg) 
         {
             try {
@@ -349,8 +343,6 @@
 
         }
 
-        
-
         private function getAdminID()
         {
             try {
@@ -377,9 +369,9 @@
             }
         }
 
-        private function checkApplicants($lastname, $firstname, $midname, $birthdate, $mailadd, $region, $city, $municipality, $zipcode, $streetname, $contact, $fathername, $mothername, $gender, $age)
+        private function checkRegister($firstname, $lastname, $email, $password, $userType)
         {
-            return ($lastname != '' && $firstname != '' && $midname != '' && $birthdate != '' && $mailadd != '' && $region != '' && $city != '' && $municipality != '' && $zipcode != '' && $streetname != '' && $contact != '' && $fathername != '' && $mothername != '' && $gender != '' && $age != '') ? true : false;
+            return ($firstname != '' && $lastname != '' && $email != '' && $password != '' && $userType != '') ? true : false;
         }
 
         private function checkRoom($roomName, $roomDetails, $roomPrice, $roomImg)
@@ -387,14 +379,14 @@
             return ($roomName != '' && $roomDetails != '' && $roomPrice != '' && $roomImg);
         }
 
-        private function checkAdminRegister($username, $password, $email)
-        {
-            return ($username != '' && $password != '' && $email != '') ? true : false;
-        }
+        // private function checkAdminRegister($username, $password, $email)
+        // {
+        //     return ($firstname != '' && $lastname != '' && $email != '' && $password != '' && $userType != '') ? true : false;
+        // }
 
-        private function checkLogin($user, $pass)
+        private function checkLogin($email, $password)
         {
-            return ($user != '' && $pass != '') ? true : false;
+            return ($email != '' && $password != '') ? true : false;
         }
 
         private function getDateNow()
@@ -404,32 +396,32 @@
 
         private function registerApplicantsQuery()
         {
-            return "INSERT INTO `registers` (`lastname`,`firstname`,`midname`,`birthdate`,`mailadd`,`region`,`city`,`municipality`,`zipcode`,`streetname`,`contact`,`fathername`,`mothername`,`gender`,`age`,`date_registered`, `username`, `password`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            return "INSERT INTO `tbl_account` (`firstname`,`lastname`, `email`, `password`, `userType`) VALUES (?,?,?,?,?);";
         }
 
-        private function registerAdminQuery()
-        {
-            return "INSERT INTO `useradmin` (`username`, `password`, `email`, `date_created`) VALUES (?,?,?,?);";
-        }
+        // private function registerAdminQuery()
+        // {
+        //     return "INSERT INTO `tbl_account` (`firstname`,`lastname`, `email`, `password`, `userType`) VALUES (?,?,?,?,?);";
+        // }
 
         private function createRoomQuery()
         {
             return "INSERT INTO `rooms` (`room_name`, `room_details`, `room_price`, `room_img`) VALUES (?,?,?,?);";
         }
 
-        private function loginAdminQuery()
+        private function loginApplicantQuery()
         {
-            return "SELECT * FROM `useradmin` WHERE `username` = ? AND `password` = ?;";
+            return "SELECT * FROM `tbl_account` WHERE `email` = ? AND `password` = ?;";
         }
-        //eeeeeeeeee
+
         private function loginUserQuery()
         {
-            return "SELECT * FROM `registers` WHERE `firstname` = ? AND `lastname` = ?;";
+            return "SELECT * FROM `tbl_account` WHERE `email` = ? AND `password` = ?;";
         }
 
         private function applicantsQuery()
         {
-            return "SELECT * FROM `registers`;";
+            return "SELECT * FROM `tbl_account`;";
         }
 
         private function getAllRoomQuery()
@@ -437,20 +429,20 @@
             return "SELECT * FROM `rooms`";
         }
 
-        private function applicantQuery()
-        {
-            return "SELECT * FROM `registers` WHERE `contact` = ? AND `mailadd` = ?;";
-        }
+        // private function applicantQuery()
+        // {
+        //     return "SELECT * FROM `tbl_account` WHERE `contact` = ? AND `mailadd` = ?;";
+        // }
 
         private function roomDetailsQuery()
         {
             return "SELECT * FROM `rooms` WHERE `room_id` = ?";
         }
 
-        private function changeAdminPassQuery()
-        {
-            return "UPDATE `useradmin` SET `password` = ? WHERE `id` = ?";
-        }
+        // private function changeAdminPassQuery()
+        // {
+        //     return "UPDATE `useradmin` SET `password` = ? WHERE `id` = ?";
+        // }
 
         private function deleteApplicantQuery()
         {

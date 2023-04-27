@@ -1,3 +1,7 @@
+<?php
+
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,21 +105,10 @@
 	<header>
 		<h1>Room Details</h1>
 	</header>
-	<div class="roomDetails">
+	<input type="hidden" value="<?php echo $_GET['room_id']; ?>"id="room_id">
+	<div id="roomDetails">
 
 	</div>
-	<div class="container">
-		<div class="room-details">
-			<div class="room-details-card">
-				<img class="room-details-img" src="https://via.placeholder.com/800x500.png?text=Room+Image" alt="Room Image">
-			</div>
-			<div class="room-details-info">
-				<div class="room-details-name">Standard Room</div>
-				<div class="room-details-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor malesuada tellus. Sed sed venenatis nibh, ac vestibulum augue. Integer vel sagittis justo. Nulla facilisi. Morbi sodales, urna</div>
-				<button class="btn btn-success">Reserve now</button>
-			</div>
-        </div>
-    </div>
     
 </body>
 <script src="./jquery.js"></script>

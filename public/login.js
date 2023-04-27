@@ -6,91 +6,123 @@ $(document).ready(() => {
             alert('Please login first')
         }
     })
-    $(document).on('click', '#btn-submit', () => {
-        if (checkForm()) {
-            registerRequest()    
+    $(document).on('click', '#btn-registerUser', () => {
+        console.log("clicked")
+        if (checkRegister()) {
+            registerUser()    
         } else {
             alert('Please fill the following credentials')
         }
     })
     $(document).on('click', '#btn-registerAdmin', ()=>{
         if (checkRegister()) {
-            register()
+            registerAdmin()
         } else {
             alert('Please fill up the missing credintials')
         }
     })
 })
 
-var registerRequest = () => {
+// var registerRequest = () => {
+//     $.ajax({
+//         type: 'POST',
+//         url: '../src/router.php',
+//         data: {
+//             choice: 'register',
+//             lastname: $('#lastname').val(),
+//             firstname: $('#firstname').val(),
+//             midname: $('#midname').val(),
+//             birthdate: $('#birthdate').val(),
+//             mailadd: $('#mailadd').val(),
+//             region: $('#region').val(),
+//             city: $('#city').val(),
+//             municipality: $('#municipality').val(),
+//             zipcode: $('#zipcode').val(),
+//             streetname: $('#streetname').val(),
+//             contact: $('#contact').val(),
+//             fathername: $('#fathername').val(),
+//             mothername: $('#mothername').val(),
+//             gender: $('#gender').val(),
+//             age: $('#age').val(),
+//             username: $('#username').val(),
+//             password: $('#password').val()
+//         },
+//         success: (data) => {
+//             console.log(data);
+//             if (data == "200") {
+//                 $('#lastname').val('')
+//                 $('#firstname').val('')
+//                 $('#midname').val('')
+//                 $('#birthdate').val('')
+//                 $('#mailadd').val('')
+//                 $('#region').val('')
+//                 $('#city').val('')
+//                 $('#municipality').val('')
+//                 $('#zipcode').val('')
+//                 $('#streetname').val('')
+//                 $('#contact').val('')
+//                 $('#fathername').val('')
+//                 $('#mothername').val('')
+//                 $('#gender').val('')
+//                 $('#age').val('')
+//                 $('#username').val('')
+//                 $('#password').val('')
+//                 alert('Registration success')
+//             }
+//         },
+//         error: (xhr, ajaxOptions, thrownError) => {
+//             console.log(thrownError)
+//         }
+//     })
+// }
+
+const registerAdmin = () => {
     $.ajax({
         type: 'POST',
         url: '../src/router.php',
         data: {
             choice: 'register',
-            lastname: $('#lastname').val(),
-            firstname: $('#firstname').val(),
-            midname: $('#midname').val(),
-            birthdate: $('#birthdate').val(),
-            mailadd: $('#mailadd').val(),
-            region: $('#region').val(),
-            city: $('#city').val(),
-            municipality: $('#municipality').val(),
-            zipcode: $('#zipcode').val(),
-            streetname: $('#streetname').val(),
-            contact: $('#contact').val(),
-            fathername: $('#fathername').val(),
-            mothername: $('#mothername').val(),
-            gender: $('#gender').val(),
-            age: $('#age').val(),
-            username: $('#username').val(),
-            password: $('#password').val()
+            firstname: $('#firstname_admin').val(),
+            lastname: $('#lastname_admin').val(),
+            email: $('#email_admin').val(),
+            password: $('#password_admin').val(),
+            userType: $('#userType_admin').val()
         },
         success: (data) => {
             console.log(data);
             if (data == "200") {
-                $('#lastname').val('')
-                $('#firstname').val('')
-                $('#midname').val('')
-                $('#birthdate').val('')
-                $('#mailadd').val('')
-                $('#region').val('')
-                $('#city').val('')
-                $('#municipality').val('')
-                $('#zipcode').val('')
-                $('#streetname').val('')
-                $('#contact').val('')
-                $('#fathername').val('')
-                $('#mothername').val('')
-                $('#gender').val('')
-                $('#age').val('')
-                $('#username').val('')
-                $('#password').val('')
-                alert('Registration success')
+                $('#firstname_admin').val('')
+                $('#lastname_admin').val('')
+                $('#email_admin').val('')
+                $('#password_admin').val('')
+                $('userType_admin').val('')
+                alert('Registration Success')
             }
         },
-        error: (xhr, ajaxOptions, thrownError) => {
-            console.log(thrownError)
-        }
+        error: (xhr, ajaxOptions, thrownError) => {console.log(thrownError);}
     })
 }
 
-const register = () => {
+const registerUser = () => {
     $.ajax({
         type: 'POST',
         url: '../src/router.php',
         data: {
-            choice: 'registeradmin',
-            username_admin: $('#username_admin').val(),
-            email_admin: $('#email_admin').val(),
-            password_admin: $('#password_admin').val()
+            choice: 'register',
+            firstname: $('#firstname_user').val(),
+            lastname: $('#lastname_user').val(),
+            email: $('#email_user').val(),
+            password: $('#password_user').val(),
+            userType: $('#userType_user').val()
         },
         success: (data) => {
             console.log(data);
             if (data == "200") {
-                $('#username_admin').val('')
-                $('#email_admin').val('')
-                $('#password_admin').val('')
+                $('#firstname_user').val('')
+                $('#lastname_user').val('')
+                $('#email_user').val('')
+                $('#password_user').val('')
+                $('userType_user').val('')
                 alert('Registration Success')
             }
         },
@@ -106,8 +138,8 @@ var loginRequest = () => {
         url: '../src/router.php',
         data:{
             choice: 'login',
-            username: $('#usernameLogin').val(),
-            password: $('#passwordLogin').val()
+            email: $('#email-login').val(),
+            password: $('#password-login').val()
         },
         success: (data) => {
             console.log(data)
@@ -120,17 +152,9 @@ var loginRequest = () => {
 }
 
 var checkLogin = () => {
-    return ($('#usernameLogin').val() != '' && $('#passwordLogin').val() != '') ? true : false
+    return ($('#email-login').val() != '' && $('#password-login').val() != '') ? true : false
 }
 
 const checkRegister = () => {
-    return($('#username_admin').val() != '' && $('#email_admin').val() != '' && $('#password_admin').val() != '') ? true : false
-}
-
-var checkForm = () => {
-    if ($('#lastname').val() != '' && $('#username').val() != '' && $('#password').val() != '' && $('#firstname').val() != '' && $('#midname').val() != '' && $('#birthdate').val() != '' && $('#mailadd').val() != '' && $('#region').val() != '' && $('#city').val() != '' && $('#municipality').val() != '' && $('#zipcode').val() != '' && $('#streetname').val() != '' && $('#contact').val() != '' && $('#fathername').val() != '' && $('#mothername').val() != '' && $('#gender').val() != '' && $('#age').val() != '') {
-        return true
-    } else {
-        return false
-    }
+    return($('#firstname').val() != '' && $('#lastname').val() != '' && $('#email').val() != '' && $('password') != '') ? true : false
 }

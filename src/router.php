@@ -6,15 +6,15 @@
         switch ($_POST["choice"]) {
             case 'register':
                 $back = new backend();
-                echo $back->register($_POST["lastname"], $_POST["firstname"], $_POST["midname"], $_POST["birthdate"], $_POST["mailadd"], $_POST["region"], $_POST["city"], $_POST["municipality"], $_POST["zipcode"], $_POST["streetname"], $_POST["contact"], $_POST["fathername"], $_POST["mothername"], $_POST["gender"], $_POST["age"], $_POST['username'], $_POST['password']);
+                echo $back->register($_POST["firstname"], $_POST["lastname"], $_POST['email'], $_POST['password'], $_POST['userType']);
                 break;
-            case 'registeradmin':
-                $back = new backend();
-                echo $back->registeradmin($_POST["username_admin"], $_POST["password_admin"], $_POST["email_admin"]);
-                break;
+            // case 'registeradmin':
+            //     $back = new backend();
+            //     echo $back->registeradmin($_POST["username_admin"], $_POST["password_admin"], $_POST["email_admin"]);
+            //     break;
             case 'login':
                 $back = new backend();
-                echo $back->login($_POST["username"], $_POST["password"]);
+                echo $back->login($_POST["email"], $_POST["password"]);
                 break;
             case 'login-user':
                 $back = new backend();
