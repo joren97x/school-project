@@ -35,11 +35,15 @@
             </div>
             <hr>
 
-            <div class="offcanvas-body h5 ">
+            <div class="offcanvas-body h6 ">
                 
-                <i class="bi bi-houses h3 mx-3"></i><a href="roomSelection.php" style="text-decoration: none; color: black;">Guest Rooms</a><br>
-                <i class="bi bi-house-add h3 mx-3"></i><a href="roomCreation.php" style="text-decoration: none;color: black;">Create Rooms</a><br>
-                <i class="bi bi-house-gear h3 mx-3"></i><a href="bookings.php" style="text-decoration: none;color: black;">My bookings</a><br>
+                <i class="bi bi-houses h3 mx-2"></i><a href="roomSelection.php" style="text-decoration: none; color: black;">Guest Rooms</a><br>
+                <i class="bi bi-houses h3 mx-2"></i><a href="roomSelection.php" style="text-decoration: none; color: black;">Reservation management</a><br>
+                <i class="bi bi-houses h3 mx-2"></i><a href="roomSelection.php" style="text-decoration: none; color: black;">Room management</a><br>
+                <i class="bi bi-houses h3 mx-2"></i><a href="roomSelection.php" style="text-decoration: none; color: black;">Customer management</a><br>
+                <?php if(isset($_SESSION['userType'])) {if($_SESSION['userType'] == "admin") {?><i class="bi bi-house-add h3 mx-2"></i><a href="roomCreation.php" style="text-decoration: none;color: black;">Create Rooms</a><br>
+                    <i class="bi bi-house-add h3 mx-2"></i><a href="roomCreation.php" style="text-decoration: none;color: black;">Users</a><br><?php }} ?>
+                <i class="bi bi-house-gear h3 mx-2"></i><a href="bookings.php" style="text-decoration: none;color: black;">My reservations</a><br>
                 
             </div>
         </div>

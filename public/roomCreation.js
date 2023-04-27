@@ -1,15 +1,25 @@
 $(document).ready(function() {
+    console.log("hello giatay?")
+
     $(document).on('click', '#createRoom', ()=>{
         if (checkRoom()) {
             var fileName = document.getElementById('roomImg').files[0].name;
-            createRoom(fileName)
+            const fileInput = document.getElementById('roomImg');
+            const files = fileInput.files;
+            var combinedFiles = ""
+            for (let i = 0; i < files.length; i++) {
+            console.log(files[i].name);
+            combinedFiles += files[i].name + " ";
+            }
+            console.log(combinedFiles)
+            createRoom(combinedFiles)
         } else {
             alert('Please fill up the missing credentials')
         }
     })
 })
 
-const createRoom = (fileName) => {
+const createRoom = (combinedFiles) => {
     //console.log($('#roomImg').val())
     $.ajax({
         type: 'POST',
@@ -19,7 +29,7 @@ const createRoom = (fileName) => {
             roomName: $('#roomName').val(),
             roomDetails: $('#roomDetails').val(),
             roomPrice: $('#roomPrice').val(),
-            roomImg: fileName
+            roomImg: combinedFiles
         },
         success: (data) => {
             console.log(data);

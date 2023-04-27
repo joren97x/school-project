@@ -2,7 +2,9 @@
 session_start();
 // echo $_SESSION['password'];
 // echo $_SESSION['username'];
-echo $_SESSION["userType"];
+if(isset($_SESSION['userType'])) {
+    echo $_SESSION["userType"];
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,6 +39,6 @@ echo $_SESSION["userType"];
 
 </body>
 <script src="jquery.js"></script>
-<script src="roomSelection.js"></script>
+<script src="displayRoom.js"></script>
 
 </html>

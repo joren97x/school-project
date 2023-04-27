@@ -265,8 +265,12 @@
                         $stmt = $db->getConn()->prepare($this->registerApplicantsQuery());
                         $stmt->execute(array($firstname, $lastname, $email, $password, $userType));
                         $res = $stmt->fetch();
+                        $stmt2 = $db->getConn()->prepare($this->loginApplicantQuery());
+                        $stmt2->execute(array($email, $password));
+                        $res2 = $stmt2->fetch();
+
                         if (!$res) {
-                            $_SESSION["userType"] = $res['userType'];
+                            $_SESSION["userType"] = $res2['userType'];
                             $db->closeConn();
                             return "200";
                         } else {

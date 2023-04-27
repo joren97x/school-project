@@ -7,7 +7,6 @@ $(document).ready(() => {
         }
     })
     $(document).on('click', '#btn-registerUser', () => {
-        console.log("clicked")
         if (checkRegister()) {
             registerUser()    
         } else {
@@ -97,6 +96,7 @@ const registerAdmin = () => {
                 $('#password_admin').val('')
                 $('userType_admin').val('')
                 alert('Registration Success')
+                window.location.href = 'index.php'
             }
         },
         error: (xhr, ajaxOptions, thrownError) => {console.log(thrownError);}
@@ -124,6 +124,7 @@ const registerUser = () => {
                 $('#password_user').val('')
                 $('userType_user').val('')
                 alert('Registration Success')
+                window.location.href = 'index.php'
             }
         },
         error: (xhr, ajaxOptions, thrownError) => {console.log(thrownError);}

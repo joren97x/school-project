@@ -82,7 +82,7 @@
         <div class="form">
 
             <label for="room-name">Room Image:</label>
-            <input type="file" id="roomImg" name="roomImg" required>
+            <input type="file" id="roomImg" name="roomImg" required multiple>
 
 			<label for="room-name">Room Name:</label>
 			<input type="text" id="roomName" name="roomName" required>
