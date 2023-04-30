@@ -12,6 +12,10 @@
         {
             return self::loginRequest($email, $password);
         }
+        public function confirmRes($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process)
+        {
+            return self::confirmReservation($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process);
+        }
         // //eeeeeeeeee
         // public function loginUser($firstName, $lastName)
         // {
@@ -22,6 +26,8 @@
         {
             return self::createRoomFunction($roomName, $roomDetails, $roomPrice, $roomImg);
         }
+
+       
 
         public function viewApplicants()
         {
@@ -208,6 +214,7 @@
                         $res = $stmt->fetch();
                         if ($res) {
                             $_SESSION["userType"] = $res['userType'];
+                            $_SESSION["firstname"] = $res['firstname'];
                             $db->closeConn();
                             return "200";
                         } else {
@@ -256,6 +263,38 @@
         //     }
         // }
 
+        public function confirmReservation($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process)
+        {
+            try {
+                if($this->checkPaymentInfo($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process)) {
+                    $db = new database();
+                    if($db->getStatus()) {
+                        $stmt = $db->getConn()->prepare($this->confirmReservationQuery());
+                        $fullname = $firstname." ".$middlename." ".$lastname;
+                        $stmt->execute(array($room_id, $fullname, $address, $contact_no, $payment_process));
+                        $res = $stmt->fetch();
+                        if(!$res) {
+                            $db->closeConn();
+                            return "200";
+                        }
+                        else {
+                            $db->closeConn();
+                            return "404";
+                        }
+                    }
+                    else {
+                        return '403';
+                    }
+                }
+                else {
+                    return '403';
+                }
+            }
+            catch (PDOException $e) {
+                return $e;
+            }
+        }
+
         private function registerApplicant($firstname, $lastname, $email, $password, $userType)
         {
             try {
@@ -271,6 +310,7 @@
 
                         if (!$res) {
                             $_SESSION["userType"] = $res2['userType'];
+                            $_SESSION["firstname"] = $res2['firstname'];
                             $db->closeConn();
                             return "200";
                         } else {
@@ -393,6 +433,11 @@
             return ($email != '' && $password != '') ? true : false;
         }
 
+        private function checkPaymentInfo($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process)
+        {
+            return ($room_id != '' && $firstname != '' && $middlename != '' && $lastname != '' && $address != '' && $contact_no != '' && $payment_process != '') ? true : false;
+        }
+
         private function getDateNow()
         {
             return date('Y-m-d');
@@ -413,6 +458,11 @@
             return "INSERT INTO `rooms` (`room_name`, `room_details`, `room_price`, `room_img`) VALUES (?,?,?,?);";
         }
 
+        private function confirmReservationQuery() 
+        {
+            return "INSERT INTO `tbl_reservation` (`room_id`, `name`, `address`, `contact_no`, `payment_process`) VALUES(?,?,?,?,?);";
+        }
+
         private function loginApplicantQuery()
         {
             return "SELECT * FROM `tbl_account` WHERE `email` = ? AND `password` = ?;";
@@ -428,6 +478,8 @@
             return "SELECT * FROM `tbl_account`;";
         }
 
+        
+
         private function getAllRoomQuery()
         {
             return "SELECT * FROM `rooms`";
@@ -442,11 +494,6 @@
         {
             return "SELECT * FROM `rooms` WHERE `room_id` = ?";
         }
-
-        // private function changeAdminPassQuery()
-        // {
-        //     return "UPDATE `useradmin` SET `password` = ? WHERE `id` = ?";
-        // }
 
         private function deleteApplicantQuery()
         {

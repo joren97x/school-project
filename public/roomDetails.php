@@ -113,7 +113,7 @@
 
 	</div>
 	<!-- CAROUSEL IMAGES -->
-	<div class="container">
+	<!-- <div class="container">
 		<div class="row ">
 			<div class="col-8 shadow  justify-content-around d-flex">
 				<div id="carouselExampleFade" class="carousel slide carousel-fade w-100">
@@ -144,7 +144,19 @@
 				HEllo world?
 			</div>
 		</div>
+	</div> -->
+	<!-- <div class="carousel-item">  
+		<img src="../images/room3.png" class="d-block w-100" alt="...">
 	</div>
+	<div class="carousel-item"> 
+		 <img src="../images/someRoom.png" class="d-block w-100" alt="...">
+	</div>
+	<div class="carousel-item"> 
+		<img src="../images/wowRoom.png" class="d-block w-100" alt="...">
+	</div>
+	<div class="carousel-item">  
+		<img src="../images/" class="d-block w-100" alt="...">
+	</div> -->
 
 
 </body>

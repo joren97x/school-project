@@ -48,6 +48,10 @@
                 $back = new backend();
                 echo $back->displayCard($_POST["contact"], $_POST["email"]);
                 break;
+            case 'confirmRes':
+                $back = new backend();
+                echo $back->confirmRes($_POST['room_id'], $_POST["firstname"], $_POST["middlename"], $_POST["lastname"], $_POST["address"], $_POST["contact_no"], $_POST["payment_process"]);
+                break;
             default:
                 # code...
                 break;

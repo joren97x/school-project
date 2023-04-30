@@ -1,9 +1,11 @@
 $(document).ready(() => {
     $(document).on('click', '#btn-login', () => {
         if (checkLogin()) {
-            loginRequest()
+            if(!loginRequest()){
+                ifFalse()
+            }
         } else {
-            alert('Please login first')
+            ifFalse()
         }
     })
     $(document).on('click', '#btn-registerUser', () => {
@@ -74,6 +76,8 @@ $(document).ready(() => {
 //         }
 //     })
 // }
+
+
 
 const registerAdmin = () => {
     $.ajax({
@@ -159,3 +163,13 @@ var checkLogin = () => {
 const checkRegister = () => {
     return($('#firstname').val() != '' && $('#lastname').val() != '' && $('#email').val() != '' && $('password') != '') ? true : false
 }
+
+function ifFalse() {
+                let emailLogin = document.getElementById('email-login')
+                let passwordLogin = document.getElementById('password-login')
+                emailLogin.style.border = '1px solid';
+                emailLogin.style.borderColor = 'red';
+                passwordLogin.style.border = '1px solid'
+                passwordLogin.style.borderColor = 'red'
+                passwordLogin.style.borderColor = "red solid 5px";
+}    

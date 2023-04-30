@@ -1,7 +1,5 @@
 <?php
 session_start();
-// echo $_SESSION['password'];
-// echo $_SESSION['username'];
 if(isset($_SESSION['userType'])) {
     echo $_SESSION["userType"];
 }
