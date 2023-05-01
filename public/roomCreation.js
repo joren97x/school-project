@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    console.log("hello giatay?")
 
     $(document).on('click', '#createRoom', ()=>{
         if (checkRoom()) {
@@ -8,10 +7,8 @@ $(document).ready(function() {
             const files = fileInput.files;
             var combinedFiles = ""
             for (let i = 0; i < files.length; i++) {
-            console.log(files[i].name);
             combinedFiles += files[i].name + " ";
             }
-            console.log(combinedFiles)
             createRoom(combinedFiles)
         } else {
             alert('Please fill up the missing credentials')
@@ -28,7 +25,10 @@ const createRoom = (combinedFiles) => {
             choice: 'createRoom',
             roomName: $('#roomName').val(),
             roomDetails: $('#roomDetails').val(),
+            roomLocation: $('#roomLocation').val(),
+            roomLink: $('#roomLink').val(),
             roomPrice: $('#roomPrice').val(),
+            roomNo: $('#roomNo').val(),
             roomImg: combinedFiles
         },
         success: (data) => {
@@ -37,7 +37,10 @@ const createRoom = (combinedFiles) => {
                 $('#roomName').val('')
                 $('#roomDetails').val('')
                 $('#roomPrice').val('')
+                $('#roomNo').val('')
                 $('#roomImg').val('')
+                $('#roomLocation').val('')
+                $('#roomLink').val('')
                 alert('Room successfully created!')
             }
         },
@@ -46,5 +49,5 @@ const createRoom = (combinedFiles) => {
 }
 
 const checkRoom = () => {
-    return($('#roomImg').val() != '' && $('#roomName').val() != '' && $('#roomDetails').val() != '' && $('#roomPrice').val() != '') ? true : false
+    return($('#roomImg').val() != '' && $('#roomLink').val() != '' && $('#roomLocation').val() != '' && $('#roomName').val() != '' && $('#roomDetails').val() != '' && $('#roomPrice').val() != '') ? true : false
 }

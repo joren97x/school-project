@@ -28,9 +28,13 @@
                 $back = new backend();
                 echo $back->viewDetails($_POST['roomId']);
                 break;
+            case 'viewReservation':
+                $back = new backend();
+                echo $back->viewReservations();
+                break;
             case 'createRoom':
                 $back = new backend();
-                echo $back->createRoom($_POST["roomName"],$_POST["roomDetails"],$_POST["roomPrice"],$_POST["roomImg"]);
+                echo $back->createRoom($_POST["roomName"], $_POST["roomDetails"], $_POST["roomPrice"], $_POST["roomLocation"], $_POST["roomLink"], $_POST["roomImg"], $_POST['roomNo']);
                 break;
             case 'view':
                 $back = new backend();

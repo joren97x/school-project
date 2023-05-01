@@ -1,3 +1,6 @@
+<?php
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -26,7 +29,7 @@
                 <input type="text" id="middlename" class="form-control my-2" placeholder="Middlename">
                 <input type="text" id="lastname" class="form-control my-2" placeholder="Lastname">
                 <input type="text" id="address" class="form-control my-2" placeholder="Address">
-                <input type="tel" id="contact_no" class="form-control my-2" placeholder="Contact Number">
+                <input type="number" id="contact_no" class="form-control my-2" placeholder="Contact Number">
                 <select name="" id="payment_process" class="form-select">
                     <option value="gcash">GCash</option>
                     <option value="paypal">Paypal</option>
@@ -36,13 +39,8 @@
                 <input type="submit" id="btn-confirm" class="btn btn-success my-3" >
             </div>
         </div>
-        <div class="col-5 shadow mt-5">
-            <img src="../images/room3.png" class="rounded m-4" style="width: 150px; height: 150px;">
-            room name
-           <div class="row m-3">
-           <hr>
-            <h5>Price Details</h5>
-           </div>
+        <div class="col-5 shadow mt-5" id="paymentDetailDiv">
+           
         </div>
     </div>
     </div>

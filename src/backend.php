@@ -12,22 +12,16 @@
         {
             return self::loginRequest($email, $password);
         }
+
         public function confirmRes($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process)
         {
             return self::confirmReservation($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process);
         }
-        // //eeeeeeeeee
-        // public function loginUser($firstName, $lastName)
-        // {
-        //     return self::loginUserFunction($firstName, $lastName);
-        // }
-        //tiwasonon
-        public function createRoom($roomName, $roomDetails, $roomPrice, $roomImg)
-        {
-            return self::createRoomFunction($roomName, $roomDetails, $roomPrice, $roomImg);
-        }
-
        
+        public function createRoom($roomName, $roomDetails, $roomPrice, $roomLocation, $roomLink, $roomImg, $roomNo)
+        {
+            return self::createRoomFunction($roomName, $roomDetails, $roomPrice, $roomLocation, $roomLink, $roomImg, $roomNo);
+        }
 
         public function viewApplicants()
         {
@@ -53,6 +47,41 @@
         {
             return self::getAllRooms();
         }
+
+        public function viewReservations()
+        {
+            return self::getAllReservations();
+        }
+
+        public function getRoom($room_id)
+        {
+            return self::getRoomById($room_id);
+        }
+
+        // private function getRoomById($room_id)
+        // {
+        //     try {
+        //         if($room_id != '') {
+        //             $db = new database();
+        //             if($db->getStatus()) {
+        //                 $stmt = $db->getConn()->prepare($this->roomDetailsQuery());
+        //                 $stmt->execute(array($room_id));
+        //                 $res = $stmt->fetch();
+        //                 return json_encode($res);
+        //                 $db->closeConn();
+        //             }
+        //             else {
+        //                 return '403';
+        //             }
+        //         }
+        //         else {
+        //             return '403';
+        //         }
+        //     }
+        //     catch(PDOException $e) {
+        //         return $e;
+        //     }
+        // }
 
         public function viewDetails($roomId)
         {   
@@ -188,6 +217,26 @@
                 $db = new database();
                 if($db->getStatus()) {
                     $stmt = $db->getConn()->prepare($this->getAllRoomQuery());
+                    $stmt->execute();
+                    $var = $stmt->fetchAll();
+                    $db->closeConn();
+                    return json_encode($var);
+                }
+                else {
+                    return "403";
+                }
+            }
+            catch(PDOException $e) {
+                return $e;
+            }
+        }
+
+        private function getAllReservations()
+        {
+            try{
+                $db = new database();
+                if($db->getStatus()) {
+                    $stmt = $db->getConn()->prepare($this->getAllReservationsQuery());
                     $stmt->execute();
                     $var = $stmt->fetchAll();
                     $db->closeConn();
@@ -355,14 +404,14 @@
         //     }
         // }
         
-        private function createRoomFunction($roomName, $roomDetails, $roomPrice, $roomImg) 
+        private function createRoomFunction($roomName, $roomDetails, $roomPrice, $roomLocation, $roomLink, $roomImg, $roomNo) 
         {
             try {
-                if($this->checkRoom($roomName, $roomDetails, $roomPrice, $roomImg)) {
+                if($this->checkRoom($roomName, $roomDetails, $roomPrice, $roomLocation, $roomLink, $roomImg, $roomNo)) {
                     $db = new database();
                     if($db->getStatus()) {
                         $stmt = $db->getConn()->prepare($this->createRoomQuery());
-                        $stmt->execute(array($roomName, $roomDetails, $roomPrice, $roomImg));
+                        $stmt->execute(array($roomName, $roomDetails, $roomPrice, $roomLocation, $roomLink, $roomImg, $roomNo));
                         $res = $stmt->fetch();
                         if(!$res) {
                             $db->closeConn();
@@ -418,9 +467,9 @@
             return ($firstname != '' && $lastname != '' && $email != '' && $password != '' && $userType != '') ? true : false;
         }
 
-        private function checkRoom($roomName, $roomDetails, $roomPrice, $roomImg)
+        private function checkRoom($roomName, $roomDetails, $roomPrice,$roomLocation, $roomLink, $roomImg)
         {
-            return ($roomName != '' && $roomDetails != '' && $roomPrice != '' && $roomImg);
+            return ($roomName != '' && $roomDetails != '' && $roomPrice != '' && $roomLocation != '' && $roomLink != '' && $roomImg != '');
         }
 
         // private function checkAdminRegister($username, $password, $email)
@@ -455,7 +504,7 @@
 
         private function createRoomQuery()
         {
-            return "INSERT INTO `rooms` (`room_name`, `room_details`, `room_price`, `room_img`) VALUES (?,?,?,?);";
+            return "INSERT INTO `rooms` (`room_name`, `room_details`, `room_price`, `room_location`, `room_link`, `room_img`, `room_no`) VALUES (?,?,?,?,?,?,?);";
         }
 
         private function confirmReservationQuery() 
@@ -483,6 +532,11 @@
         private function getAllRoomQuery()
         {
             return "SELECT * FROM `rooms`";
+        }
+
+        private function getAllReservationsQuery()
+        {
+            return "SELECT * FROM `tbl_reservation`";
         }
 
         // private function applicantQuery()

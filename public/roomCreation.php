@@ -84,11 +84,23 @@
             <label for="room-name">Room Image:</label>
             <input type="file" id="roomImg" name="roomImg" required multiple>
 
+			<label for="room-name">Room number:</label>
+            <select  id="roomNo">
+				<option value="1">1</option>
+				<option value="2">2</option>
+			</select>
+
 			<label for="room-name">Room Name:</label>
 			<input type="text" id="roomName" name="roomName" required>
 
             <label for="room-description">Room Description:</label>
 			<textarea id="roomDetails" name="roomDetails" class="form-control" style="padding: 50px; padding-right: 350px;" required></textarea>
+
+			<label for="room-name">Room Location:</label>
+			<input type="text" id="roomLocation" name="roomLocation" required>
+
+			<label for="room-name">Link:</label>
+			<input type="text" id="roomLink" name="roomLink" required>
 
 			<label for="room-price">Room Price:</label>
 			<input type="number" id="roomPrice" name="roomPrice" required>
