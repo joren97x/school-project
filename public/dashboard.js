@@ -1,5 +1,18 @@
 $(document).ready(() => {
     viewReservations()
+
+    $(document).on('click', '#btn-cancel', () => {
+
+        console.log($('#btn-cancel'))
+        //$('#btn-cancel').attr("disabled", true)
+
+        setTimeout(function() {
+            // Enable the button after 24 hours
+            $('#btn-cancel').attr("disabled", true)
+          }, 5000);
+
+    })
+
 })
 
 const viewReservations = () => {
@@ -15,7 +28,6 @@ const viewReservations = () => {
             jsonData.forEach(res => {
 
             var str = ''
-                console.log(res.room_id)
                 $.ajax({
                     type: 'POST',
                     url: '../src/router.php',
@@ -37,17 +49,17 @@ const viewReservations = () => {
                             '<p>'+res.payment_process+'</p>'+
                             '<a href="'+jsonData2.room_link+'"> <i class="bi bi-geo-alt"></i></a>'+jsonData2.room_location+''+
                             '<br><a href="#" class="btn btn-success">Reserved</a>' +
-                            '<a href="#" class="btn btn-danger">Cancel</a>' +
+                            '<button class="btn btn-danger" id="btn-cancel"> Cancel </button>' +
                         '</div>' +
                         '</div>'
                 $('#roomDiv').append(str)
                     },
                     error: (xhr, ajaxOptions, thrownError) => {console.log(thrownError)}
                 })
-                console.log(str)
             }) 
         },
         error: (xhr, ajaxOptions, thrownError) => {console.log(thrownError)}
     })
-
 }
+
+
