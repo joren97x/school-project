@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2023 at 11:41 AM
+-- Generation Time: May 02, 2023 at 07:13 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -43,7 +43,10 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`room_id`, `room_name`, `room_details`, `room_price`, `room_location`, `room_link`, `room_img`, `room_no`) VALUES
-(53, 'Empty Room', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unc', 5000, 'Cordova, Cebu', 'https://goo.gl/maps/dP3bv7BZxFPvyVC97', 'sampleImg.png ', 2);
+(56, 'Sample Guest House', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Etiam tempor orci eu lobortis elementum nibh tellus molestie nunc. Ullamcorper eget nulla facilisi etiam dignissim diam. Sed lectus vestibulum mattis ullamcorper velit sed ullamcorper', 5000, 'Cordova, Cebu', 'https://goo.gl/maps/CNzopkeM1pFRv3Kh7', 'room2.png room3.png ', 1),
+(57, 'Random Guest House', 'morbi. Bibendum arcu vitae elementum curabitur vitae nunc sed velit. Elementum eu facilisis sed odio morbi quis. Tincidunt arcu non sodales neque. Turpis egestas pretium aenean pharetra magna ac placerat vestibulum. Suspendisse sed nisi lacus sed. Cras semper auctor neque vitae tempus quam pellentesque nec nam. Egestas', 2500, 'Cordova, Cebu', 'https://goo.gl/maps/CNzopkeM1pFRv3Kh7', 'guest.png room1.png ', 2),
+(58, 'Cordova Guest House', 'tempor orci eu lobortis elementum nibh tellus molestie nunc. Ullamcorper eget nulla facilisi etiam dignissim diam. Sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi. Bibendum arcu vitae elementum curabitur vitae nunc sed velit. Elementum eu facilisis sed odio morbi quis. Tincidunt arcu non sodales neque.', 3000, 'Buagsong, Cordova', 'https://goo.gl/maps/CNzopkeM1pFRv3Kh7', 'room3.png room4.png ', 1),
+(59, 'Guest House sample', 'purus sit amet volutpat. Donec adipiscing tristique risus nec feugiat. Rhoncus urna neque viverra justo nec. Ultrices tincidunt arcu non sodales. Egestas sed sed risus pretium quam vulputate dignissim suspendisse.', 4500, 'California, Buagsong', 'https://goo.gl/maps/CNzopkeM1pFRv3Kh7', 'room1.png ', 1);
 
 -- --------------------------------------------------------
 
@@ -66,7 +69,8 @@ CREATE TABLE `tbl_account` (
 
 INSERT INTO `tbl_account` (`account_id`, `firstname`, `lastname`, `email`, `password`, `userType`) VALUES
 (1, 'john', 'doe', 'john@doe.com', '123', 'user'),
-(2, 'Jane', 'Doe', 'jane@doe.com', '143', 'admin');
+(2, 'Jane', 'Doe', 'jane@doe.com', '143', 'admin'),
+(22, 'Juan', 'Dela Cruz', 'juan@email.com', 'asd', 'user');
 
 -- --------------------------------------------------------
 
@@ -77,6 +81,7 @@ INSERT INTO `tbl_account` (`account_id`, `firstname`, `lastname`, `email`, `pass
 CREATE TABLE `tbl_reservation` (
   `res_id` int(11) NOT NULL,
   `room_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `name` varchar(111) NOT NULL,
   `address` varchar(222) NOT NULL,
   `contact_no` varchar(11) NOT NULL,
@@ -88,10 +93,8 @@ CREATE TABLE `tbl_reservation` (
 -- Dumping data for table `tbl_reservation`
 --
 
-INSERT INTO `tbl_reservation` (`res_id`, `room_id`, `name`, `address`, `contact_no`, `payment_process`, `room_address`) VALUES
-(9, 53, 'britta bgfrtyr premacio', 'buagonsg cordova cebu', '09123456789', 'paymaya', ''),
-(10, 53, 'jerald  adsa  asdas', 'day as ', '09123456789', 'paypal', ''),
-(11, 53, 'asdds sdds dsd', 'sds', '3434', 'paypal', '');
+INSERT INTO `tbl_reservation` (`res_id`, `room_id`, `user_id`, `name`, `address`, `contact_no`, `payment_process`, `room_address`) VALUES
+(16, 59, 1, 'John Bulwarte DOe', 'Buagsong, Cordova, Cebu', '09123456789', 'gcash', '');
 
 -- --------------------------------------------------------
 
@@ -152,19 +155,19 @@ ALTER TABLE `useradmin`
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `tbl_account`
 --
 ALTER TABLE `tbl_account`
-  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
-  MODIFY `res_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `res_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `useradmin`

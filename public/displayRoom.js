@@ -12,12 +12,12 @@ var viewRooms = () => {
         success: (data) => {
             var jsonData = JSON.parse(data)
             var str = ''
-            
+            console.log("hello?")
             jsonData.forEach(room => {
                 var imgArr = room.room_img.split(" ")
                 str += 
                         
-                            '<div class="room col-4">' +
+                            '<div class="room col-4 my-2">' +
                                 '<div class="card">' +
                                     '<img class="card-img-top" src="../images/'+imgArr[0]+'" style="height: 212px" alt="Room Image">' +
                                     '<div class="card-body">'+ 

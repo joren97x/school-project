@@ -64,8 +64,8 @@ var viewRoomDetails = () => {
                        '<h3>'+jsonData.room_name+'</h3>'+
                         '<br>'+
                         jsonData.room_details+
-                        '<br>'+
-                        '<div class="row">Monthly Payment <label style="margin-left: 180px;">' + jsonData.room_price + '</label><br></div>'+
+                        '<br><hr>'+
+                        'Monthly Payment <label style="margin-left: 180px;">₱' + jsonData.room_price + '</label>'+
                         '<a href="payment.php?room_id='+jsonData.room_id+'" value="Reserve Now"><button class="btn btn-success" > Reserve Now </button></a>'+
                     '</div>'+
                ' </div>'+
@@ -76,4 +76,3 @@ var viewRoomDetails = () => {
         error: (xhr, ajaxOptions, thrownError) => {console.log(thrownError)}
     })
 }
-console.log("hello giatay?")

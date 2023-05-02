@@ -35,7 +35,7 @@
 
             <div class="offcanvas-body h6" >
             <hr>
-                
+            <i class="bi bi-house-gear h3 mx-2"></i><a href="index.php" style="text-decoration: none;color: black;">Home</a><br>
                 <!-- <i class="bi bi-houses h3 mx-2"></i><a href="roomSelection.php" style="text-decoration: none; color: black;">Guest Rooms</a><br>
                 <i class="bi bi-houses h3 mx-2"></i><a href="roomSelection.php" style="text-decoration: none; color: black;">Reservation management</a><br>
                 <i class="bi bi-houses h3 mx-2"></i><a href="roomSelection.php" style="text-decoration: none; color: black;">Room management</a><br>

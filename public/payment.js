@@ -7,7 +7,7 @@ $(document).ready(function() {
             confirmReservation()
         }
         else {
-            alert("Fill in the blanks")
+            alert("Please fill in missing credentials")
         }
     })
 })
@@ -58,7 +58,7 @@ const seeRoomInfo = () => {
                     '<div class="row m-3">'+
                     '<hr>'+
                         '<h5>Price Details</h5>'+
-                        '<h6>'+jsonData.room_price+'</h6>'+
+                        '<h6>₱'+jsonData.room_price+'</h6>'+
                     '</div>'
 
             $('#paymentDetailDiv').append(str)
