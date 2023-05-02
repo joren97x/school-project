@@ -48,10 +48,11 @@ const seeRoomInfo = () => {
         success: (data) => {
 
             var jsonData = JSON.parse(data)
+            var imgArr = jsonData.room_img.split(" ")
             console.log(jsonData)
             let str = ''
 
-            str += '<img src="../images/'+jsonData.room_img+'" class="rounded m-4" style="width: 150px; height: 150px;">'+
+            str += '<img src="../images/'+imgArr[0]+'" class="rounded m-4" style="width: 150px; height: 150px;">'+
                         jsonData.room_name +
                     '<div class="row m-3">'+
                     '<hr>'+

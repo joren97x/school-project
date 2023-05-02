@@ -1,17 +1,32 @@
 $(document).ready(() => {
     viewReservations()
 
-    $(document).on('click', '#btn-cancel', () => {
 
-        console.log($('#btn-cancel'))
-        //$('#btn-cancel').attr("disabled", true)
+        // console.log($('#btn-cancel'))
+        // $('#btn-cancel').attr("disabled", true)
 
-        setTimeout(function() {
-            // Enable the button after 24 hours
-            $('#btn-cancel').attr("disabled", true)
-          }, 5000);
+        // setTimeout(function() {
+        //     // Enable the button after 24 hours
+        //     $('#btn-cancel').attr("disabled", true)
+        //   }, 24 * 60 * 60 * 1000);
 
-    })
+        // const twentyFourHours = 3000; // 24 hours in milliseconds
+        // const startTime = Date.now(); // Get the current time
+
+        // // Check if a timer has already been set and saved to local storage
+        // const savedTime = localStorage.getItem('timerStartTime');
+        // const elapsedTime = savedTime ? startTime - savedTime : 0;
+
+        // // Calculate the remaining time for the timer
+        // const remainingTime = twentyFourHours - elapsedTime;
+
+        // // Set the timer using setTimeout()
+        // const timeoutId = setTimeout(function() {
+        //     $('#btn-cancel').attr("disabled", true)
+        // }, remainingTime);
+
+        // // Save the start time to local storage
+        // localStorage.setItem('timerStartTime', startTime);
 
 })
 
