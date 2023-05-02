@@ -34,8 +34,8 @@ if(isset($_SESSION['username'])){
                 <input type="text" id="email-login" class="fadeIn second" name="email-login" placeholder="Email">
                 <input type="password" id="password-login" class="fadeIn third" name="password-login"
                     placeholder="Password">
-                <input type="button" class="fadeIn fourth" id="btn-login" value="Log In">
-                <input type="button" class="fadeIn fourth" style="" id="btn-create" data-bs-toggle="modal"
+                <input type="button" class="fadeIn mb-2 fourth" id="btn-login" value="Log In">
+                <input type="button" class="fadeIn mb-2 fourth" style="" id="btn-create" data-bs-toggle="modal"
                     data-bs-target="#register-User-Modal" value="Create User">
                 <input type="button" class="fadeIn fourth" id="btn-create-admin" data-bs-toggle="modal"
                     data-bs-target="#register-Admin-Modal" value="Create Admin">
@@ -53,7 +53,7 @@ if(isset($_SESSION['username'])){
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Register Admin</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body text-center">
                     <input type="text" placeholder="First Name" name="firstname_admin" id="firstname_admin">
                     <input type="text" placeholder="Last Name" name="lastname_admin" id="lastname_admin">
                     <input type="text" placeholder="Email" name="email_admin" id="email_admin">
@@ -78,8 +78,8 @@ if(isset($_SESSION['username'])){
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Register User</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <input type="text" placeholder="First Name" name="firstname_user" id="firstname_user">
+                <div class="modal-body text-center">
+                    <input type="text" placeholder="First Name " name="firstname_user" id="firstname_user">
                     <input type="text" placeholder="Last Name" name="lastname_user" id="lastname_user">
                     <input type="text" placeholder="Email" name="email_user" id="email_user">
                     <input type="password" placeholder="Password" name="password_user" id="password_user">

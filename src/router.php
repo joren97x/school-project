@@ -32,6 +32,10 @@
                 $back = new backend();
                 echo $back->viewReservations();
                 break;
+            case 'viewReservationUser':
+                $back = new backend();
+                echo $back->viewReservation($_POST['user_id']);
+                break;
             case 'createRoom':
                 $back = new backend();
                 echo $back->createRoom($_POST["roomName"], $_POST["roomDetails"], $_POST["roomPrice"], $_POST["roomLocation"], $_POST["roomLink"], $_POST["roomImg"], $_POST['roomNo']);
@@ -54,7 +58,7 @@
                 break;
             case 'confirmRes':
                 $back = new backend();
-                echo $back->confirmRes($_POST['room_id'], $_POST["firstname"], $_POST["middlename"], $_POST["lastname"], $_POST["address"], $_POST["contact_no"], $_POST["payment_process"]);
+                echo $back->confirmRes($_POST['room_id'], $_POST["firstname"], $_POST["middlename"], $_POST["lastname"], $_POST["address"], $_POST["contact_no"], $_POST["payment_process"], $_POST['user_id']);
                 break;
             default:
                 # code...

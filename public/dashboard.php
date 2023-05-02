@@ -1,10 +1,5 @@
 <?php
 session_start();
-// echo $_SESSION['password'];
-// echo $_SESSION['username'];
-if(isset($_SESSION['userType'])) {
-    echo $_SESSION["userType"];
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,13 +21,12 @@ if(isset($_SESSION['userType'])) {
 
         <?php require_once "navbar.php"; ?>
 
+        <input type="hidden" value="<?php echo $_SESSION['userType'] ?>" id="userType">
+        <input type="hidden" value="<?php echo $_SESSION['userId'] ?>" id="user_id">
         <div class="container mt-5">
 
 
                 <div class="row" id="roomDiv" name="roomDiv">
-
-
-
 
                 </div>
 

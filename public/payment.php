@@ -1,5 +1,8 @@
 <?php
-
+session_start();
+if(!isset($_SESSION['userType'])){
+    header("Location: login.php");
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,7 +16,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <title>Room Selection</title>
+    <title>Confirm Reservation</title>
 
 </head>
 
@@ -36,7 +39,8 @@
                     <option value="paymaya">Paymaya</option>
                 </select>
                 <input type="hidden" value="<?php echo $_GET['room_id'] ?>" id="room_id">
-                <input type="submit" id="btn-confirm" class="btn btn-success my-3" >
+                <input type="hidden" value="<?php echo $_SESSION['userId'] ?>" id="user_id">
+                <input type="submit" id="btn-confirm" class="btn btn-success my-3">
             </div>
         </div>
         <div class="col-5 shadow mt-5" id="paymentDetailDiv">

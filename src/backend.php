@@ -13,9 +13,9 @@
             return self::loginRequest($email, $password);
         }
 
-        public function confirmRes($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process)
+        public function confirmRes($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process, $user_id)
         {
-            return self::confirmReservation($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process);
+            return self::confirmReservation($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process, $user_id);
         }
        
         public function createRoom($roomName, $roomDetails, $roomPrice, $roomLocation, $roomLink, $roomImg, $roomNo)
@@ -51,6 +51,11 @@
         public function viewReservations()
         {
             return self::getAllReservations();
+        }
+
+        public function viewReservation($user_id)
+        {
+            return self::getReservations($user_id);
         }
 
         public function getRoom($room_id)
@@ -251,6 +256,26 @@
             }
         }
 
+        private function getReservations($user_id)
+        {
+            try{
+                $db = new database();
+                if($db->getStatus()) {
+                    $stmt = $db->getConn()->prepare($this->getReservationsQuery());
+                    $stmt->execute(array($user_id));
+                    $res = $stmt->fetchAll();
+                    return json_encode($res);
+                    $db->closeConn();
+                }
+                else {
+                    return "403";
+                }
+            }
+            catch(PDOException $e) {
+                return $e;
+            }
+        }
+
         private function loginRequest($email, $password)
         {
             try {
@@ -263,6 +288,7 @@
                         $res = $stmt->fetch();
                         if ($res) {
                             $_SESSION["userType"] = $res['userType'];
+                            $_SESSION["userId"] = $res['account_id'];
                             $_SESSION["firstname"] = $res['firstname'];
                             $db->closeConn();
                             return "200";
@@ -312,15 +338,15 @@
         //     }
         // }
 
-        public function confirmReservation($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process)
+        public function confirmReservation($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process, $user_id)
         {
             try {
-                if($this->checkPaymentInfo($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process)) {
+                if($this->checkPaymentInfo($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process, $user_id)) {
                     $db = new database();
                     if($db->getStatus()) {
                         $stmt = $db->getConn()->prepare($this->confirmReservationQuery());
                         $fullname = $firstname." ".$middlename." ".$lastname;
-                        $stmt->execute(array($room_id, $fullname, $address, $contact_no, $payment_process));
+                        $stmt->execute(array($room_id, $user_id, $fullname, $address, $contact_no, $payment_process));
                         $res = $stmt->fetch();
                         if(!$res) {
                             $db->closeConn();
@@ -359,6 +385,7 @@
 
                         if (!$res) {
                             $_SESSION["userType"] = $res2['userType'];
+                            $_SESSION["userId"] = $res2['account_id'];
                             $_SESSION["firstname"] = $res2['firstname'];
                             $db->closeConn();
                             return "200";
@@ -482,9 +509,9 @@
             return ($email != '' && $password != '') ? true : false;
         }
 
-        private function checkPaymentInfo($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process)
+        private function checkPaymentInfo($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process, $user_id)
         {
-            return ($room_id != '' && $firstname != '' && $middlename != '' && $lastname != '' && $address != '' && $contact_no != '' && $payment_process != '') ? true : false;
+            return ($room_id != '' && $firstname != '' && $middlename != '' && $lastname != '' && $address != '' && $contact_no != '' && $user_id != '' && $payment_process != '') ? true : false;
         }
 
         private function getDateNow()
@@ -509,7 +536,7 @@
 
         private function confirmReservationQuery() 
         {
-            return "INSERT INTO `tbl_reservation` (`room_id`, `name`, `address`, `contact_no`, `payment_process`) VALUES(?,?,?,?,?);";
+            return "INSERT INTO `tbl_reservation` (`room_id`, `user_id`, `name`, `address`, `contact_no`, `payment_process`) VALUES(?,?,?,?,?,?);";
         }
 
         private function loginApplicantQuery()
@@ -527,8 +554,6 @@
             return "SELECT * FROM `tbl_account`;";
         }
 
-        
-
         private function getAllRoomQuery()
         {
             return "SELECT * FROM `rooms`";
@@ -537,6 +562,11 @@
         private function getAllReservationsQuery()
         {
             return "SELECT * FROM `tbl_reservation`";
+        }
+
+        private function getReservationsQuery()
+        {
+            return "SELECT * FROM `tbl_reservation` WHERE `user_id` = ?";
         }
 
         // private function applicantQuery()

@@ -19,6 +19,7 @@ const confirmReservation = () => {
         data: {
             choice: 'confirmRes',
             room_id: $('#room_id').val(),
+            user_id: $('#user_id').val(),
             firstname: $('#firstname').val(),
             middlename: $('#middlename').val(),
             lastname: $('#lastname').val(),
