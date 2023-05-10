@@ -13,7 +13,7 @@ session_start();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <title>Home</title>
+    <title>Dashboard</title>
 
 </head>
 
@@ -21,7 +21,11 @@ session_start();
 
         <?php require_once "navbar.php"; ?>
 
-        <div class="container mt-5 ">
+        <input type="hidden" value="<?php echo $_SESSION['userType'] ?>" id="userType">
+        <input type="hidden" value="<?php echo $_SESSION['userId'] ?>" id="user_id">
+        
+        <div class="container mt-5">
+
 
                 <div class="row" id="roomDiv" name="roomDiv">
 
@@ -29,11 +33,11 @@ session_start();
 
         </div>
 
-        <?php require_once "footer.html" ?>
+   <?php require "footer.html"; ?>
 
 
 </body>
 <script src="jquery.js"></script>
-<script src="displayRoom.js"></script>
+<script src="reservation.js"></script>
 
 </html>

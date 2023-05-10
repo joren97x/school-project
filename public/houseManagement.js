@@ -12,11 +12,15 @@ var viewRooms = () => {
         success: (data) => {
             var jsonData = JSON.parse(data)
             var str = ''
-            console.log("hello?")
+            if(jsonData == ''){
+                let s = ''
+                s += '<div class="container text-center"> <h1>NO GUEST HOUSES FOUND</h1> </div>'
+                $('#roomDiv').append(s)
+            }
             jsonData.forEach(room => {
                 var imgArr = room.room_img.split(" ")
                 str += 
-                                '<div class=" col-4 card shadow ">' +
+                                '<div class=" col-4 card shadow " id="card">' +
                                     '<img class="card-img-top my-2" src="../images/'+imgArr[0]+'" style="height: 212px;" alt="Room Image">' +
                                     '<div class="card-body bg-white">'+ 
                                         ' <div "class="room-name">'+ room.room_name +'</div>' +
@@ -36,6 +40,18 @@ var viewRooms = () => {
 }
 
 function deleteFunction(id) {
+
+            // let btn = document.querySelectorAll('#btn-delete')
+            // let btnValue = id
+            // console.log(btn.value)
+            // let selectedButton = null
+            // btn.forEach(button => {
+            //     if(button.value === btnValue) {
+            //         selectedButton = btn.value
+            //     }
+            // })
+            // let parent = selectedButton.closest('.card')
+            // parent.remove()
 
     $.ajax({
         type: 'POST',
@@ -59,7 +75,7 @@ function deleteFunction(id) {
 function deleteGuestHouse(){
 
     let id = $('#btn-delete-house').val()
-    console.log(id)
+   
     $.ajax({
 
         type: 'POST',
@@ -69,7 +85,11 @@ function deleteGuestHouse(){
             room_id: id
         },
         success: (data) => {
-            console.log(data)
+
+            window.location.href = 'houseManagement.php'
+
+            
+
         },
         error: (xhr, ajaxOptions, thrownError) => {console.log(thrownError)}
 

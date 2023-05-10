@@ -17,7 +17,7 @@ session_start();
 
 </head>
 
-<body class="bg-warning" style="background-color: rgb(188,206,251)">
+<body class="bg-light">
 
         <?php require_once "navbar.php"; ?>
 

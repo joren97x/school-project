@@ -12,7 +12,11 @@ var viewRooms = () => {
         success: (data) => {
             var jsonData = JSON.parse(data)
             var str = ''
-            console.log("hello?")
+            if(jsonData == ''){
+                let s = ''
+                s += '<div class="container text-center"> <h1>NO GUEST HOUSES FOUND</h1> </div>'
+                $('#roomDiv').append(s)
+            }
             jsonData.forEach(room => {
                 var imgArr = room.room_img.split(" ")
                 str += 

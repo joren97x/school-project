@@ -20,7 +20,7 @@ if(!isset($_SESSION['userType'])){
 
 </head>
 
-<body class="bg-warning">
+<body class="bg-white">
 
 <div class="container">
     <div class="row mt-5">
@@ -41,6 +41,13 @@ if(!isset($_SESSION['userType'])){
                 <input type="hidden" value="<?php echo $_GET['room_id'] ?>" id="room_id">
                 <input type="hidden" value="<?php echo $_SESSION['userId'] ?>" id="user_id">
                 <input type="submit" id="btn-confirm" class="btn btn-success my-3" style="margin-left: 300px">
+                <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="N2Q528MMPLWVQ">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
             </div>
         </div>
         <div class="col-5 shadow mt-5 bg-white " style="border-radius: 15px" id="paymentDetailDiv">

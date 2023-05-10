@@ -69,7 +69,7 @@
 		}
 	</style>
 </head>
-<body class="bg-warning">
+<body class="bg-light">
 
 		<?php require "navbar.php"; ?>
 	

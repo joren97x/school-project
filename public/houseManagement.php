@@ -20,10 +20,10 @@ if(!isset($_SESSION['userType'])) {
 
 </head>
 
-<body class="bg-warning">
+<body class="bg-light">
 
         <?php require_once "navbar.php"; ?>
-        <div class="container">
+        <div class="container mt-5 ">
 
                 <div class="row justify-content-around d-flex" id="roomDiv" name="roomDiv">
                 </div>

@@ -28,7 +28,7 @@ $(document).ready(() => {
             success: (data) => {
                
                 console.log(data)
-                window.location.href = 'dashboard.php'
+                window.location.href = 'reservation.php'
     
             },
             error: (xhr, ajaxOptions, thrownError) => {console.log(thrownError)}

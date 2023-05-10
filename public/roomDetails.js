@@ -14,7 +14,6 @@ var viewRoomDetails = () => {
         },
         success: (data) => {
             var jsonData = JSON.parse(data)
-            console.log(jsonData)
             var img = jsonData.room_img
             var imgArr = img.split(" ")
             var carouselImg = ''
@@ -28,24 +27,24 @@ var viewRoomDetails = () => {
             else {
                 for(let i = 0; i < imgArr.length-1; i++) {
                     if(i == 0) {
-                        carouselImg += '<div class="carousel-item active">'+
-                                            ' <img src="../images/'+imgArr[i]+'" class="d-block w-100 img-thumbnail rounded" alt="...">'+
+                        carouselImg += '<div class="carousel-item active ">'+
+                                            ' <img src="../images/'+imgArr[i]+'" class="d-block w-100 img-thumbnail rounded" style="height: 450px; background-size: auto;">'+
                                         '</div>'
                     }
                     else {
                         carouselImg += '<div class="carousel-item ">'+
-                                            '<img src="../images/'+imgArr[i]+'" class="d-block w-100 img-thumbnail rounded" alt="...">'+
+                                            '<img src="../images/'+imgArr[i]+'" class="d-block w-100 img-thumbnail rounded" style="height: 450px">'+
                                         '</div>'
                     }
                 }
             } 
-
+            console.log("HELO GIATAY")
           
-                carousel += '<div class="container">' +
+                carousel += '<div class="container mt-5">' +
                 '<div class="row">' +
                     '<div class="col-8  justify-content-around ">'+
                         '<div id="carouselExampleFade" class="carousel slide carousel-fade w-100 ">'+
-                            '<div class="carousel-inner">'+
+                            '<div class="carousel-inner h-100">'+
                                 carouselImg +
                             '</div>'+
                             '<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"'+
