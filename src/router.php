@@ -16,6 +16,10 @@
                 $back = new backend();
                 echo $back->login($_POST["email"], $_POST["password"]);
                 break;
+            case 'adminLogin':
+                $back = new backend();
+                echo $back->adminLogin($_POST["email"], $_POST["password"]);
+                break;
             case 'viewRooms':
                 $back = new backend();
                 echo $back->displayRooms();
@@ -62,7 +66,7 @@
                 break;
             case 'confirmRes':
                 $back = new backend();
-                echo $back->confirmRes($_POST['room_id'], $_POST["firstname"], $_POST["middlename"], $_POST["lastname"], $_POST["address"], $_POST["contact_no"], $_POST["payment_process"], $_POST['user_id']);
+                echo $back->confirmRes($_POST['room_id'], $_POST["firstname"], $_POST["middlename"], $_POST["lastname"], $_POST["address"], $_POST["contact_no"], $_POST["payment_process"], $_POST['room_price'], $_POST['user_id']);
                 break;
             default:
                 # code...

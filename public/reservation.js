@@ -67,9 +67,10 @@ const viewReservationsAdmin = () => {
                     success: (data) => {
                         var jsonData2 = JSON.parse(data)
                         var imgArr = jsonData2.room_img.split(" ")
+                        console.log("AMBATUKAMMMMMMMMMMM")
                 str += 
-                    '<div class="card mx-3" style=" background-color: black; width: 18rem; box-shadow: 6px 5px 8px 2px #A9A9A9;">'+
-                        '<img src="../images/'+imgArr[0]+'" class="card-img-top" alt="...">'+
+                    '<div class="card mx-3" style="width: 18rem; box-shadow: 6px 5px 8px 2px #A9A9A9;">'+
+                        '<img src="../images/'+imgArr[0]+'" class="card-img-top" style="height: 180px">'+
                         '<div class="card-body text-center bg-white">'+
                             '<h5 class="card-title ">'+jsonData2.room_name+'</h5>'+
                             '<p class="card-text">'+res.name+'</p>'+

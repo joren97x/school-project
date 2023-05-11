@@ -12,106 +12,92 @@
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 	<title>Create New Guest House</title>
 	<style>
-		/* basic styles */
-		body {
-			margin: 0;
-			padding: 0;
-			font-family: Arial, sans-serif;
-		}
-
-		/* header styles */
-		header {
-			padding: 20px;
-			text-align: center;
-		}
-
-		/* container styles */
-		.container {
-			margin: 0 auto;
-			max-width: 800px;
-			padding: 20px;
-		}
-
-		/* form styles */
-		.form {
-			background-color: white;
-			border: 1px solid #dddddd;
-			border-radius: 5px;
-			box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-			padding: 20px;
-		}
-
-		/* form label styles */
-		/* label {
-			display: block;
-			margin-bottom: 10px;
-			font-size: 16px;
-			font-weight: bold;
-		} */
-
-		/* form input styles */
-		input[type="text"],
-		input[type="number"],
-		select {
-			padding: 10px;
-			width: 100%;
-			border: 1px solid #cccccc;
-			border-radius: 5px;
-			margin-bottom: 20px;
-			font-size: 16px;
-		}
-
-		/* form submit button styles */
-		
-
-		button[type="submit"]:hover {
-			background-color: #005f8b;
-		}
+		h1 {
+        color: #5c5c5c;
+        font-weight: 700;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+      }
+      
+      label {
+        font-weight: 600;
+        font-size: 1.2rem;
+        color: #a8a8a8;
+      }
+      
+      .form-control:focus {
+        box-shadow: none;
+        border-color: #ff7f50;
+      }
+      
+      textarea {
+        resize: none;
+      }
+      
+      .btn-primary {
+        background-color: #ff7f50;
+        border-color: #ff7f50;
+      }
+      
+      .btn-primary:hover {
+        background-color: #ff704d;
+        border-color: #ff704d;
+      }
 	</style>
 </head>
 <body class="bg-light">
 
 		<?php require "navbar.php"; ?>
 	
-	<header>
-		<h1>Create New Guest House</h1>
-	</header>
-
-	<div class="container">
-
-        <div class="form">
-
-            <label for="room-name" class="h5">Room Image:</label>
-            <br>
-			<input type="file" id="roomImg" name="roomImg" required multiple>
-		<br>
-			<label for="room-name" class="h5">Room number:</label>
-            <select  id="roomNo">
-				<option value="1">1</option>
-				<option value="2">2</option>
-			</select>
-
-			<label for="room-name" class="h5">Room Name:</label>
-			<input type="text" id="roomName" name="roomName" required>
-
-            <label for="room-description" class="h5">Room Description:</label>
-			<textarea id="roomDetails" name="roomDetails" class="form-control w-100" required></textarea>
-
-			<label for="room-name" class="h5">Room Location:</label>
-			<input type="text" id="roomLocation" name="roomLocation" required>
-
-			<label for="room-name" class="h5">Link:</label>
-			<input type="text" id="roomLink" name="roomLink" required>
-
-			<label for="room-price" class="h5">Room Price:</label>
-			<input type="number" id="roomPrice" name="roomPrice" required>
-
-			
-
-			<button class="btn btn-success form-control" name="createRoom" id="createRoom">Create Guest House</button>
-        </div>
-
-	</div>
+	<div class="container text-center mt-5">
+    <h1>Create New Guest House</h1>
+      <div class="form-group">
+        <label for="roomName" class="mb-2">Room Name</label>
+        <input type="text" class="form-control rounded-pill" id="roomName" name="roomName" required>
+      </div>
+	  <div class="form-group">
+        <label for="roomImg" class="mb-2">Room Image</label>
+        <input type="file" class="form-control rounded-pill" id="roomImg" name="roomImg" required multiple>
+      </div>
+      
+      <div class="form-group">
+        <label for="roomDetails" class="mb-2">Room Description</label>
+        <textarea class="form-control rounded" id="roomDetails" name="roomDetails" rows="3" required></textarea>
+      </div>
+      
+	  <div class="form-group">
+        <div class="row">
+			<div class="col-6">
+				<label for="roomNo" class="mb-2">Room Type</label>
+				<select class="form-control rounded-pill" id="roomNo" name="roomNo" required>
+          <option value="">Select Room Number</option>
+          <option value="1">Single</option>
+          <option value="2">Double</option>
+        </select>
+			</div>
+			<div class="col-6">
+				<label for="room_img" class="mb-2">Room Price</label>
+				<input type="text" class="form-control rounded-pill" id="roomPrice" name="roomPrice" required>
+			</div>
+		</div>
+      </div>
+	  <div class="form-group">
+        <div class="row">
+			<div class="col-6">
+				<label for="roomLocation" class="mb-2">Room Location</label>
+				<input type="text" class="form-control rounded-pill" id="roomLocation" name="roomLocation" required>
+			</div>
+			<div class="col-6">
+				<label for="roomLink" class="mb-2">Room Link</label>
+				<input type="text" class="form-control rounded-pill" id="roomLink" name="roomLink" required>
+			</div>
+		</div>
+      </div>
+      <div class="form-group text-center mt-4">
+        <button type="submit" class="btn btn-primary rounded-pill px-5 py-3" id="createRoom" name="createRoom">Create Room</button>
+      </div>
+	  
+  </div>
 
 	<?php require_once "footer.html" ?>
 

@@ -55,18 +55,18 @@
 
             <div class="offcanvas-body h6" >
             <hr>
-            <i class="bi bi-house-gear h3 mx-2"></i><a href="index.php" style="text-decoration: none;color: black;">Home</a><br>
-            <?php if(isset($_SESSION['userType'])) {if($_SESSION['userType'] == "admin") {?><i class="bi bi-house-add h3 mx-2"></i><a href="dashboard.php" style="text-decoration: none;color: black;">Dashboard</a><br><?php }} ?>
-            <?php if(isset($_SESSION['userType'])) {if($_SESSION['userType'] == "admin") {?><i class="bi bi-house-add h3 mx-2"></i><a href="houseManagement.php" style="text-decoration: none;color: black;">Manage Guest House</a><br><?php }} ?>
+            <i class="bi bi-house h3 mx-2"></i><a href="index.php" style="text-decoration: none;color: black;">Home</a><br>
+            <?php if(isset($_SESSION['userType'])) {if($_SESSION['userType'] == "admin") {?><i class="bi bi-speedometer2 h3 mx-2"></i><a href="dashboard.php" style="text-decoration: none;color: black;">Dashboard</a><br><?php }} ?>
+            <?php if(isset($_SESSION['userType'])) {if($_SESSION['userType'] == "admin") {?><i class="bi bi-house-gear h3 mx-2"></i><a href="houseManagement.php" style="text-decoration: none;color: black;">Manage Guest House</a><br><?php }} ?>
                 <?php if(isset($_SESSION['userType'])) {if($_SESSION['userType'] == "admin") {?><i class="bi bi-house-add h3 mx-2"></i><a href="roomCreation.php" style="text-decoration: none;color: black;">Create Guest House</a><br><?php }} ?>
-                <i class="bi bi-house-gear h3 mx-2"></i><a href="dashboard.php" style="text-decoration: none;color: black;"><?php if(isset($_SESSION['userType'])) {if ($_SESSION['userType'] == 'admin') {echo "View All Reservations";} else {echo "My Reservations";}} else { echo "login"; } ?></a><br>
+                <i class="bi bi-view-list h3 mx-2"></i><a href="reservation.php" style="text-decoration: none;color: black;"><?php if(isset($_SESSION['userType'])) {if ($_SESSION['userType'] == 'admin') {echo "View All Reservations";} else {echo "My Reservations";}} else { echo "login"; } ?></a><br>
                 <!-- BOTTOM DIV -->
                 <?php if(isset($_SESSION['userType'])) {
                     ?>
                     <div class="profile-div" style="position: absolute; margin-left: 10px; margin-bottom: 20px; bottom: 0px;">
                     <hr style="padding-left: 230px">
                         <div class="col-2 text-center"> 
-                            <button class="btn btn-white dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-circle"> </i><?php echo $_SESSION['firstname']; ?></button>
+                            <button class="btn btn-white dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-circle h4"> </i><?php echo $_SESSION['firstname']; ?></button>
                             <div class="dropdown">
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="#">Edit Account</a></li>

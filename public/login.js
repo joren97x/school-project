@@ -1,9 +1,12 @@
 $(document).ready(() => {
     $(document).on('click', '#btn-login', () => {
         if (checkLogin()) {
+            console.log("what")
             if(!loginRequest()){
+                adminLogin()
                 ifFalse()
             }
+            
         } else {
             ifFalse()
         }
@@ -60,6 +63,25 @@ var loginRequest = () => {
             console.log(data)
             if (data == "200") {
                 window.location.href = 'index.php'
+            }
+        },
+        error: (xhr, ajaxOptions, thrownError) => {console.log(thrownError)}
+    })
+}
+
+var adminLogin = () => {
+    $.ajax({
+        type: 'POST',
+        url: '../src/router.php',
+        data:{
+            choice: 'adminLogin',
+            email: $('#email-login').val(),
+            password: $('#password-login').val()
+        },
+        success: (data) => {
+            console.log(data)
+            if (data == "200") {
+                window.location.href = 'dashboard.php'
             }
         },
         error: (xhr, ajaxOptions, thrownError) => {console.log(thrownError)}

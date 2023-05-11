@@ -1,15 +1,20 @@
-console.log($('#room_id').val())
 
 $(document).ready(function() {
     seeRoomInfo()
     $(document).on('click', '#btn-confirm', ()=>{
+        console.log("hello giatay")
+
         if(checkForm()) {
+            let form = document.getElementById('form');
+            form.submit()
             confirmReservation()
         }
         else {
             alert("Please fill in missing credentials")
+
         }
     })
+    console.log($('#room_price').val())
 })
 
 const confirmReservation = () => {
@@ -25,13 +30,14 @@ const confirmReservation = () => {
             lastname: $('#lastname').val(),
             address: $('#address').val(),
             contact_no: $('#contact_no').val(),
+            room_price: $('#room_price').val(),
             payment_process: $('#payment_process').val()
         }, 
         success: (data) => {
             console.log(data)
             if(data == '200') {
                 alert("Confirmed Reservation")
-                window.location.href = 'dashboard.php'
+                window.location.href = 'reservation.php'
             }
         },
         error: (xhr, ajaxOptions, thrownError) => {console.log(thrownError);}
@@ -50,8 +56,8 @@ const seeRoomInfo = () => {
 
             var jsonData = JSON.parse(data)
             var imgArr = jsonData.room_img.split(" ")
-            console.log(jsonData)
             let str = ''
+            $('#room_price').val(jsonData.room_price)
 
             str += '<img src="../images/'+imgArr[0]+'" class="rounded m-4" style="width: 150px; height: 150px;">'+
                         jsonData.room_name +

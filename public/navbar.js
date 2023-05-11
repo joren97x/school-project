@@ -3,7 +3,6 @@ $(document).ready(() => {
     getReservation()
 
     $(document).on('click', '#btn-bell', () => {
-        console.log("clicked ? hello?")
         $('#num_reservation').remove()
     })
     
@@ -26,7 +25,7 @@ const getReservation = () => {
                 }
                 document.getElementById('num_reservation').innerHTML = jsonData.length
                 jsonData.forEach(res => {
-                    str +=  '<a href="dashboard.php" style="text-decoration: none;"> <li style="margin:20px">'+res[3]+' reserved a guest room.</li></a>'
+                    str +=  '<a href="reservation.php" style="text-decoration: none;"> <li style="margin:20px">'+res[3]+' reserved a guest room.</li></a>'
                 }) 
                 $('#notification-dropdown').append(str)
             },

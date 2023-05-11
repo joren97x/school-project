@@ -13,9 +13,14 @@
             return self::loginRequest($email, $password);
         }
 
-        public function confirmRes($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process, $user_id)
+        public function adminLogin($email, $password)
         {
-            return self::confirmReservation($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process, $user_id);
+            return self::adminLoginRequest($email, $password);
+        }
+
+        public function confirmRes($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process, $room_price, $user_id)
+        {
+            return self::confirmReservation($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process, $room_price, $user_id);
         }
 
         public function deleteRes($res_id)
@@ -370,6 +375,36 @@
                 return $e;
             }
         }
+        private function adminLoginRequest($email, $password)
+        {
+            try {
+                if ($this->checkLogin($email, $password)) {
+                    $db = new database();
+                    if ($db->getStatus()) {
+                        $tmp = md5($password);
+                        $stmt = $db->getConn()->prepare($this->loginAdminQuery());
+                        $stmt->execute(array($email, $password));
+                        $res = $stmt->fetch();
+                        if ($res) {
+                            $_SESSION["userType"] = $res['userType'];
+                            $_SESSION["userId"] = $res['account_id'];
+                            $_SESSION["firstname"] = $res['firstname'];
+                            $db->closeConn();
+                            return "200";
+                        } else {
+                            $db->closeConn();
+                            return "404";
+                        }
+                    } else {
+                        return "403";
+                    }
+                } else {
+                    return "403";
+                }
+            } catch (PDOException $e) {
+                return $e;
+            }
+        }
         //eeeeeeeeee
         // private function loginUserFunction($firstName, $lastName)
         // {
@@ -402,16 +437,19 @@
         //     }
         // }
 
-        public function confirmReservation($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process, $user_id)
+        public function confirmReservation($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process, $room_price, $user_id)
         {
             try {
                 if($this->checkPaymentInfo($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process, $user_id)) {
                     $db = new database();
                     if($db->getStatus()) {
                         $stmt = $db->getConn()->prepare($this->confirmReservationQuery());
+                        $stmt2 = $db->getConn()->prepare($this->addCash());
                         $fullname = $firstname." ".$middlename." ".$lastname;
                         $stmt->execute(array($room_id, $user_id, $fullname, $address, $contact_no, $payment_process));
+                        $stmt2->execute(array($room_price));
                         $res = $stmt->fetch();
+                        $res2 = $stmt2->fetch();
                         if(!$res) {
                             $db->closeConn();
                             return "200";
@@ -608,6 +646,11 @@
             return "CALL `deleteReservation`(?)";
         }
 
+        private function addCash()
+        {
+            return "UPDATE `tbl_admin` SET `cash` = `cash` + ? WHERE `account_id` = 1;";
+        } 
+
         private function deleteGuestHouseQuery()
         {
             return "DELETE FROM `rooms` WHERE `room_id` = ?";
@@ -617,6 +660,12 @@
         {
             return "CALL `loginRequest`(?,?)";
         }
+
+        private function loginAdminQuery()
+        {
+            return "SELECT * FROM `tbl_admin` WHERE `email` = ? AND `password` = ?";
+        }
+
 
         // private function loginUserQuery()
         // {

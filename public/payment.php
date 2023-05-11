@@ -34,19 +34,21 @@ if(!isset($_SESSION['userType'])){
                 <input type="text" id="address" class="form-control my-2" placeholder="Address">
                 <input type="number" id="contact_no" class="form-control my-2" placeholder="Contact Number">
                 <select name="" id="payment_process" class="form-select">
-                    <option value="gcash">GCash</option>
                     <option value="paypal">Paypal</option>
+                    <option value="gcash">Gcash</option>
                     <option value="paymaya">Paymaya</option>
                 </select>
                 <input type="hidden" value="<?php echo $_GET['room_id'] ?>" id="room_id">
                 <input type="hidden" value="<?php echo $_SESSION['userId'] ?>" id="user_id">
+                <input type="hidden" id="room_price">
                 <input type="submit" id="btn-confirm" class="btn btn-success my-3" style="margin-left: 300px">
-                <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="N2Q528MMPLWVQ">
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
+                
+                <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" id="form">
+                    <input type="hidden" name="cmd" value="_s-xclick">
+                    <input type="hidden" name="hosted_button_id" value="N2Q528MMPLWVQ">
+                    <input type="hidden" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_LG.gif" alt="PayPal - The safer, easier way to pay online!">
+                    <img alt=""  src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                </form>
 
             </div>
         </div>
@@ -60,4 +62,5 @@ if(!isset($_SESSION['userType'])){
 </body>
 <script src="jquery.js"></script>
 <script src="payment.js"></script>
+
 </html>

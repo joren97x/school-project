@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 
@@ -22,6 +23,11 @@
 	<div id="roomDetails">
 
 	</div>
+
+<!-- Modal -->
+<div class="modal-div" id="modal-div">
+
+</div>
 
 	<?php require "footer.html"; ?>
 

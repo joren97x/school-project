@@ -2,7 +2,10 @@ var room_id;
 $(document).ready(function() {
     room_id = $('#room_id').val()
     viewRoomDetails()
+    
 })
+
+
 
 var viewRoomDetails = () => {
     $.ajax({
@@ -13,11 +16,42 @@ var viewRoomDetails = () => {
             roomId: room_id
         },
         success: (data) => {
+
+            
+            
+
+
             var jsonData = JSON.parse(data)
             var img = jsonData.room_img
             var imgArr = img.split(" ")
             var carouselImg = ''
             var carousel = ''
+
+            let s = '' 
+
+            s += '<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">'+
+                '<div class="modal-dialog">'+
+                    '<div class="modal-content ">'+
+                    '<div class="modal-header ">'+
+                        '<h1 class="modal-title fs-3 " id="exampleModalLabel">Edit Guest House</h1>'+
+                    '</div>'+
+                    '<div class="modal-body fs-5">'+
+                        'Room Name: <input type="text" class="form-control" value="'+jsonData.room_name+'">'+
+                        'Room Description: <textarea class="form-control" style="height: 100px">'+jsonData.room_details+'</textarea>'+
+                        '<div class="row"> <div class="col-6">Room Price: <input type="number" class="form-control" value="'+jsonData.room_price+'"></div>'+
+                        '<div class="col-6">Room Location: <input type="text" class="form-control" value="'+jsonData.room_location+'"></div></div>'+
+                        '<div class="row"> <div class="col-6">Room Link: <input type="text" class="form-control" value="'+jsonData.room_link+'"></div>'+
+                        ' <div class="col-6">Room No: <select value="'+jsonData.room_no+'" class="form-control"><option value="1">1</option><option value="2">2</option></select></div></div>'+
+                    '</div>'+
+                    '<div class="modal-footer">'+
+                        '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>'+
+                        '<button type="button" class="btn btn-primary" id="update_guest_house" name="update_guest_house">Save changes</button>'+
+                    '</div>'+
+                    '</div>'+
+                '</div>'+
+            '</div>'
+
+            $('#modal-div').append(s)
 
             if(imgArr.length == 1) {
                 carouselImg += '<div class="carousel-item active">'+
@@ -38,7 +72,6 @@ var viewRoomDetails = () => {
                     }
                 }
             } 
-            console.log("HELO GIATAY")
           
                 carousel += '<div class="container mt-5">' +
                 '<div class="row">' +
@@ -59,9 +92,16 @@ var viewRoomDetails = () => {
                             '</button>'+
                         '</div>'+
                     '</div>'+
-                    '<div class="col-4">'+
-                       '<h2>'+jsonData.room_name+'</h2>'+
-                        '<br>'+
+                    '<div class="col-4 ">'+
+                       '<div class="row "><div class="col-10"><h2>'+jsonData.room_name+'</h2></div><div class="col-2"><div class="dropdown"><button class="btn " role="button" data-bs-toggle="dropdown" aria-expanded="false"><h2><i class="bi bi-three-dots-vertical"></i></h2></button>'+
+                       '<ul class="dropdown-menu">'+
+                       
+                        '<li><a class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">Edit Guest House</a></li>'+
+                        '<li><a class="dropdown-item" href="#">Delete Guest House</a></li>'+
+                    '</ul>'+
+                    '</div></div></div>'+
+                       
+                       '<br>'+
                         jsonData.room_details+
                         '<br><hr>'+
                         'Monthly Payment <label style="margin-left: 180px;">₱' + jsonData.room_price + '</label>'+
