@@ -44,10 +44,15 @@
                 $back = new backend();
                 echo $back->deleteGuestHouse($_POST['room_id']);
                 break;   
+            case 'updateGuestHouse':
+                $back = new backend();
+                echo $back->updateGuestHouse($_POST['room_id'], $_POST["room_name"], $_POST["room_details"], $_POST["room_price"], $_POST["room_location"], $_POST["room_link"], $_POST['room_no']);
+                break;
             case 'createRoom':
                 $back = new backend();
                 echo $back->createRoom($_POST["roomName"], $_POST["roomDetails"], $_POST["roomPrice"], $_POST["roomLocation"], $_POST["roomLink"], $_POST["roomImg"], $_POST['roomNo']);
                 break;
+            
             // case 'view':
                 $back = new backend();
                 echo $back->viewApplicants();

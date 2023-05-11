@@ -32,6 +32,11 @@
         {
             return self::deleteGuestHouseFunction($room_id);
         }
+
+        public function updateGuestHouse($room_id, $room_name, $room_details, $room_price, $room_location, $room_link, $room_no)
+        {
+            return self::updateGuestHouseFunction($room_id, $room_name, $room_details, $room_price, $room_location, $room_link, $room_no);
+        }
        
         public function createRoom($roomName, $roomDetails, $roomPrice, $roomLocation, $roomLink, $roomImg, $roomNo)
         {
@@ -326,6 +331,33 @@
                     if ($db->getStatus()) {
                         $stmt = $db->getConn()->prepare($this->deleteGuestHouseQuery());
                         $stmt->execute(array($room_id));
+                        $res = $stmt->fetch();
+                        if (!$res) {
+                            $db->closeConn();
+                            return "200";
+                        } 
+                        else {
+                            $db->closeConn();
+                            return "404";
+                        }
+                    } 
+                    else {
+                        return "403";
+                    }
+                }
+            } catch (PDOException $e) {
+                return $e;
+            }
+        }
+
+        private function updateGuestHouseFunction($room_id, $room_name, $room_details, $room_price, $room_location, $room_link, $room_no)
+        {
+            try {
+                if ($room_id != '') {
+                    $db = new database();
+                    if ($db->getStatus()) {
+                        $stmt = $db->getConn()->prepare($this->updateGuestHouseQuery());
+                        $stmt->execute(array($room_name, $room_details, $room_price, $room_location, $room_link, $room_no, $room_id));
                         $res = $stmt->fetch();
                         if (!$res) {
                             $db->closeConn();
@@ -654,6 +686,11 @@
         private function deleteGuestHouseQuery()
         {
             return "DELETE FROM `rooms` WHERE `room_id` = ?";
+        }
+
+        private function updateGuestHouseQuery()
+        {
+            return "UPDATE `rooms` SET `room_name` = ?, `room_details` = ?, `room_price` = ?, `room_location` = ?, `room_link` = ?, `room_no` = ? WHERE `room_id` = ?;";
         }
 
         private function loginApplicantQuery()

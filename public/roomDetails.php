@@ -25,9 +25,15 @@
 	</div>
 
 <!-- Modal -->
-<div class="modal-div" id="modal-div">
+<div class="update-modal-div" id="update-modal-div">
 
 </div>
+
+<div class="delete-modal-div" id="delete-modal-div">
+
+</div>
+
+
 
 	<?php require "footer.html"; ?>
 
