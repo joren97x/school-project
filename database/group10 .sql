@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2023 at 11:20 AM
+-- Generation Time: May 12, 2023 at 12:45 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -61,10 +61,8 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`room_id`, `room_name`, `room_details`, `room_price`, `room_location`, `room_link`, `room_img`, `room_no`) VALUES
-(56, 'Sample Guest House', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Etiam tempor orci eu lobortis elementum nibh tellus molestie nunc. Ullamcorper eget nulla facilisi etiam dignissim diam. Sed lectus vestibulum mattis ullamcorper velit sed ullamcorper', 5000, 'Cordova, Cebu', 'https://goo.gl/maps/CNzopkeM1pFRv3Kh7', 'room2.png room3.png ', 1),
-(57, 'Random Guest House', 'morbi. Bibendum arcu vitae elementum curabitur vitae nunc sed velit. Elementum eu facilisis sed odio morbi quis. Tincidunt arcu non sodales neque. Turpis egestas pretium aenean pharetra magna ac placerat vestibulum. Suspendisse sed nisi lacus sed. Cras semper auctor neque vitae tempus quam pellentesque nec nam. Egestas', 2500, 'Cordova, Cebu', 'https://goo.gl/maps/CNzopkeM1pFRv3Kh7', 'guest.png room1.png ', 2),
-(59, 'Guest House sample', 'purus sit amet volutpat. Donec adipiscing tristique risus nec feugiat. Rhoncus urna neque viverra justo nec. Ultrices tincidunt arcu non sodales. Egestas sed sed risus pretium quam vulputate dignissim suspendisse.', 4500, 'California, Buagsong', 'https://goo.gl/maps/CNzopkeM1pFRv3Kh7', 'room1.png ', 1),
-(60, 'Guest House ni John Doe', 'Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ', 200, 'Amerika', 'd', 'guest.png ', 1);
+(69, 'Guest Room 1', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 2000, 'asd', 'dsdsd', 'room1.png room2.png room4.png ', 1),
+(72, 'Guest Room 2 ', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,', 2500, 'bagusng', 'e', 'room1.png room2.png ', 1);
 
 -- --------------------------------------------------------
 
@@ -90,8 +88,29 @@ INSERT INTO `tbl_account` (`account_id`, `firstname`, `lastname`, `email`, `pass
 (2, 'Jane', 'Doe', 'jane@doe.com', '143', 'admin'),
 (22, 'Juan', 'Dela Cruz', 'juan@email.com', 'asd', 'user'),
 (23, 'Dreamy', 'Bull', 'dreamy@bull.com', 'ambatukam', 'user'),
-(24, 'joren', 'nigga', 'das@sd.com', '123', 'admin'),
 (25, 'Burdagol', 'Burikitikitk', 'hehe@h.com', '123', 'user');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_admin`
+--
+
+CREATE TABLE `tbl_admin` (
+  `account_id` int(11) NOT NULL,
+  `firstname` varchar(222) NOT NULL,
+  `email` varchar(244) NOT NULL,
+  `password` varchar(244) NOT NULL,
+  `userType` varchar(5) NOT NULL,
+  `cash` decimal(10,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_admin`
+--
+
+INSERT INTO `tbl_admin` (`account_id`, `firstname`, `email`, `password`, `userType`, `cash`) VALUES
+(1, 'jose', 'admin', 'admin', 'admin', '10393');
 
 -- --------------------------------------------------------
 
@@ -115,8 +134,8 @@ CREATE TABLE `tbl_reservation` (
 --
 
 INSERT INTO `tbl_reservation` (`res_id`, `room_id`, `user_id`, `name`, `address`, `contact_no`, `payment_process`, `room_address`) VALUES
-(28, 59, 25, 'Burdagol DreamyBOL Brokatiktik', 'buagonsg', '09123456789', 'gcash', ''),
-(29, 56, 1, 'John Bulwarte Doe', 'day-as', '09222222222', 'paypal', '');
+(54, 69, 1, 'ds as sdas', '34', '34', 'paypal', ''),
+(55, 69, 1, 'ds as sdas', '34', '34', 'paypal', '');
 
 -- --------------------------------------------------------
 
@@ -158,6 +177,12 @@ ALTER TABLE `tbl_account`
   ADD PRIMARY KEY (`account_id`);
 
 --
+-- Indexes for table `tbl_admin`
+--
+ALTER TABLE `tbl_admin`
+  ADD PRIMARY KEY (`account_id`);
+
+--
 -- Indexes for table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
@@ -177,19 +202,25 @@ ALTER TABLE `useradmin`
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `tbl_account`
 --
 ALTER TABLE `tbl_account`
-  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `tbl_admin`
+--
+ALTER TABLE `tbl_admin`
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
-  MODIFY `res_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `res_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `useradmin`

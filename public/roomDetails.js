@@ -122,58 +122,59 @@ var viewRoomDetails = () => {
 
             if(imgArr.length == 1) {
                 carouselImg += '<div class="carousel-item active">'+
-                                    '<img src="../images/'+imgArr[0]+'" class="d-block w-100 img-thumbnail rounded" alt="...">'+
+                                    '<img src="../images/'+imgArr[0]+'" class="d-block w-100 img-thumbnail rounded" alt="..." onclick="openFullscreen(this)">'+
                                 '</div>'
             }
             else {
                 for(let i = 0; i < imgArr.length-1; i++) {
                     if(i == 0) {
                         carouselImg += '<div class="carousel-item active ">'+
-                                            ' <img src="../images/'+imgArr[i]+'" class="d-block w-100 img-thumbnail rounded" style="height: 450px; background-size: auto;">'+
+                                            ' <img src="../images/'+imgArr[i]+'" class="d-block w-100 img-thumbnail rounded" style="height: 450px; background-size: auto;" onclick="openFullscreen(this)">'+
                                         '</div>'
                     }
                     else {
                         carouselImg += '<div class="carousel-item ">'+
-                                            '<img src="../images/'+imgArr[i]+'" class="d-block w-100 img-thumbnail rounded" style="height: 450px">'+
+                                            '<img src="../images/'+imgArr[i]+'" class="d-block w-100 img-thumbnail rounded" style="height: 450px" onclick="openFullscreen(this)">'+
                                         '</div>'
                     }
                 }
             } 
+
           
                 carousel += '<div class="container mt-5">' +
-                '<div class="row">' +
+                '<div class="row " id="cardID">' +
                     '<div class="col-8  justify-content-around ">'+
-                        '<div id="carouselExampleFade" class="carousel slide carousel-fade w-100 ">'+
-                            '<div class="carousel-inner h-100">'+
-                                carouselImg +
+                            '<div id="carouselExampleFade" class="carousel slide carousel-fade w-100 ">'+
+                                '<div class="carousel-inner h-100">'+
+                                    carouselImg +
+                                '</div>'+
+                                '<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"'+
+                                    'data-bs-slide="prev">'+
+                                    '<span class="carousel-control-prev-icon" aria-hidden="true"></span>'+
+                                    '<span class="visually-hidden">Previous</span>'+
+                                '</button>'+
+                                '<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"'+
+                                    'data-bs-slide="next">'+
+                                    '<span class="carousel-control-next-icon" aria-hidden="true"></span>'+
+                                    '<span class="visually-hidden">Next</span>'+
+                                '</button>'+
                             '</div>'+
-                            '<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"'+
-                                'data-bs-slide="prev">'+
-                                '<span class="carousel-control-prev-icon" aria-hidden="true"></span>'+
-                                '<span class="visually-hidden">Previous</span>'+
-                            '</button>'+
-                            '<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"'+
-                                'data-bs-slide="next">'+
-                                '<span class="carousel-control-next-icon" aria-hidden="true"></span>'+
-                                '<span class="visually-hidden">Next</span>'+
-                            '</button>'+
                         '</div>'+
-                    '</div>'+
-                    '<div class="col-4 ">'+
-                       '<div class="row "><div class="col-10"><h2>'+jsonData.room_name+'</h2></div><div class="col-2"><div class="dropdown"><button class="btn " role="button" data-bs-toggle="dropdown" aria-expanded="false"><h2><i class="bi bi-three-dots-vertical"></i></h2></button>'+
-                       '<ul class="dropdown-menu">'+
-                       
-                        '<li><a class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">Edit Guest House</a></li>'+
-                        '<li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal" href="#">Delete Guest House</a></li>'+
-                    '</ul>'+
-                    '</div></div></div>'+
-                       
-                       '<br>'+
-                        jsonData.room_details+
-                        '<br><hr>'+
-                        'Monthly Payment <label style="margin-left: 180px;">₱' + jsonData.room_price + '</label>'+
-                        '<a href="payment.php?room_id='+jsonData.room_id+'" value="Reserve Now"><button class="btn btn-success " > Reserve Now </button></a>'+
-                    '</div>'+
+                        '<div class="col-4 ">'+
+                        '<div class="row "><div class="col-10"><h2>'+jsonData.room_name+'</h2></div><div class="col-2"><div class="dropdown"><button class="btn " role="button" data-bs-toggle="dropdown" aria-expanded="false"><h2><i class="bi bi-three-dots-vertical"></i></h2></button>'+
+                        '<ul class="dropdown-menu">'+
+                        
+                            '<li><a class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">Edit Guest House</a></li>'+
+                            '<li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal" href="#">Delete Guest House</a></li>'+
+                        '</ul>'+
+                        '</div></div></div>'+
+                        
+                        '<br>'+
+                            jsonData.room_details+
+                            '<br><hr>'+
+                            'Monthly Payment <label style="margin-left: 180px;">₱' + jsonData.room_price + '</label>'+
+                            '<a href="payment.php?room_id='+jsonData.room_id+'"   value="Reserve Now"><button class="btn btn-success" id="reserveBtn" >Reserve Now </button></a>'+
+                        '</div>'+
                ' </div>'+
             '</div>'
 
@@ -183,3 +184,4 @@ var viewRoomDetails = () => {
     })
 }
 
+console.log("HOY BOANG")

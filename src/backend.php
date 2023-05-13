@@ -23,6 +23,16 @@
             return self::confirmReservation($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process, $room_price, $user_id);
         }
 
+        public function approveRes($res_id)
+        {
+            return self::approveReservation($res_id);
+        }
+
+        public function cancelRes($res_id)
+        {
+            return self::cancelReservation($res_id);
+        }
+
         public function deleteRes($res_id)
         {
             return self::deleteReservation($res_id);
@@ -504,6 +514,54 @@
             }
         }
 
+        private function approveReservation($res_id)
+        {
+            try {
+                $db = new database();
+                if($db->getStatus()) {
+                    $stmt = $db->getConn()->prepare($this->approveResQuery());
+                    $stmt->execute(array($res_id));
+                    $res = $stmt->fetch();
+                    if(!$res) {
+                        $db->closeConn();
+                        return '200 OK';
+                    }
+                    else {
+                        return '404 BRUH';
+                    }
+                }
+                else {
+                    return '403 bruh';
+                }
+            }catch (PDOException $e) {
+                return $e;
+            }
+        }
+
+        private function cancelReservation($res_id)
+        {
+            try {
+                $db = new database();
+                if($db->getStatus()) {
+                    $stmt = $db->getConn()->prepare($this->cancelResQuery());
+                    $stmt->execute(array($res_id));
+                    $res = $stmt->fetch();
+                    if(!$res) {
+                        $db->closeConn();
+                        return '200 OK';
+                    }
+                    else {
+                        return '404 BRUH';
+                    }
+                }
+                else {
+                    return '403 bruh';
+                }
+            }catch (PDOException $e) {
+                return $e;
+            }
+        }
+
         private function registerApplicant($firstname, $lastname, $email, $password, $userType)
         {
             try {
@@ -670,7 +728,7 @@
 
         private function confirmReservationQuery() 
         {
-            return "INSERT INTO `tbl_reservation` (`room_id`, `user_id`, `name`, `address`, `contact_no`, `payment_process`) VALUES(?,?,?,?,?,?);";
+            return "INSERT INTO `tbl_reservation` (`room_id`, `user_id`, `name`, `address`, `contact_no`, `payment_process`, `status`) VALUES(?,?,?,?,?,?,'pending');";
         }
 
         private function deleteReservationQuery()
@@ -727,6 +785,16 @@
         private function getReservationsQuery()
         {
             return "SELECT * FROM `tbl_reservation` WHERE `user_id` = ?";
+        }
+
+        private function approveResQuery()
+        {
+            return "UPDATE `tbl_reservation` SET `status` = 'approved' WHERE `res_id` = ?;";
+        }
+
+        private function cancelResQuery()
+        {
+            return "UPDATE `tbl_reservation` SET `status` = 'cancelled' WHERE `res_id` = ?;";
         }
 
         // private function applicantQuery()

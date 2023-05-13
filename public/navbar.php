@@ -1,3 +1,21 @@
+<style>
+    .badge{
+    padding: 3px 5px 2px;
+    position: absolute;
+    top: 0px;
+    left: 15px;
+    display: inline-block;
+    min-width: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #ffffff;
+    line-height: 1;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 10px;
+}
+</style>
 <div class="row d-flex justify-content-around">
 <nav class="navbar bg-white shadow" data-bs-theme="light">
             <div class="col-8 ms-4">
@@ -11,12 +29,18 @@
                     ?>
                         <div class="col-2 justify-content-around  d-flex">
                             <div class="dropstart">
-                                <button type="button" class="btn btn-dark position-relative" style="border-radius: 50%;" data-bs-toggle="dropdown" aria-expanded="false" id="btn-bell">
+
+                            <a href="#" role="button " data-bs-toggle="dropdown" aria-expanded="false" id="btn-bell" style="float: left" >
+                                <i class="bi bi-bell h3" style=" float: left; color: black" ></i>
+                                <span class="badge bg-danger" id="num_reservation"></span>
+                            </a>
+
+                                <!-- <button type="button" class="btn btn-dark position-relative" style="font-size: 20px; float: left; color: black" data-bs-toggle="dropdown" aria-expanded="false" id="btn-bell">
                                     <i class="bi bi-bell-fill h4 text-white"></i>
-                                    <span class="position-absolute left-0 start-100 badge-notification translate-middle badge rounded-pill bg-danger" id="num_reservation">
+                                    <span class="badge bg-danger" id="num_reservation">
                                     99 
                                     </span>
-                                </button>
+                                </button> -->
                                 <ul class="dropdown-menu" id="notification-dropdown" style="max-height: 600px; overflow-y: scroll;">
                                     <li class="h3 w-100" style="padding-right: 280px; margin-left: 20px">Notifications</li>
                                     <hr>
@@ -59,7 +83,7 @@
             <?php if(isset($_SESSION['userType'])) {if($_SESSION['userType'] == "admin") {?><i class="bi bi-speedometer2 h3 mx-2"></i><a href="dashboard.php" style="text-decoration: none;color: black;">Dashboard</a><br><?php }} ?>
             <?php if(isset($_SESSION['userType'])) {if($_SESSION['userType'] == "admin") {?><i class="bi bi-house-gear h3 mx-2"></i><a href="houseManagement.php" style="text-decoration: none;color: black;">Manage Guest House</a><br><?php }} ?>
                 <?php if(isset($_SESSION['userType'])) {if($_SESSION['userType'] == "admin") {?><i class="bi bi-house-add h3 mx-2"></i><a href="roomCreation.php" style="text-decoration: none;color: black;">Create Guest House</a><br><?php }} ?>
-                <i class="bi bi-view-list h3 mx-2"></i><a href="reservation.php" style="text-decoration: none;color: black;"><?php if(isset($_SESSION['userType'])) {if ($_SESSION['userType'] == 'admin') {echo "View All Reservations";} else {echo "My Reservations";}} else { echo "login"; } ?></a><br>
+                <a href="reservation.php" style="text-decoration: none;color: black;"><?php if(isset($_SESSION['userType'])) {if ($_SESSION['userType'] == 'admin') {echo "<i class='bi bi-view-list h3 mx-2'></i>View All Reservations";} else {echo "My Reservations";}} ?></a><br>
                 <!-- BOTTOM DIV -->
                 <?php if(isset($_SESSION['userType'])) {
                     ?>

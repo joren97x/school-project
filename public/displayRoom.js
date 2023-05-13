@@ -38,3 +38,29 @@ var viewRooms = () => {
     })
 }
 
+// const app = Vue.createApp({
+
+//   data() {
+//     return {
+//         rooms: [
+//             {room_name: "Guest House 1", room_id: 1, room_price: 1000},
+//             {room_name: "Guest House 2", room_id: 2, room_price: 1000},
+//             {room_name: "Guest House 3", room_id: 3, room_price: 1000}
+//         ]
+//     };
+//   },
+//   methods: {
+//     viewRooms() {
+//       axios
+//         .post("../src/router.php", { choice: "viewRooms" })
+//         .then((response) => {
+//           console.log(response)
+//         })
+//         .catch((error) => {
+//           console.log(error);
+//         });
+//     },
+//   },
+// })
+// app.mount('#app')
+

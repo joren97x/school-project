@@ -58,9 +58,9 @@ const seeRoomInfo = () => {
             var imgArr = jsonData.room_img.split(" ")
             let str = ''
             $('#room_price').val(jsonData.room_price)
-
-            str += '<img src="../images/'+imgArr[0]+'" class="rounded m-4" style="width: 150px; height: 150px;">'+
-                        jsonData.room_name +
+            console.log("BOANG")
+            str += '<img src="../images/'+imgArr[0]+'" id="room_image" class="rounded m-4" style="width: 150px; height: 150px;">'+
+                       '<label><h4>'+ jsonData.room_name +'</h4></label>'+
                     '<div class="row m-3">'+
                     '<hr>'+
                         '<h5>Price Details</h5>'+
