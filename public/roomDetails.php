@@ -73,7 +73,7 @@
 	<?php require "navbar.php"; ?>
 
 	<input type="hidden" value="<?php echo $_GET['room_id']; ?>" id="room_id">
-	<div id="roomDetails">
+	<div id="roomDetails" style="margin-top: 120px">
 
 	</div>
 

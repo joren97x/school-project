@@ -425,7 +425,7 @@
                     if ($db->getStatus()) {
                         $tmp = md5($password);
                         $stmt = $db->getConn()->prepare($this->loginAdminQuery());
-                        $stmt->execute(array($email, $password));
+                        $stmt->execute(array($email, md5($password)));
                         $res = $stmt->fetch();
                         if ($res) {
                             $_SESSION["userType"] = $res['userType'];
@@ -569,10 +569,10 @@
                     $db = new database();
                     if ($db->getStatus()) {
                         $stmt = $db->getConn()->prepare($this->registerApplicantsQuery());
-                        $stmt->execute(array($firstname, $lastname, $email, $password, $userType));
+                        $stmt->execute(array($firstname, $lastname, $email, md5($password), $userType));
                         $res = $stmt->fetch();
                         $stmt2 = $db->getConn()->prepare($this->loginApplicantQuery());
-                        $stmt2->execute(array($email, $password));
+                        $stmt2->execute(array($email, md5($password)));
                         $res2 = $stmt2->fetch();
 
                         if (!$res) {

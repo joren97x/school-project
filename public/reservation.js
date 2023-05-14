@@ -1,6 +1,4 @@
 $(document).ready(() => {
-    console.log($('#user_id').val())
-    console.log($('#userType').val())
     if($('#userType').val() == 'admin') {
         viewReservationsAdmin()
     }
@@ -103,6 +101,7 @@ const viewReservationsAdmin = () => {
                     success: (data) => {
                         var jsonData2 = JSON.parse(data)
                         var imgArr = jsonData2.room_img.split(" ")
+                        console.log("BOANG?")
                 str += 
                     '<div class="card mx-3" id="cardXD" style="width: 18rem; box-shadow: 6px 5px 8px 2px #A9A9A9;">'+
                         '<img src="../images/'+imgArr[0]+'" class="card-img-top" style="height: 180px">'+
@@ -155,10 +154,10 @@ const viewReservationsUser = () => {
         success: (data) => {
             var jsonData = JSON.parse(data)
             if(jsonData == ''){
-                console.log("waley")
-                let s = ''
-                s += '<div class="container"> <h1>NO RESERVATION FOUND</h1> </div>'
+                let s = '<div class="container"> <h1>NO RESERVATION FOUND</h1> </div>'
+                let tbl2 = '<tr><td scope="row" colspan="10" class="fs-1">NO RESERVATION FOUND </td></tr>'
                 $('#roomDiv').append(s)
+                $('#tbl').append(tbl2)
             }
             jsonData.forEach(res => {
 
@@ -189,6 +188,21 @@ const viewReservationsUser = () => {
                         '</div>' +
                         '</div>'
                 $('#roomDiv').append(str)
+                let tbl = ''
+                        tbl += '<tr><td scope="row">'+ res.res_id +'</td>'+
+                                '<td>'+ jsonData2.room_name +'</td>'+
+                                '<td>'+ res.name +'</td>'+
+                                '<td >'+ res.address +'</td>'+
+                                '<td>'+ res.contact_no +'</td>'+
+                                '<td>'+ res.payment_process +'</td>'+
+                                '<td>'+ jsonData2.room_location +'</td>'+
+                                '<td ><span class="bg-warning" id="status_span">'+res.status+'</span></td>'+
+                                '<td >'+
+                                '<button class="btn btn-success" id="btn-approve" value="'+ res.res_id +'"> <i class="bi bi-check2-circle"></i> </button>'+
+                                '<button class="btn btn-danger" id="btn-cancel" value="'+ res.res_id +'"> <i class="bi bi-x-circle"></i> </button>'+
+                                '<button class="btn btn-danger" id="btn-delete" value="'+ res.res_id +'"> <i class="bi bi-trash2"></i> </button></td></tr>'
+
+                        $('#tbl').append(tbl)
                     },
                     error: ( thrownError) => {console.log(thrownError)}
                 })

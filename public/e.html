@@ -1,296 +1,82 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <title>Guest House Details</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    integrity="sha384-DmY9l76R6iK+BbXTJvuaDlY6Bf/1z9LJQwTCEi6Tj6jC53gFGb/PQ6U6IwzIYHp5"
-    crossorigin="anonymous">
-  <style>
-    .guest-house-details {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 30px;
-      padding: 20px;
-      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-      border-radius: 10px;
-    }
-
-    .guest-house-image {
-      flex-basis: 50%;
-      margin-right: 30px;
-    }
-
-    .guest-house-image img {
-      width: 100%;
-      border-radius: 10px;
-      object-fit: cover;
-    }
-
-    .guest-house-info {
-      flex-basis: 45%;
-    }
-
-    .guest-house-info h2 {
-      font-size: 36px;
-      margin-bottom: 20px;
-    }
-
-    .guest-house-info p {
-      font-size: 20px;
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
-
-    .btn-primary {
-      background-color: #00c0ef;
-      border-color: #00c0ef;
-      font-size: 18px;
-      padding: 10px 20px;
-      margin-top: 20px;
-      border-radius: 5px;
-    }
-
-    .btn-primary:hover,
-    .btn-primary:focus {
-      background-color: #007bff;
-      border-color: #007bff;
-    }
-
-    .full-screen-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      z-index: 9999;
-      overflow-y: scroll;
-    }
-
-    .full-screen-image {
-      position: relative;
-      margin: 20px auto;
-      width: 90%;
-      max-width: 800px;
-    }
-
-    .full-screen-image img {
-      width: 100%;
-      height: auto;
-    }
-
-    .close-full-screen {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      color: #fff;
-      font-size: 24px;
-      cursor: pointer;
-    }
-
-    @media (max-width: 767px) {
-      .guest-house-details {
-        flex-direction: column;
+  	<title>How To Create Star Rating CSS Icons Classic UX Patterns</title>
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      .starRating {
+        position: absolute;
+        left: 50%;
+        top: 45%;
+        transform: translate(-50%, -50%);
+        font-family: arial;
+        text-align: center;
       }
-
-      .guest-house-image {
-        flex-basis: 100%;
-        margin-right: 0;
-        margin-bottom: 20px;
+      .starRating input {
+        display: none;
       }
-
-      .guest-house-info {
-        flex-basis: 100%;
+      .starRating label {
+        font-size: 80px;
+        float: right;
+        margin: 0px 5px;
+        color: #ddd;
       }
-    }
-  </style>
+      .starRating label:before {
+        content: '★';
+      }
+      .starRating input:checked ~ label {
+        color: #FFC107;
+      }
+      .starRating:input:checked > label:hover,
+      .starRating:input:checked > label:hover ~ label {
+        color: #FFC107;
+      }
+      .starRating:not(:checked) > label:hover,
+      .starRating:not(:checked) > label:hover ~ label {
+        color: #FFC107;
+      }
+      .starRating .result:after {
+          left: 0px;
+          right: 0px;
+          font-size: 20px;
+          color: #FFC107;
+          display: none;
+      }
+      .starRating input:checked ~ .result:after {
+        display: block;
+      }
+      .starRating #fifth:checked ~ .result:after {
+        content: "Excellent (5)";
+      }
+      .starRating #fourth:checked ~ .result:after {
+        content: "Good (4)";
+      }
+      .starRating #thirth:checked ~ .result:after {
+        content: "Average (3)";
+      }
+      .starRating #second:checked ~ .result:after {
+        content: "Poor (2)";
+      }
+      .starRating #first:checked ~ .result:after {
+        content: "Very Bad (1)";
+      }
+      </style>
 </head>
-
 <body>
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Guest House</a>
-    <button class="navbar-toggler" type="<!DOCTYPE html>
-<html>
-
-<head>
-  <title>Guest House Details</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    integrity="sha384-DmY9l76R6iK+BbXTJvuaDlY6Bf/1z9LJQwTCEi6Tj6jC53gFGb/PQ6U6IwzIYHp5"
-    crossorigin="anonymous">
-  <style>
-    .guest-house-details {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 30px;
-      padding: 20px;
-      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-      border-radius: 10px;
-    }
-
-    .guest-house-image {
-      flex-basis: 50%;
-      margin-right: 30px;
-    }
-
-    .guest-house-image img {
-      width: 100%;
-      border-radius: 10px;
-      object-fit: cover;
-    }
-
-    .guest-house-info {
-      flex-basis: 45%;
-    }
-
-    .guest-house-info h2 {
-      font-size: 36px;
-      margin-bottom: 20px;
-    }
-
-    .guest-house-info p {
-      font-size: 20px;
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
-
-    .btn-primary {
-      background-color: #00c0ef;
-      border-color: #00c0ef;
-      font-size: 18px;
-      padding: 10px 20px;
-      margin-top: 20px;
-      border-radius: 5px;
-    }
-
-    .btn-primary:hover,
-    .btn-primary:focus {
-      background-color: #007bff;
-      border-color: #007bff;
-    }
-
-    .full-screen-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      z-index: 9999;
-      overflow-y: scroll;
-    }
-
-    .full-screen-image {
-      position: relative;
-      margin: 20px auto;
-      width: 90%;
-      max-width: 800px;
-    }
-
-    .full-screen-image img {
-      width: 100%;
-      height: auto;
-    }
-
-    .close-full-screen {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      color: #fff;
-      font-size: 24px;
-      cursor: pointer;
-    }
-
-    @media (max-width: 767px) {
-      .guest-house-details {
-        flex-direction: column;
-      }
-
-      .guest-house-image {
-        flex-basis: 100%;
-        margin-right: 0;
-        margin-bottom: 20px;
-      }
-
-      .guest-house-info {
-        flex-basis: 100%;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Guest House</a>
-    <button class="navbar-toggler" type="submit">
-      <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <div class="container my-5">
-      <div class="guest-house-details">
-        <div class="guest-house-image">
-          <img src="https://picsum.photos/800/600" alt="Guest house image">
-        </div>
-        <div class="guest-house-info">
-          <h2>Guest House Name</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut dui sed nulla faucibus vestibulum
-            nec quis libero. Sed feugiat, leo eu efficitur faucibus, justo elit maximus metus, non lobortis urna tellus
-            eu nisi. Quisque ultricies nunc non dapibus congue. Vivamus mollis quis arcu sed dignissim. Nulla vitae
-            accumsan arcu. Sed vitae feugiat urna. Nunc ac justo id magna dictum luctus non a enim. Etiam tempor elit
-            vel tortor pellentesque blandit. Aliquam vel enim eget nisi bibendum tristique. Vestibulum posuere, eros
-            sit amet finibus gravida, elit nisi egestas enim, at dignissim enim nulla eu enim. Vivamus rutrum lacinia
-            vestibulum.</p>
-          <button class="btn btn-primary" id="view-full-screen">View Image</button>
-        </div>
-      </div>
-      
-      <div class="full-screen-overlay">
-        <div class="full-screen-image">
-          <span class="close-full-screen">&times;</span>
-          <img src="https://picsum.photos/800/600" alt="Guest house image">
-        </div>
-      </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/esm/popper"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
-    <script>
-      const fullScreenOverlay = document.querySelector('.full-screen-overlay');
-      const closeFullScreen = document.querySelector('.close-full-screen');
-      const viewFullScreen = document.querySelector('#view-full-screen');
-  
-      viewFullScreen.addEventListener('click', () => {
-        fullScreenOverlay.style.display = 'block';
-      });
-  
-      closeFullScreen.addEventListener('click', () => {
-        fullScreenOverlay.style.display = 'none';
-      });
-    </script>
-  </body>
-  </html>            
+	<div class="starRating">
+		<input type="radio" name="starRate" value="5" id="fifth">
+		<label for="fifth"></label>
+		<input type="radio" name="starRate" value="4" id="fourth">
+		<label for="fourth"></label>
+		<input type="radio" name="starRate" value="3" id="thirth">
+		<label for="thirth"></label>
+		<input type="radio" name="starRate" value="2" id="second">
+		<label for="second"></label>
+		<input type="radio" name="starRate" value="1" id="first">
+		<label for="first"></label>
+		<!-- Show Result  -->
+		<span class="result"></span>
+	</div>
+</body>
+</html>

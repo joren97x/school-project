@@ -49,7 +49,7 @@
 
 		<?php require "navbar.php"; ?>
 	
-	<div class="container text-center mt-5">
+	<div class="container text-center " style="margin-top: 120px">
     <h1>Create New Guest House</h1>
       <div class="form-group">
         <label for="roomName" class="mb-2">Room Name</label>

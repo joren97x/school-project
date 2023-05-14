@@ -32,13 +32,13 @@ session_start();
     }
     
     #status_span{
-    background:red;
-    border-radius: 12px;
-    height: 26px;
-    line-height: 26px;
-    text-align: center;
-    padding: 2px
-}
+        background:red;
+        border-radius: 12px;
+        height: 26px;
+        line-height: 26px;
+        text-align: center;
+        padding: 2px
+    }
 
     #btn-cancel{
         border-radius: 12px;
@@ -65,7 +65,7 @@ session_start();
         <input type="hidden" value="<?php echo $_SESSION['userType'] ?>" id="userType">
         <input type="hidden" value="<?php echo $_SESSION['userId'] ?>" id="user_id">
         
-        <div class="container mt-5">
+        <div class="container " style="margin-top: 100px">
 
             <header class="fs-1 text-center">ALL RESERVATIONS</header>
                 
@@ -73,11 +73,10 @@ session_start();
             <!-- <div class="row" id="roomDiv" name="roomDiv">
 
             </div> -->
-
-                <table class="table table-bordered border-dark text-center">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
+                <table class="table text-center">
+                    <thead class="table-primary">
+                        <tr >
+                            <th scope="col" >#</th>
                             <th scope="col">Guest House</th>
                             <th scope="col">Guest Name</th>
                             <th scope="col">Guest Address</th>

@@ -16,7 +16,7 @@ if(!isset($_SESSION['userType'])){
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <title>Confirm Reservation</title>
+        <title>Confirm Reservation</title>
     <style>
         #room_image {
             width: 100%;
@@ -49,12 +49,14 @@ if(!isset($_SESSION['userType'])){
                 <input type="hidden" id="room_price">
                 <input type="submit" id="btn-confirm" class="btn btn-success my-3" style="margin-left: 300px">
                 
-                <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" id="form">
-                    <input type="hidden" name="cmd" value="_s-xclick">
-                    <input type="hidden" name="hosted_button_id" value="N2Q528MMPLWVQ">
-                    <input type="hidden" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_LG.gif" alt="PayPal - The safer, easier way to pay online!">
-                    <img alt=""  src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-                </form>
+                <div class="paypal-button-container" id="paypal-button-container">
+                    <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" id="form">
+                        <input type="hidden" name="cmd" value="_s-xclick">
+                        <input type="hidden" name="hosted_button_id" value="N2Q528MMPLWVQ">
+                        <input type="hidden" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_LG.gif" alt="PayPal - The safer, easier way to pay online!">
+                        <img alt=""  src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                    </form>
+                </div>
 
             </div>
         </div>
@@ -68,5 +70,30 @@ if(!isset($_SESSION['userType'])){
 </body>
 <script src="jquery.js"></script>
 <script src="payment.js"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=ARvqGCp7R4gLQgzgpGElbfWh8OGfx6WfpQSYmVFUeegiEVrRkFbquSHDo9Am6agbABFhvU-8_d-2f2D4"></script>
+<script>
+        paypal.Buttons({
+            style: {
+                color:'blue',
+                shape:'pill',
+                layout: 'horizontal',
+                tagline: 'false'
+            },
+    createOrder: function(data, actions) {
+        return actions.order.create({
+        purchase_units: [{
+            amount: {
+            value: '0.01'
+            }
+        }]
+        });
+    },
+    onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+            alert('Transaction completed by ' + details.payer.name.given_name + '!');
+        });
+    }
+    }).render('#paypal-button-container')
+    </script>
 
 </html>

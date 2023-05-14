@@ -2,7 +2,6 @@
 $(document).ready(function() {
     seeRoomInfo()
     $(document).on('click', '#btn-confirm', ()=>{
-        console.log("hello giatay")
 
         if(checkForm()) {
             let form = document.getElementById('form');
@@ -58,7 +57,6 @@ const seeRoomInfo = () => {
             var imgArr = jsonData.room_img.split(" ")
             let str = ''
             $('#room_price').val(jsonData.room_price)
-            console.log("BOANG")
             str += '<img src="../images/'+imgArr[0]+'" id="room_image" class="rounded m-4" style="width: 150px; height: 150px;">'+
                        '<label><h4>'+ jsonData.room_name +'</h4></label>'+
                     '<div class="row m-3">'+

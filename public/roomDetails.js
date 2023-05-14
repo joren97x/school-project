@@ -172,7 +172,7 @@ var viewRoomDetails = () => {
                         '<br>'+
                             jsonData.room_details+
                             '<br><hr>'+
-                            'Monthly Payment <label style="margin-left: 180px;">₱' + jsonData.room_price + '</label>'+
+                            'Monthly Payment <label style="margin-left: 150px;">₱' + jsonData.room_price + '</label>'+
                             '<a href="payment.php?room_id='+jsonData.room_id+'"   value="Reserve Now"><button class="btn btn-success" id="reserveBtn" >Reserve Now </button></a>'+
                         '</div>'+
                ' </div>'+

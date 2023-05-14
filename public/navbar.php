@@ -17,15 +17,13 @@
 }
 </style>
 <div class="row d-flex justify-content-around">
-<nav class="navbar bg-white shadow" data-bs-theme="light">
+<nav class="navbar bg-white shadow fixed-top" data-bs-theme="light">
             <div class="col-8 ms-4">
                 <button class="btn btn-white" href="#offcanvasExample" aria-controls="offcanvasExample" data-bs-toggle="offcanvas"><i class="bi bi-list h1 text-dark"></i></button>
                 
             </div>
             <?php
                 if(isset($_SESSION['userType'])){
-                    if($_SESSION['userType'] == 'admin') {
-
                     ?>
                         <div class="col-2 justify-content-around  d-flex">
                             <div class="dropstart">
@@ -34,14 +32,7 @@
                                 <i class="bi bi-bell h3" style=" float: left; color: black" ></i>
                                 <span class="badge bg-danger" id="num_reservation"></span>
                             </a>
-
-                                <!-- <button type="button" class="btn btn-dark position-relative" style="font-size: 20px; float: left; color: black" data-bs-toggle="dropdown" aria-expanded="false" id="btn-bell">
-                                    <i class="bi bi-bell-fill h4 text-white"></i>
-                                    <span class="badge bg-danger" id="num_reservation">
-                                    99 
-                                    </span>
-                                </button> -->
-                                <ul class="dropdown-menu" id="notification-dropdown" style="max-height: 600px; overflow-y: scroll;">
+                                <ul class="dropdown-menu shadow" id="notification-dropdown" style="max-height: 600px; ">
                                     <li class="h3 w-100" style="padding-right: 280px; margin-left: 20px">Notifications</li>
                                     <hr>
                                 </ul>
@@ -49,7 +40,6 @@
                         </div>
 
                     <?php
-                    }
                 }
                 else {
                     ?>
@@ -76,14 +66,12 @@
                      ?></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-
             <div class="offcanvas-body h6" >
-            <hr>
             <i class="bi bi-house h3 mx-2"></i><a href="index.php" style="text-decoration: none;color: black;">Home</a><br>
             <?php if(isset($_SESSION['userType'])) {if($_SESSION['userType'] == "admin") {?><i class="bi bi-speedometer2 h3 mx-2"></i><a href="dashboard.php" style="text-decoration: none;color: black;">Dashboard</a><br><?php }} ?>
             <?php if(isset($_SESSION['userType'])) {if($_SESSION['userType'] == "admin") {?><i class="bi bi-house-gear h3 mx-2"></i><a href="houseManagement.php" style="text-decoration: none;color: black;">Manage Guest House</a><br><?php }} ?>
                 <?php if(isset($_SESSION['userType'])) {if($_SESSION['userType'] == "admin") {?><i class="bi bi-house-add h3 mx-2"></i><a href="roomCreation.php" style="text-decoration: none;color: black;">Create Guest House</a><br><?php }} ?>
-                <a href="reservation.php" style="text-decoration: none;color: black;"><?php if(isset($_SESSION['userType'])) {if ($_SESSION['userType'] == 'admin') {echo "<i class='bi bi-view-list h3 mx-2'></i>View All Reservations";} else {echo "My Reservations";}} ?></a><br>
+                <a href="reservation.php" style="text-decoration: none; color: black;"><?php if(isset($_SESSION['userType'])) {if ($_SESSION['userType'] == 'admin') {echo "<i class='bi bi-book h3 mx-2'></i>View All Reservations";} else {echo "<i class='bi bi-book h3 mx-2'></i>My Reservations";}} ?></a><br>
                 <!-- BOTTOM DIV -->
                 <?php if(isset($_SESSION['userType'])) {
                     ?>

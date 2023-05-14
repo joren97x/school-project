@@ -23,7 +23,7 @@ if(!isset($_SESSION['userType'])) {
 <body class="bg-light">
 
         <?php require_once "navbar.php"; ?>
-        <div class="container mt-5 ">
+        <div class="container " style="margin-top: 120px">
 
                 <div class="row justify-content-around d-flex" id="roomDiv" name="roomDiv">
                 </div>
