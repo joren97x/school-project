@@ -1,22 +1,15 @@
 
 $(document).ready(function() {
     seeRoomInfo()
-    $(document).on('click', '#btn-confirm', ()=>{
-
-        if(checkForm()) {
-            let form = document.getElementById('form');
-            form.submit()
-            confirmReservation()
-        }
-        else {
-            alert("Please fill in missing credentials")
-
-        }
-    })
-    console.log($('#room_price').val())
+    
 })
 
-const confirmReservation = () => {
+const confirmReservation = (res_status) => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDate();
+    const formattedDate = year + '-' + month + '-' + day;
     $.ajax({
         type: 'POST',
         url: '../src/router.php',
@@ -30,14 +23,12 @@ const confirmReservation = () => {
             address: $('#address').val(),
             contact_no: $('#contact_no').val(),
             room_price: $('#room_price').val(),
+            status: res_status,
+            date: formattedDate,
             payment_process: $('#payment_process').val()
         }, 
         success: (data) => {
             console.log(data)
-            if(data == '200') {
-                alert("Confirmed Reservation")
-                window.location.href = 'reservation.php'
-            }
         },
         error: (xhr, ajaxOptions, thrownError) => {console.log(thrownError);}
     })
@@ -55,6 +46,8 @@ const seeRoomInfo = () => {
 
             var jsonData = JSON.parse(data)
             var imgArr = jsonData.room_img.split(" ")
+            var numericAmount = parseFloat(jsonData.room_price);
+            var formattedAmount = numericAmount.toLocaleString(undefined, { minimumFractionDigits: 0, style: 'currency', currency: 'PHP' });
             let str = ''
             $('#room_price').val(jsonData.room_price)
             str += '<img src="../images/'+imgArr[0]+'" id="room_image" class="rounded m-4" style="width: 150px; height: 150px;">'+
@@ -62,7 +55,7 @@ const seeRoomInfo = () => {
                     '<div class="row m-3">'+
                     '<hr>'+
                         '<h5>Price Details</h5>'+
-                        '<h6>₱'+jsonData.room_price+'</h6>'+
+                        '<h6>'+formattedAmount+'</h6>'+
                     '</div>'
 
             $('#paymentDetailDiv').append(str)

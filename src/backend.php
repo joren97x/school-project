@@ -18,9 +18,9 @@
             return self::adminLoginRequest($email, $password);
         }
 
-        public function confirmRes($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process, $room_price, $user_id)
+        public function confirmRes($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process, $room_price, $status, $date, $user_id)
         {
-            return self::confirmReservation($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process, $room_price, $user_id);
+            return self::confirmReservation($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process, $room_price, $status, $date, $user_id);
         }
 
         public function approveRes($res_id)
@@ -479,7 +479,7 @@
         //     }
         // }
 
-        public function confirmReservation($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process, $room_price, $user_id)
+        public function confirmReservation($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process, $room_price, $status, $date, $user_id)
         {
             try {
                 if($this->checkPaymentInfo($room_id, $firstname, $middlename, $lastname, $address, $contact_no, $payment_process, $user_id)) {
@@ -488,7 +488,7 @@
                         $stmt = $db->getConn()->prepare($this->confirmReservationQuery());
                         $stmt2 = $db->getConn()->prepare($this->addCash());
                         $fullname = $firstname." ".$middlename." ".$lastname;
-                        $stmt->execute(array($room_id, $user_id, $fullname, $address, $contact_no, $payment_process));
+                        $stmt->execute(array($room_id, $user_id, $fullname, $address, $contact_no, $payment_process, $status, $date));
                         $stmt2->execute(array($room_price));
                         $res = $stmt->fetch();
                         $res2 = $stmt2->fetch();
@@ -728,7 +728,7 @@
 
         private function confirmReservationQuery() 
         {
-            return "INSERT INTO `tbl_reservation` (`room_id`, `user_id`, `name`, `address`, `contact_no`, `payment_process`, `status`) VALUES(?,?,?,?,?,?,'pending');";
+            return "INSERT INTO `tbl_reservation` (`room_id`, `user_id`, `name`, `address`, `contact_no`, `payment_process`, `status`, `res_date`) VALUES(?,?,?,?,?,?,?,?);";
         }
 
         private function deleteReservationQuery()

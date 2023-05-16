@@ -3,129 +3,170 @@
 <html>
 
 <head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-    </script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-	<title>Guest House Details</title>
-	<style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+  </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <style>
+    .img-fluid:hover {
+      opacity: 0.8;
+      cursor: pointer;
+    }
 
-        #cardID {
-            position: relative;
-        }
-        #reserveBtn{
-            position: absolute;
-            bottom: 0;
-            right: 0;
-        }
+    .rounded-left {
+      border-top-left-radius: 15px;
+      border-bottom-left-radius: 15px;
+    }
 
-        .container {
-            position: relative;
-        }
+    .rounded-bottom-right {
+      border-bottom-right-radius: 15px;
+    }
 
-        .img {
-            width: 100%;
-            height: auto;
-            cursor: pointer;
-        }
+    .rounded-top-right {
+      border-top-right-radius: 15px;
 
-        .overlay {
-            position: fixed;
-            z-index: 9999;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: none;
-        }
+    }
 
-        .fullscreen-img {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            max-width: 100%;
-            max-height: 100%;
-        }
+    .overlay {
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: none;
+    }
 
-        /* Style the close button */
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            color: white;
-            font-size: 30px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+    .fullscreen-img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 100%;
+      max-height: 100%;
+    }
 
-
-    </style>
+    /* Style the close button */
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 30px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
-<body class="bg-light">
-	
-	<?php require "navbar.php"; ?>
-
-	<input type="hidden" value="<?php echo $_GET['room_id']; ?>" id="room_id">
-	<div id="roomDetails" style="margin-top: 120px">
-
-	</div>
-
-<!-- Modal -->
-<div class="update-modal-div" id="update-modal-div">
-
-</div>
-
-<div class="delete-modal-div" id="delete-modal-div">
-
-</div>
-
-
-
-	<?php require "footer.html"; ?>
-
-
+<body>
+  <?php require "navbar.php"; ?>
+  <div class="container mt-5" style="margin-bottom: 100px">
+    <div class="row mb-3">
+      <h1 id="house_title">Guest House Title</h1>
+    </div>
+    <div class="row" >
+      <div class="col-6" >
+        <img src="" id="img0"  onclick="openFullscreen(this)" class="img-fluid w-100 rounded-left "
+          style=" height: 300px;">
+      </div>
+      <div class="col-3">
+        <div class="row">
+          <div class="row">
+            <div class="col">
+              <img src="" id="img1"  onclick="openFullscreen(this)"
+                class="img-fluid  object-fit-fill border rounded w-100" style=" height: 150px; margin-left: 8px;">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <img src="" id="img2"  onclick="openFullscreen(this)"
+                class="img-fluid object-fit-fill border rounded w-100" style="height: 150px; margin-left: 8px;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="row">
+          <div class="row">
+            <div class="col">
+              <img src="" id="img3" onclick="openFullscreen(this)"
+                class="img-fluid object-fit-fill border rounded-top-right  w-100" style="height: 150px; ">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <img src="" id="img4" onclick="openFullscreen(this)"
+                class="img-fluid object-fit-fill border rounded-bottom-right  w-100" style="height: 150px; ">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-8">
+      <div class="h3 text-dark">About this place</div>
+        <div class="h4 mx-5" id="house_desc">It is a long established fact that a reader will be distracted by the readable content of a page
+          when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution
+          of letters,</div>
+      </div>
+      <div class="col-4">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title"> Details</h3>
+            <p class="card-text">Price </p>
+            <p class="card-text">Monthly Fee <label for="" style="margin-left: 175px;" id="house_price"></label></p>
+            <a href="payment.php?room_id=<?php echo $_GET['room_id']; ?>"   value="Reserve Now"><button class="btn btn-success form-control" id="reserveBtn" >Reserve Now </button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <input type="hidden" value="<?php echo $_GET['room_id']; ?>" id="room_id">
+  <?php include 'footer.html'; ?>
 </body>
 <script src="jquery.js"></script>
 <script src="roomDetails.js"></script>
 <script>
   function openFullscreen(img) {
-    
-        var overlay = document.createElement("div");
-        overlay.classList.add("overlay");
 
-        var fullscreenImg = document.createElement("img");
-        fullscreenImg.classList.add("fullscreen-img");
-        fullscreenImg.src = img.src;
+    var overlay = document.createElement("div");
+    overlay.classList.add("overlay");
 
-        var closeBtn = document.createElement("span");
-        closeBtn.classList.add("close-btn");
-        closeBtn.innerHTML = "&times;";
-        closeBtn.onclick = closeFullscreen;
+    var fullscreenImg = document.createElement("img");
+    fullscreenImg.classList.add("fullscreen-img");
+    fullscreenImg.src = img.src;
 
-        overlay.appendChild(fullscreenImg);
-        overlay.appendChild(closeBtn);
+    var closeBtn = document.createElement("span");
+    closeBtn.classList.add("close-btn");
+    closeBtn.innerHTML = "&times;";
+    closeBtn.onclick = closeFullscreen;
 
-        document.body.appendChild(overlay);
+    overlay.appendChild(fullscreenImg);
+    overlay.appendChild(closeBtn);
 
-        overlay.style.display = "block";
-}
+    document.body.appendChild(overlay);
 
-function closeFullscreen() {
-        var overlay = document.querySelector(".overlay");
-        overlay.style.display = "none";
+    overlay.style.display = "block";
+  }
 
-        overlay.removeChild(overlay.querySelector(".fullscreen-img"));
-        overlay.removeChild(overlay.querySelector(".close-btn"));
+  function closeFullscreen() {
+    var overlay = document.querySelector(".overlay");
+    overlay.style.display = "none";
 
-        document.body.removeChild(overlay);
-}
+    overlay.removeChild(overlay.querySelector(".fullscreen-img"));
+    overlay.removeChild(overlay.querySelector(".close-btn"));
 
+    document.body.removeChild(overlay);
+  }
 </script>
+
 </html>

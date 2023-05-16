@@ -33,6 +33,7 @@ if(!isset($_SESSION['userType'])){
         <div class="col-6 ">
             <label class="h3 mx-4 ">Confirm Reservation</label><br>
             <div class="container w-75 my-3 justify-content-center">
+                <form action="" id="my-form">
                 <h5>Personal Information</h5>
                 <input type="text" id="firstname" class="form-control my-2" placeholder="Firstname">
                 <input type="text" id="middlename" class="form-control my-2" placeholder="Middlename">
@@ -47,17 +48,9 @@ if(!isset($_SESSION['userType'])){
                 <input type="hidden" value="<?php echo $_GET['room_id'] ?>" id="room_id">
                 <input type="hidden" value="<?php echo $_SESSION['userId'] ?>" id="user_id">
                 <input type="hidden" id="room_price">
-                <input type="submit" id="btn-confirm" class="btn btn-success my-3" style="margin-left: 300px">
-                
-                <div class="paypal-button-container" id="paypal-button-container">
-                    <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" id="form">
-                        <input type="hidden" name="cmd" value="_s-xclick">
-                        <input type="hidden" name="hosted_button_id" value="N2Q528MMPLWVQ">
-                        <input type="hidden" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_LG.gif" alt="PayPal - The safer, easier way to pay online!">
-                        <img alt=""  src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-                    </form>
-                </div>
+                <div class="paypal-button-container mt-3" id="paypal-button-container"></div>
 
+                </form>
             </div>
         </div>
         <div class="col-5 shadow mt-5 bg-white " style="border-radius: 15px" id="paymentDetailDiv">
@@ -72,28 +65,56 @@ if(!isset($_SESSION['userType'])){
 <script src="payment.js"></script>
 <script src="https://www.paypal.com/sdk/js?client-id=ARvqGCp7R4gLQgzgpGElbfWh8OGfx6WfpQSYmVFUeegiEVrRkFbquSHDo9Am6agbABFhvU-8_d-2f2D4"></script>
 <script>
-        paypal.Buttons({
-            style: {
-                color:'blue',
-                shape:'pill',
-                layout: 'horizontal',
-                tagline: 'false'
-            },
-    createOrder: function(data, actions) {
-        return actions.order.create({
-        purchase_units: [{
-            amount: {
-            value: '0.01'
-            }
-        }]
-        });
-    },
-    onApprove: function(data, actions) {
-        return actions.order.capture().then(function(details) {
-            alert('Transaction completed by ' + details.payer.name.given_name + '!');
-        });
-    }
-    }).render('#paypal-button-container')
-    </script>
 
+
+
+paypal.Buttons({
+  style: {
+    color:'blue',
+    shape:'pill',
+    layout: 'horizontal',
+    tagline: 'false'
+  },
+  createOrder: function(data, actions) {
+    if(checkForm2()){
+      return actions.order.create({
+      purchase_units: [{
+        amount: {
+          value: '0.01'
+        }
+      }]
+    });
+    }
+    else {
+      alert("Fill in missing fields")
+    }
+  },
+  onApprove: function(data, actions) {
+    return actions.order.capture().then(function(details) {
+      confirmReservation('approved')
+      alert('Transaction completed by ' + details.payer.name.given_name + '!');
+      window.location.href = 'reservation.php'
+    });
+  },
+  onCancel: function(data) {
+    confirmReservation('pending')
+    window.location.href = 'reservation.php'
+  }
+}).render('#paypal-button-container');
+
+
+
+</script>
+<script>
+     const checkForm2 = ()  => {
+            var firstname = document.getElementById('firstname').value
+            var middlename = document.getElementById('middlename').value
+            var lastname = document.getElementById('lastname').value
+            var address = document.getElementById('address').value
+            var contact_no = document.getElementById('contact_no').value
+
+            return firstname != '' && middlename != '' && lastname != '' && address != '' && contact_no != '' ? true : false
+
+        }
+</script>
 </html>

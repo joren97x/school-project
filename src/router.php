@@ -71,7 +71,7 @@
                 break;
             case 'confirmRes':
                 $back = new backend();
-                echo $back->confirmRes($_POST['room_id'], $_POST["firstname"], $_POST["middlename"], $_POST["lastname"], $_POST["address"], $_POST["contact_no"], $_POST["payment_process"], $_POST['room_price'], $_POST['user_id']);
+                echo $back->confirmRes($_POST['room_id'], $_POST["firstname"], $_POST["middlename"], $_POST["lastname"], $_POST["address"], $_POST["contact_no"], $_POST["payment_process"], $_POST['room_price'], $_POST['status'], $_POST['date'], $_POST['user_id']);
                 break;
             case 'approveRes':
                 $back = new backend();

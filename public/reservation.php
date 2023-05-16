@@ -16,6 +16,11 @@ session_start();
     <title>Dashboard</title>
     <style>
 
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
     table {
         border-collapse: collapse;
         width: 100%;
@@ -37,7 +42,7 @@ session_start();
         height: 26px;
         line-height: 26px;
         text-align: center;
-        padding: 2px
+        padding: 2px;
     }
 
     #btn-cancel{
@@ -53,6 +58,11 @@ session_start();
         margin-left: 8px;
         border-radius: 12px;
     }
+    
+    .container-fluid {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
 
     </style>
 
@@ -65,7 +75,7 @@ session_start();
         <input type="hidden" value="<?php echo $_SESSION['userType'] ?>" id="userType">
         <input type="hidden" value="<?php echo $_SESSION['userId'] ?>" id="user_id">
         
-        <div class="container " style="margin-top: 100px">
+        <div class="container-fluid " style="margin-top: 100px">
 
             <header class="fs-1 text-center">ALL RESERVATIONS</header>
                 
@@ -73,7 +83,7 @@ session_start();
             <!-- <div class="row" id="roomDiv" name="roomDiv">
 
             </div> -->
-                <table class="table text-center">
+                <table class="table text-center border border-success" style="margin-bottom: 280px">
                     <thead class="table-primary">
                         <tr >
                             <th scope="col" >#</th>
@@ -83,6 +93,7 @@ session_start();
                             <th scope="col">Contact No.</th>
                             <th scope="col">Payment Process</th>
                             <th scope="col">Guest House Address</th>
+                            <th scope="col">Date</th>
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>

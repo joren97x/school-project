@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2023 at 12:45 PM
+-- Generation Time: May 15, 2023 at 06:24 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -29,7 +29,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `createAccount` (IN `fname` VARCHAR(
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteReservation` (IN `resId` INT)   DELETE FROM tbl_reservation WHERE res_id = resId$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllReservations` ()   SELECT * FROM tbl_reservation$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllReservations` ()   SELECT * FROM tbl_reservation ORDER BY res_id$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllRoom` ()   SELECT * FROM rooms$$
 
@@ -62,7 +62,8 @@ CREATE TABLE `rooms` (
 
 INSERT INTO `rooms` (`room_id`, `room_name`, `room_details`, `room_price`, `room_location`, `room_link`, `room_img`, `room_no`) VALUES
 (69, 'Guest Room 1', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 2000, 'asd', 'dsdsd', 'room1.png room2.png room4.png ', 1),
-(72, 'Guest Room 2 ', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,', 2500, 'bagusng', 'e', 'room1.png room2.png ', 1);
+(72, 'Guest Room 2 ', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,', 2500, 'bagusng', 'e', 'room1.png room2.png ', 1),
+(73, 'Guest House 3', '\"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\"\n\"There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain...\"', 50000, 'Cordova', 'dssds', 'guest.png room1.png room2.png room4.png ', 1);
 
 -- --------------------------------------------------------
 
@@ -88,7 +89,9 @@ INSERT INTO `tbl_account` (`account_id`, `firstname`, `lastname`, `email`, `pass
 (2, 'Jane', 'Doe', 'jane@doe.com', '143', 'admin'),
 (22, 'Juan', 'Dela Cruz', 'juan@email.com', 'asd', 'user'),
 (23, 'Dreamy', 'Bull', 'dreamy@bull.com', 'ambatukam', 'user'),
-(25, 'Burdagol', 'Burikitikitk', 'hehe@h.com', '123', 'user');
+(25, 'Burdagol', 'Burikitikitk', 'hehe@h.com', '123', 'user'),
+(28, 'John2', 'Doe2', 'josdf@dad.com', 'dcf087f55cd12dff4d58c04ecc62c17c', 'user'),
+(29, 'John2', 'Doe2', 'asda@dsad.com', 'dcf087f55cd12dff4d58c04ecc62c17c', 'user');
 
 -- --------------------------------------------------------
 
@@ -110,7 +113,7 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`account_id`, `firstname`, `email`, `password`, `userType`, `cash`) VALUES
-(1, 'jose', 'admin', 'admin', 'admin', '10393');
+(1, 'jose', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', '89893');
 
 -- --------------------------------------------------------
 
@@ -126,16 +129,19 @@ CREATE TABLE `tbl_reservation` (
   `address` varchar(222) NOT NULL,
   `contact_no` varchar(11) NOT NULL,
   `payment_process` varchar(111) NOT NULL,
-  `room_address` varchar(111) NOT NULL
+  `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_reservation`
 --
 
-INSERT INTO `tbl_reservation` (`res_id`, `room_id`, `user_id`, `name`, `address`, `contact_no`, `payment_process`, `room_address`) VALUES
-(54, 69, 1, 'ds as sdas', '34', '34', 'paypal', ''),
-(55, 69, 1, 'ds as sdas', '34', '34', 'paypal', '');
+INSERT INTO `tbl_reservation` (`res_id`, `room_id`, `user_id`, `name`, `address`, `contact_no`, `payment_process`, `status`) VALUES
+(65, 72, 1, 'd d d', 'd', '232', 'paypal', 'pending'),
+(66, 72, 1, 'dsfd df df', 'df', '23', 'paypal', 'pending'),
+(67, 72, 29, 'sd sd sd', 'ds', '322', 'paypal', 'approved'),
+(68, 72, 29, 'sd sd sd', 'ds', '322', 'paypal', 'pending'),
+(69, 72, 29, 'sd sd sd', 'ds', '322', 'paypal', 'pending');
 
 -- --------------------------------------------------------
 
@@ -202,13 +208,13 @@ ALTER TABLE `useradmin`
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `tbl_account`
 --
 ALTER TABLE `tbl_account`
-  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `tbl_admin`
@@ -220,7 +226,7 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
-  MODIFY `res_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `res_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `useradmin`
