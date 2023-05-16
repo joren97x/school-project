@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2023 at 06:24 AM
+-- Generation Time: May 16, 2023 at 08:13 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -63,7 +63,11 @@ CREATE TABLE `rooms` (
 INSERT INTO `rooms` (`room_id`, `room_name`, `room_details`, `room_price`, `room_location`, `room_link`, `room_img`, `room_no`) VALUES
 (69, 'Guest Room 1', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 2000, 'asd', 'dsdsd', 'room1.png room2.png room4.png ', 1),
 (72, 'Guest Room 2 ', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,', 2500, 'bagusng', 'e', 'room1.png room2.png ', 1),
-(73, 'Guest House 3', '\"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\"\n\"There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain...\"', 50000, 'Cordova', 'dssds', 'guest.png room1.png room2.png room4.png ', 1);
+(73, 'Guest House 3', '\"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\"\n\"There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain...\"', 50000, 'Cordova', 'dssds', 'guest.png room1.png room2.png room4.png ', 1),
+(74, 'Guest Room 4', 'This is without doubt THE BEST LOCATION you could ever ask for when visiting Sydney. \n2 minute walk to everything that is wonderful and local in the inner-city village of Surry Hills, and a short walk further to Sydney\'s CBD, Hyde Park or Centennial Park. Across the road from the iconic Sydney Cricket Ground and other sporting venues', 5500, 'Sydney', 'asd', 'guest.png room1.png room2.png room4.png rooom.png ', 2),
+(75, 'Guest House 5', 'The src property can be changed at any time. However, the new image inherits the height and width attributes of the original image, if not new height and width properties are specified.', 5400, 'Cordova', 'e', 'house5.png house6.png room1.png room2.png room4.png rooom.png ', 1),
+(76, 'Guest House 6', 'This guesthouse has 2 floors located in Wirobrajan\'s Residential area, 8mins to city center. All the 3 private rooms located on the 2nd floor, fit for 2 person, and include a private toilet inside (water heater & AC). At the same floor, located the shared facilities; a pantry, dining table, lounge, small gallery, & a view-ing terrace. The 1st floor is where my parents spend their time plus a kitchen, a fish pond, and some shared area that you can use.', 2000, 'Jakarta', 'asd', 'house5.png ', 1),
+(77, 'Guest House 9', 'A modern, comfortable room in the charming and peaceful neighbourhood of Seddon, just over fifteen minutes from the centre of Melbourne.\n\nThe space\nThe room has everything you need for a comfortable stay, including a double bed, towels, air conditioning, wardrobe space, and a private en-suite bathroom. There\'s also a des', 3500, 'Japan', 's', 'house6.png room1.png room2.png room4.png rooom.png ', 1);
 
 -- --------------------------------------------------------
 
@@ -113,7 +117,7 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`account_id`, `firstname`, `email`, `password`, `userType`, `cash`) VALUES
-(1, 'jose', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', '89893');
+(1, 'jose', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', '151893');
 
 -- --------------------------------------------------------
 
@@ -129,19 +133,26 @@ CREATE TABLE `tbl_reservation` (
   `address` varchar(222) NOT NULL,
   `contact_no` varchar(11) NOT NULL,
   `payment_process` varchar(111) NOT NULL,
-  `status` varchar(10) NOT NULL
+  `status` varchar(10) NOT NULL,
+  `res_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_reservation`
 --
 
-INSERT INTO `tbl_reservation` (`res_id`, `room_id`, `user_id`, `name`, `address`, `contact_no`, `payment_process`, `status`) VALUES
-(65, 72, 1, 'd d d', 'd', '232', 'paypal', 'pending'),
-(66, 72, 1, 'dsfd df df', 'df', '23', 'paypal', 'pending'),
-(67, 72, 29, 'sd sd sd', 'ds', '322', 'paypal', 'approved'),
-(68, 72, 29, 'sd sd sd', 'ds', '322', 'paypal', 'pending'),
-(69, 72, 29, 'sd sd sd', 'ds', '322', 'paypal', 'pending');
+INSERT INTO `tbl_reservation` (`res_id`, `room_id`, `user_id`, `name`, `address`, `contact_no`, `payment_process`, `status`, `res_date`) VALUES
+(65, 72, 1, 'd d d', 'd', '232', 'paypal', 'pending', '2023-05-12'),
+(66, 72, 1, 'dsfd df df', 'df', '23', 'paypal', 'pending', '2023-05-15'),
+(67, 72, 29, 'sd sd sd', 'ds', '322', 'paypal', 'approved', '2023-05-15'),
+(68, 72, 29, 'sd sd sd', 'ds', '322', 'paypal', 'pending', '2023-05-15'),
+(69, 72, 29, 'sd sd sd', 'ds', '322', 'paypal', 'pending', '2023-05-15'),
+(70, 72, 1, 'ere reer ere', 'sds', '3434', 'paypal', 'pending', '0000-00-00'),
+(71, 72, 1, '43as sds asda', 'das', '34', 'paypal', 'approved', '0000-00-00'),
+(72, 72, 1, 'Jose Manaloto Dela Cruz', 'Manila', '092323434', 'paypal', 'pending', '0000-00-00'),
+(73, 72, 1, 'John petmalu Dela Cruz', 'asdasd', '096549853', 'paypal', 'approved', '2023-04-15'),
+(74, 73, 23, 'Dreamy Ambassin Bull', 'California', '0934354656', 'paypal', 'approved', '2023-04-15'),
+(75, 69, 1, 'John king Doe', 'buagsong', '09343434344', 'paypal', 'approved', '2023-04-16');
 
 -- --------------------------------------------------------
 
@@ -208,7 +219,7 @@ ALTER TABLE `useradmin`
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT for table `tbl_account`
@@ -226,7 +237,7 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
-  MODIFY `res_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `res_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `useradmin`
