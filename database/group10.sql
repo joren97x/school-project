@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2023 at 03:34 PM
+-- Generation Time: May 17, 2023 at 03:32 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -27,11 +27,15 @@ DELIMITER $$
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `createAccount` (IN `fname` VARCHAR(200), IN `lname` VARCHAR(200), IN `mail` VARCHAR(200), IN `pass` VARCHAR(200), IN `utype` VARCHAR(7))   INSERT INTO tbl_account (firstname, lastname, email, password, userType) VALUES (fname, lname, mail, pass, utype)$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteGuestHouse` (IN `roomid` INT)   DELETE FROM `rooms` WHERE `room_id` = roomid$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteReservation` (IN `resId` INT)   DELETE FROM tbl_reservation WHERE res_id = resId$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllReservations` ()   SELECT * FROM tbl_reservation ORDER BY res_id$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllRoom` ()   SELECT * FROM rooms$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getReservations` (IN `userid` INT)   SELECT * FROM `tbl_reservation` WHERE `user_id` = userid$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getRoomDetail` (IN `rid` INT)   SELECT * FROM rooms WHERE room_id = rid$$
 
@@ -61,7 +65,6 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`room_id`, `room_name`, `room_details`, `room_price`, `room_location`, `room_link`, `room_img`, `room_no`) VALUES
-(69, 'Guest Room 1', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 2000, 'asd', 'dsdsd', 'room1.png room2.png room4.png ', 1),
 (72, 'Guest Room 2 ', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,', 2500, 'bagusng', 'e', 'room1.png room2.png ', 1),
 (73, 'Guest House 3', '\"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\"\n\"There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain...\"', 50000, 'Cordova', 'dssds', 'guest.png room1.png room2.png room4.png ', 1),
 (74, 'Guest Room 4', 'This is without doubt THE BEST LOCATION you could ever ask for when visiting Sydney. \n2 minute walk to everything that is wonderful and local in the inner-city village of Surry Hills, and a short walk further to Sydney\'s CBD, Hyde Park or Centennial Park. Across the road from the iconic Sydney Cricket Ground and other sporting venues', 5500, 'Sydney', 'asd', 'guest.png room1.png room2.png room4.png rooom.png ', 2),
@@ -117,7 +120,7 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`account_id`, `firstname`, `email`, `password`, `userType`, `cash`) VALUES
-(1, 'jose', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', '155393');
+(1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', '292393');
 
 -- --------------------------------------------------------
 
@@ -134,20 +137,25 @@ CREATE TABLE `tbl_reservation` (
   `contact_no` varchar(11) NOT NULL,
   `payment_process` varchar(111) NOT NULL,
   `status` varchar(10) NOT NULL,
-  `res_date` date NOT NULL
+  `res_date` date NOT NULL,
+  `expire_time` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_reservation`
 --
 
-INSERT INTO `tbl_reservation` (`res_id`, `room_id`, `user_id`, `name`, `address`, `contact_no`, `payment_process`, `status`, `res_date`) VALUES
-(67, 72, 29, 'sd sd sd', 'ds', '322', 'paypal', 'approved', '2023-05-15'),
-(68, 72, 29, 'sd sd sd', 'ds', '322', 'paypal', 'pending', '2023-05-15'),
-(69, 72, 29, 'sd sd sd', 'ds', '322', 'paypal', 'pending', '2023-05-15'),
-(74, 73, 23, 'Dreamy Ambassin Bull', 'California', '0934354656', 'paypal', 'approved', '2023-04-15'),
-(75, 69, 1, 'John king Doe', 'buagsong', '09343434344', 'paypal', 'approved', '2023-04-16'),
-(76, 77, 1, 'John Gwapo Doe', 'Buagsong Cordova Cebu', '09123456789', 'paypal', 'pending', '2023-04-16');
+INSERT INTO `tbl_reservation` (`res_id`, `room_id`, `user_id`, `name`, `address`, `contact_no`, `payment_process`, `status`, `res_date`, `expire_time`) VALUES
+(77, 77, 1, 'asdasd sadasd asd', 'asd', '051101651', 'paypal', 'cancelled', '2023-04-16', NULL),
+(78, 73, 1, 'alexis sd jumaoas', 'nuisabdsfo', '0815113', 'paypal', 'cancelled', '2023-04-16', NULL),
+(79, 77, 1, 'joyce s degamo', 'asdasda', '0815165', 'paypal', 'approved', '2023-04-16', NULL),
+(80, 73, 1, 'dfd df df', 'dsfs', '45', 'paypal', 'pending', '2023-04-16', NULL),
+(81, 77, 1, 'sd sd sds', 'sds', '3', 'paypal', 'pending', '2023-04-16', NULL),
+(84, 77, 23, 'dreamy new forgis bull', 'hehe', '23232', 'paypal', 'cancelled', '2023-04-17', '2023-05-16 07:55:12'),
+(85, 77, 23, 'dreamy b bull', 'asdas', '34343', 'paypal', 'approved', '2023-04-17', '2023-05-18 00:00:00'),
+(86, 77, 23, 'dreamy gwapo hehehahaha', 'buagsong ', '092323233', 'paypal', 'pending', '2023-04-17', '2023-05-18 13:45:27'),
+(87, 74, 23, 's ds ds', 'ds', '34', 'paypal', 'pending', '2023-04-17', '2023-05-18 14:17:27'),
+(88, 77, 23, 'dream b bull', 'buagsong', '093434343', 'paypal', 'approved', '2023-04-17', '2023-05-18 15:04:33');
 
 -- --------------------------------------------------------
 
@@ -232,7 +240,7 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
-  MODIFY `res_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `res_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `useradmin`
