@@ -2,9 +2,7 @@ var room_id;
 $(document).ready(function() {
     var amount = 5400;
     var formattedAmount = amount.toLocaleString(undefined, { style: 'currency', currency: 'PHP' });
-    console.log(formattedAmount);
     room_id = $('#room_id').val()
-    console.log(room_id)
     viewRoomDetails()
 
     $(document).on('click', '#delete_guest_house', () => {
@@ -77,7 +75,6 @@ var viewRoomDetails = () => {
 
             var numericAmount = parseFloat(jsonData.room_price);
             var formattedAmount = numericAmount.toLocaleString(undefined, { style: 'currency', currency: 'PHP' });
-            console.log(formattedAmount);
 
             document.getElementById('house_title').innerHTML = jsonData.room_name
             document.getElementById('house_desc').innerHTML = jsonData.room_details

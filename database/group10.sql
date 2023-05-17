@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2023 at 08:13 AM
+-- Generation Time: May 16, 2023 at 03:34 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -117,7 +117,7 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`account_id`, `firstname`, `email`, `password`, `userType`, `cash`) VALUES
-(1, 'jose', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', '151893');
+(1, 'jose', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', '155393');
 
 -- --------------------------------------------------------
 
@@ -142,17 +142,12 @@ CREATE TABLE `tbl_reservation` (
 --
 
 INSERT INTO `tbl_reservation` (`res_id`, `room_id`, `user_id`, `name`, `address`, `contact_no`, `payment_process`, `status`, `res_date`) VALUES
-(65, 72, 1, 'd d d', 'd', '232', 'paypal', 'pending', '2023-05-12'),
-(66, 72, 1, 'dsfd df df', 'df', '23', 'paypal', 'pending', '2023-05-15'),
 (67, 72, 29, 'sd sd sd', 'ds', '322', 'paypal', 'approved', '2023-05-15'),
 (68, 72, 29, 'sd sd sd', 'ds', '322', 'paypal', 'pending', '2023-05-15'),
 (69, 72, 29, 'sd sd sd', 'ds', '322', 'paypal', 'pending', '2023-05-15'),
-(70, 72, 1, 'ere reer ere', 'sds', '3434', 'paypal', 'pending', '0000-00-00'),
-(71, 72, 1, '43as sds asda', 'das', '34', 'paypal', 'approved', '0000-00-00'),
-(72, 72, 1, 'Jose Manaloto Dela Cruz', 'Manila', '092323434', 'paypal', 'pending', '0000-00-00'),
-(73, 72, 1, 'John petmalu Dela Cruz', 'asdasd', '096549853', 'paypal', 'approved', '2023-04-15'),
 (74, 73, 23, 'Dreamy Ambassin Bull', 'California', '0934354656', 'paypal', 'approved', '2023-04-15'),
-(75, 69, 1, 'John king Doe', 'buagsong', '09343434344', 'paypal', 'approved', '2023-04-16');
+(75, 69, 1, 'John king Doe', 'buagsong', '09343434344', 'paypal', 'approved', '2023-04-16'),
+(76, 77, 1, 'John Gwapo Doe', 'Buagsong Cordova Cebu', '09123456789', 'paypal', 'pending', '2023-04-16');
 
 -- --------------------------------------------------------
 
@@ -237,7 +232,7 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
-  MODIFY `res_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `res_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `useradmin`

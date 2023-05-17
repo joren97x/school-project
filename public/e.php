@@ -71,14 +71,24 @@
 <body class="bg-light">
 	
 <?php
-// Assuming you have retrieved the money value from the database
-$amount = 1234;
 
-// Format the money value with two decimal places and a comma as the thousands separator
-$formattedAmount = number_format($amount, 0, '.', ',');
+    $currentDateTime = date('Y-m-d H:i:s');
+    $tomorrowDateTime = date('Y-m-d H:i:s', strtotime('+1 day'));
 
-// Display the formatted amount
-echo $formattedAmount;
+        echo $currentDateTime; 
+        ?>
+        <br>
+        <?php 
+        
+        echo $tomorrowDateTime;
+
+        if($currentDateTime < $tomorrowDateTime) {
+            echo "not yet expired nigga";
+        }
+        else {
+            echo "expired";
+        }
+
 ?>
 
 

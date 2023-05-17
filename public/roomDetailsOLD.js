@@ -55,8 +55,6 @@ var checkLogin = () => {
     return ($('#roomName').val() != '' && $('#room_price').val() != '' && $('#room_details').val() != '' && $('#room_link').val() != '' && $('#room_no').val() != '' && $('#room_location').val() != '') ? true : false
 }
 
-
-
 var viewRoomDetails = () => {
     $.ajax({
         type: 'POST',

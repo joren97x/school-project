@@ -1,6 +1,5 @@
 $(document).ready(function() {
     viewRooms()
-    console.log("BOANG?")
 })
 
 var viewRooms = () => {
@@ -24,7 +23,7 @@ var viewRooms = () => {
                 var formattedAmount = numericAmount.toLocaleString(undefined, { minimumFractionDigits: 0, style: 'currency', currency: 'PHP' });
                 str += 
                         
-                            '<div class="room  col-3  my-2"><a href="roomDetails.php?room_id='+room.room_id+'">' +
+                            '<div class="room  col-lg-3 col-md-4 col-sm-6 my-2  my-2"><a href="roomDetails.php?room_id='+room.room_id+'">' +
                                 '<div class="card ">'  +
                                     '<img class="card-img-top" src="../images/'+imgArr[0]+'" style="height: 265px;" alt="Room Image">' +
                                     '<div class="card-body  ">'+ 

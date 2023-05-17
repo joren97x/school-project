@@ -17,6 +17,11 @@ if(isset($_SESSION['userType'])){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <link rel="stylesheet" href="../style.css">
     <title>Document</title>
+    <style>
+         a:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+    </style>
 </head>
 
 <body>

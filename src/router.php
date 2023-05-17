@@ -28,13 +28,13 @@
                 $back = new backend();
                 echo $back->viewDetails($_POST['roomId']);
                 break;
-            case 'viewReservation':
+            case 'viewReservationAdmin':
                 $back = new backend();
-                echo $back->viewReservations();
+                echo $back->viewReservationAdmin();
                 break;
             case 'viewReservationUser':
                 $back = new backend();
-                echo $back->viewReservation($_POST['user_id']);
+                echo $back->viewReservationUser($_POST['user_id']);
                 break;
             case 'deleteReservation':
                 $back = new backend();

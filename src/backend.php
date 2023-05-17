@@ -78,12 +78,12 @@
             return self::getAllRooms();
         }
 
-        public function viewReservations()
+        public function viewReservationAdmin()
         {
             return self::getAllReservations();
         }
 
-        public function viewReservation($user_id)
+        public function viewReservationUser($user_id)
         {
             return self::getReservations($user_id);
         }
@@ -488,7 +488,8 @@
                         $stmt = $db->getConn()->prepare($this->confirmReservationQuery());
                         $stmt2 = $db->getConn()->prepare($this->addCash());
                         $fullname = $firstname." ".$middlename." ".$lastname;
-                        $stmt->execute(array($room_id, $user_id, $fullname, $address, $contact_no, $payment_process, $status, $date));
+                        $tomorrowDateTime = date('Y-m-d H:i:s', strtotime('+1 day'));
+                        $stmt->execute(array($room_id, $user_id, $fullname, $address, $contact_no, $payment_process, $status, $date, $tomorrowDateTime));
                         $stmt2->execute(array($room_price));
                         $res = $stmt->fetch();
                         $res2 = $stmt2->fetch();
@@ -728,7 +729,7 @@
 
         private function confirmReservationQuery() 
         {
-            return "INSERT INTO `tbl_reservation` (`room_id`, `user_id`, `name`, `address`, `contact_no`, `payment_process`, `status`, `res_date`) VALUES(?,?,?,?,?,?,?,?);";
+            return "INSERT INTO `tbl_reservation` (`room_id`, `user_id`, `name`, `address`, `contact_no`, `payment_process`, `status`, `res_date`, `expire_time`) VALUES(?,?,?,?,?,?,?,?,?);";
         }
 
         private function deleteReservationQuery()

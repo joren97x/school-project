@@ -8,6 +8,7 @@ if(!isset($_SESSION['userType'])){
 <html>
 
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
@@ -27,40 +28,35 @@ if(!isset($_SESSION['userType'])){
 </head>
 
 <body class="bg-white">
-
-<div class="container">
-    <div class="row mt-5">
-        <div class="col-6 ">
-            <label class="h3 mx-4 ">Confirm Reservation</label><br>
-            <div class="container w-75 my-3 justify-content-center">
-                <form action="" id="my-form">
-                <h5>Personal Information</h5>
-                <input type="text" id="firstname" class="form-control my-2" placeholder="Firstname">
-                <input type="text" id="middlename" class="form-control my-2" placeholder="Middlename">
-                <input type="text" id="lastname" class="form-control my-2" placeholder="Lastname">
-                <input type="text" id="address" class="form-control my-2" placeholder="Address">
-                <input type="number" id="contact_no" class="form-control my-2" placeholder="Contact Number">
-                <select name="" id="payment_process" class="form-select">
-                    <option value="paypal">Paypal</option>
-                    <option value="gcash">Gcash</option>
-                    <option value="paymaya">Paymaya</option>
-                </select>
-                <input type="hidden" value="<?php echo $_GET['room_id'] ?>" id="room_id">
-                <input type="hidden" value="<?php echo $_SESSION['userId'] ?>" id="user_id">
-                <input type="hidden" id="room_price">
-                <div class="paypal-button-container mt-3" id="paypal-button-container"></div>
-
-                </form>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-lg-6">
+                <label class="h3 mx-4">Confirm Reservation</label><br>
+                <div class="container my-3">
+                    <form action="" id="my-form">
+                        <h5>Personal Information</h5>
+                        <input type="text" id="firstname" class="form-control my-2" placeholder="Firstname">
+                        <input type="text" id="middlename" class="form-control my-2" placeholder="Middlename">
+                        <input type="text" id="lastname" class="form-control my-2" placeholder="Lastname">
+                        <input type="text" id="address" class="form-control my-2" placeholder="Address">
+                        <input type="number" id="contact_no" class="form-control my-2" placeholder="Contact Number">
+                        <select name="" id="payment_process" class="form-select">
+                            <option value="paypal">Paypal</option>
+                            <option value="gcash">Gcash</option>
+                            <option value="paymaya">Paymaya</option>
+                        </select>
+                        <input type="hidden" value="<?php echo $_GET['room_id'] ?>" id="room_id">
+                        <input type="hidden" value="<?php echo $_SESSION['userId'] ?>" id="user_id">
+                        <input type="hidden" id="room_price">
+                        <div class="paypal-button-container mt-3" id="paypal-button-container"></div>
+                    </form>
+                </div>
             </div>
-        </div>
-        <div class="col-5 shadow mt-5 bg-white " style="border-radius: 15px" id="paymentDetailDiv">
-           
+            <div class="col-lg-5 shadow mt-5 bg-white" style="border-radius: 15px" id="paymentDetailDiv"></div>
         </div>
     </div>
-    </div>
-
-
 </body>
+
 <script src="jquery.js"></script>
 <script src="payment.js"></script>
 <script src="https://www.paypal.com/sdk/js?client-id=ARvqGCp7R4gLQgzgpGElbfWh8OGfx6WfpQSYmVFUeegiEVrRkFbquSHDo9Am6agbABFhvU-8_d-2f2D4"></script>

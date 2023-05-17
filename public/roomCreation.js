@@ -7,7 +7,7 @@ $(document).ready(function() {
             const files = fileInput.files;
             var combinedFiles = ""
             for (let i = 0; i < files.length; i++) {
-            combinedFiles += files[i].name + " ";
+                combinedFiles += files[i].name + " ";
             }
             createRoom(combinedFiles)
         } else {

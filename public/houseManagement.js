@@ -19,25 +19,24 @@ var viewRooms = () => {
             }
             jsonData.forEach(room => {
                 var imgArr = room.room_img.split(" ")
-                console.log("hello giatay?")
+                var numericAmount = parseFloat(room.room_price);
+                var formattedAmount = numericAmount.toLocaleString(undefined, { minimumFractionDigits: 0, style: 'currency', currency: 'PHP' });
                 str += 
-                                '<div class=" col-4 card shadow " id="card">' +
-                                    '<img class="card-img-top my-2" src="../images/'+imgArr[0]+'" style="height: 212px;" alt="Room Image">' +
-                                    '<div class="card-body bg-white">'+ 
-                                        ' <div "class="room-name">'+ room.room_name +'</div>' +
-                                        '<div class="row">'+
-                                            '<div class="col-6"></div> '+
-                                            '<div class="col-6 justify-content-end d-flex"> <a href="roomDetails.php?room_id='+room.room_id+'"><button type="button" id="btn-edit" class="btn btn-success" style="background-color: #ff7f50; border-color: #ff7f50">view details</button></a></div>'+
-                                            //'<div class="col-3 justify-content-end d-flex"> <button type="button" onclick="deleteFunction('+room.room_id+')" value="'+room.room_id+'" id="btn-delete" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">DELETE</button></div>'+
-                                        '</div>'+
+                            '<div class="room  col-3  my-2"><a href="roomDetails.php?room_id='+room.room_id+'">' +
+                                '<div class="card ">'  +
+                                    '<img class="card-img-top" src="../images/'+imgArr[0]+'" style="height: 265px;" alt="Room Image">' +
+                                    '<div class="card-body  ">'+ 
+                                        ' <div "class="room-name "><h5>'+ room.room_name +'</h5></div>' +
+                                        '<div class="room-desc">Lorem Ipsum Neque porro quisquam est qui dolorem ipsum</div>' +
+                                        '<div><p><label class="fw-bold">'+formattedAmount+'</label> monthly</p></div>'+
                                     '</div>'+
+                                '</div></a>' +
                             '</div>'
             }) 
             $('#roomDiv').append(str)
         },
         error: (xhr, ajaxOptions, thrownError) => {console.log(thrownError)}
     })
-
 }
 
 

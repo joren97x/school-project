@@ -1,4 +1,5 @@
 $(document).ready(() => {
+
     if($('#userType').val() == 'admin') {
         viewReservationsAdmin()
     }
@@ -9,39 +10,6 @@ $(document).ready(() => {
         alert("Login please")
         window.location.href = 'login.php'
     }
-
-    $(document).on('click', '#btn-cancel', () => {
-        $.ajax({
-            type: 'POST',
-            url: '../src/router.php',
-            data: {
-                choice: 'cancelRes',
-                reservation_id: $('#btn-cancel').val()
-            },
-            success: (data) => {
-                console.log(data)
-                //window.location.href = 'reservation.php'
-            },
-            error: (xhr, ajaxOptions, thrownError) => {console.log(thrownError)}
-        })
-
-    })
-
-    $(document).on('click', '#btn-delete', () => {
-        $.ajax({
-            type: 'POST',
-            url: '../src/router.php',
-            data: {
-                choice: 'deleteReservation',
-                reservation_id: $('#btn-cancel').val()
-            },
-            success: (data) => {
-                console.log(data)
-                window.location.href = 'reservation.php'
-            },
-            error: (xhr, ajaxOptions, thrownError) => {console.log(thrownError)}
-        })
-    })
 
     $(document).on('click', '#btn-approve', () => {
         $.ajax({
@@ -68,7 +36,7 @@ const viewReservationsAdmin = () => {
         type: 'POST',
         url: '../src/router.php',
         data: {
-            choice: 'viewReservation'
+            choice: 'viewReservationAdmin'
         },
         success: (data) => {
             var jsonData = JSON.parse(data)
@@ -87,8 +55,17 @@ const viewReservationsAdmin = () => {
                     },
                     success: (data) => {
                         var jsonData2 = JSON.parse(data)
-                        var imgArr = jsonData2.room_img.split(" ")
-                
+                        let status = ''
+                        switch (res.status) {
+                            case 'pending':
+                                status += '<span class="bg-warning" id="status_span">'+res.status+'</span>'
+                                break
+                            case 'approved':
+                                status += '<span class="bg-success" id="status_span">'+res.status+'</span>'
+                                break
+                            case 'cancelled':
+                                status += '<span class="bg-danger" id="status_span">'+res.status+'</span>'
+                        }
                         let tbl = ''
                         tbl += '<tr><td scope="row">'+ res.res_id +'</td>'+
                                 '<td>'+ jsonData2.room_name +'</td>'+
@@ -98,11 +75,11 @@ const viewReservationsAdmin = () => {
                                 '<td>'+ res.payment_process +'</td>'+
                                 '<td>'+ jsonData2.room_location +'</td>'+
                                 '<td>'+ res.res_date +'</td>'+
-                                '<td ><span class="bg-warning" id="status_span">'+res.status+'</span></td>'+
+                                '<td >'+status+'</td>'+
                                 '<td >'+
-                                '<button class="btn btn-success" id="btn-approve" value="'+ res.res_id +'"> <i class="bi bi-check2-circle"></i> </button>'+
-                                '<button class="btn btn-danger" id="btn-cancel" value="'+ res.res_id +'"> <i class="bi bi-x-circle"></i> </button>'+
-                                '<button class="btn btn-danger" id="btn-delete" value="'+ res.res_id +'"> <i class="bi bi-trash2"></i> </button></td></tr>'
+                                //'<button class="btn btn-success" id="btn-approve" value="'+ res.res_id +'"> <i class="bi bi-check2-circle"></i> </button>'+
+                                '<button class="btn btn-danger" id="btn-cancel" onclick="cancelReservation('+ res.res_id +')"> <i class="bi bi-x-circle"></i> </button>'+
+                                '<button class="btn btn-danger" id="btn-delete" onclick="deleteReservation('+ res.res_id +')"> <i class="bi bi-trash2"></i> </button></td></tr>'
 
                         $('#tbl').append(tbl)
                         
@@ -141,7 +118,32 @@ const viewReservationsUser = () => {
                     },
                     success: (data) => {
                         var jsonData2 = JSON.parse(data)
-                        var imgArr = jsonData2.room_img.split(" ")
+                        let btn_pay = ''
+                        let status = ''
+                        let btn = ''
+                        switch (res.status) {
+                            case 'pending':
+                                status += '<span class="bg-warning" id="status_span">'+res.status+'</span>'
+                                break
+                            case 'approved':
+                                status += '<span class="bg-success" id="status_span">'+res.status+'</span>'
+                                break
+                            case 'cancelled':
+                                status += '<span class="bg-danger" id="status_span">'+res.status+'</span>'
+                        }
+                        console.log(res.name)
+                        console.log("expiration date: "+res.expire_time)
+                        var currentDate = new Date();
+                        var formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' ');
+                        console.log("date today: "+formattedDate);
+
+                        if(formattedDate > res.expire_time) {
+                            btn += '<button class="btn btn-danger" disabled id="btn-cancel" onclick="cancelReservation('+ res.res_id +')"> <i class="bi bi-x-circle"></i> </button>'
+                        }
+                        else {
+                            btn += '<button class="btn btn-danger" id="btn-cancel" onclick="cancelReservation('+ res.res_id +')"> <i class="bi bi-x-circle"></i> </button>'
+                        }
+
                 let tbl = ''
                         tbl += '<tr><td scope="row">'+ res.res_id +'</td>'+
                                 '<td>'+ jsonData2.room_name +'</td>'+
@@ -151,10 +153,11 @@ const viewReservationsUser = () => {
                                 '<td>'+ res.payment_process +'</td>'+
                                 '<td>'+ jsonData2.room_location +'</td>'+
                                 '<td>'+ res.res_date +'</td>'+
-                                '<td ><span class="bg-warning" id="status_span">'+res.status+'</span></td>'+
+                                '<td >'+status+'</td>'+
                                 '<td >'+
-                                '<button class="btn btn-success" id="btn-approve" value="'+ res.res_id +'"> <i class="bi bi-check2-circle"></i> </button>'+
-                                '<button class="btn btn-danger" id="btn-cancel" value="'+ res.res_id +'"> <i class="bi bi-x-circle"></i> </button>'+
+                                btn_pay +
+                                //'<button class="btn btn-success" id="btn-approve" value="'+ res.res_id +'"> <i class="bi bi-check2-circle"></i> </button>'+
+                                btn +
                                 '<button class="btn btn-danger" id="btn-delete" value="'+ res.res_id +'"> <i class="bi bi-trash2"></i> </button></td></tr>'
 
                         $('#tbl').append(tbl)
@@ -169,4 +172,35 @@ const viewReservationsUser = () => {
     
 }
 
+function cancelReservation(res_id) {
+    $.ajax({
+        type: 'POST',
+        url: '../src/router.php',
+        data: {
+            choice: 'cancelRes',
+            reservation_id: res_id
+        },
+        success: (data) => {
+            console.log(data)
+            window.location.href = 'reservation.php'
+        },
+        error: (xhr, ajaxOptions, thrownError) => {console.log(thrownError)}
+    })
 
+}
+
+function deleteReservation(res_id) {
+    $.ajax({
+        type: 'POST',
+        url: '../src/router.php',
+        data: {
+            choice: 'deleteReservation',
+            reservation_id: res_id
+        },
+        success: (data) => {
+            console.log(data)
+            window.location.href = 'reservation.php'
+        },
+        error: (xhr, ajaxOptions, thrownError) => {console.log(thrownError)}
+    })
+}
