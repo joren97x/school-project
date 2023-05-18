@@ -1,4 +1,7 @@
 <style>
+     body {
+            font-family: 'Questrial', sans-serif;
+        }
     .badge {
         padding: 3px 5px 2px;
         position: absolute;
@@ -32,11 +35,15 @@
         color: blue;
         background-color: whitesmoke;
     }
+    .stuff .col-2:hover{
+        background-color: whitesmoke;
+        border: 1px solid black
+    }
 </style>
 <div class="container">
     <div class="row d-flex justify-content-between align-items-center header">
         <nav class="navbar bg-white shadow fixed-top" data-bs-theme="light">
-            <div class="col-lg-8 col-md-6 col-4">
+            <div class="col-lg-7 col-md-6 col-4">
                 <button class="btn btn-white" href="#offcanvasExample" aria-controls="offcanvasExample"
                     data-bs-toggle="offcanvas">
                     <i class="bi bi-list h1 text-dark"></i>
@@ -64,11 +71,13 @@
                 <?php
             } else {
                 ?>
-                <div class="col-lg-3 col-md-3">
-                    <a href="index.php" class="mx-2 text-dark" style="text-decoration: none">Home</a>
-                    <a href="about.php" class="mx-2 text-dark" style="text-decoration: none">About</a>
-                    <a href="login.php" class="mx-2 text-dark" style="text-decoration: none">Login</a>
-                    <a href="login.php" class="mx-2 text-dark" style="text-decoration: none">Signup</a>
+                <div class="col-lg-4 col-md-3 text-start stuff">
+                    <div class="row">
+                    <div class="col-2 "><a href="index.php" class="mx-2 text-dark " style="text-decoration: none">Home</a></div>
+                    <div class="col-2"><a href="about.php" class="mx-2 text-dark" style="text-decoration: none">About</a></div>
+                    <div class="col-2 "><a href="login.php" class="mx-2 text-dark" style="text-decoration: none">Login</a></div>
+                    <div class="col-2"><a href="login.php" class="mx-2 text-dark" style="text-decoration: none">Signup</a></div>
+                    </div>
                 </div>
                 <?php
             }
@@ -109,26 +118,33 @@
                         <div class="col-10 ms-2 h6 mt-1">Create House</div>
                     </div>
                 </a>
-            <?php }
-        } ?>
+                
+            <?php } ?>
             <a href="reservation.php" style="text-decoration: none;">
                 <div class="row mx-1 rounded">
-                    <?php if (isset($_SESSION['userType'])) { ?>
                         <div class="col-1 h4 mb-1"><i class='bi bi-book'></i></div>
                         <div class="col-10 ms-2 h6 mt-1">View Reservations</div>
-                    <?php } ?>
+                </div>
+            </a>
+            <?php
+        } ?>
+            
+            <a href="about.php" style="text-decoration: none;">
+                <div class="row mx-1 rounded">
+                        <div class="col-1 h4 mb-1"><i class="bi bi-info-circle"></i></div>
+                        <div class="col-10 ms-2 h6 mt-1">About Us</div>
                 </div>
             </a>
             <!-- BOTTOM DIV -->
             <?php if (isset($_SESSION['userType'])) {
             ?>
                 <div class="profile-div"
-                    style="position: absolute; margin-left: 10px; margin-bottom: 20px; bottom: 0px;">
+                    style="position: absolute; margin-left: 20px; margin-bottom: 20px; bottom: 0px;">
                     <hr style="padding-left: 230px">
                     <div class="col-2 text-center">
                         <button class="btn btn-white dropdown-toggle" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            <i class="bi bi-person-circle h4"></i><?php echo $_SESSION['firstname']; ?>
+                            <i class="bi bi-person-circle h4"></i><label class="ms-2"><?php echo $_SESSION['firstname']; ?></label>
                         </button>
                         <div class="dropdown">
                             <ul class="dropdown-menu">

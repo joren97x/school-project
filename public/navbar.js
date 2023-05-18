@@ -1,5 +1,4 @@
 $(document).ready(() => {
-
     getReservation()
 
     user_type = document.getElementById('user_type').value;
@@ -39,6 +38,7 @@ const getReservation = () => {
                                 break
                         }
                     }
+                    
                 })
                 if (count === 0) {
                     document.getElementById('num_reservation').innerHTML = "0"
@@ -46,10 +46,27 @@ const getReservation = () => {
                 }
                 document.getElementById('num_reservation').innerHTML = count
             } else {
-                document.getElementById('num_reservation').innerHTML = jsonData.length
+                let count = 0
                 jsonData.forEach(res => {
-                    str += '<div class="row"><a href="reservation.php" style="text-decoration: none;"> <li style="margin: 10px">' + res[3] + ' reserved a guest room.</li></a></div>'
+                    switch(res.status) {
+                        // case 'approved':
+                        //     str += '<div class="row"><a href="reservation.php" style="text-decoration: none;"> <li style="margin:20px">'+res[3]+' reservation has been approved.</li></a></div>'
+                        //     break
+                        case 'cancelled':
+                            count++
+                            str += '<div class="row"><a href="reservation.php" style="text-decoration: none;"> <li style="margin:20px">'+res[3]+' cancelled a reservation</li></a></div>'
+                            break
+                        case 'pending':
+                            count++
+                            str += '<div class="row"><a href="reservation.php" style="text-decoration: none;"> <li style="margin:20px">'+res[3]+' has a pending reservation.</li></a></div>'
+                            break
+                    }
                 })
+                document.getElementById('num_reservation').innerHTML = count
+                if (count === 0) {
+                    document.getElementById('num_reservation').innerHTML = "0"
+                    str += '<div class="row text-center"> <li style=""> No notifications :( </li></div>'
+                }
             }
             $('#notification-dropdown').append(str)
         },

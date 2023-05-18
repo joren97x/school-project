@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,81 +15,15 @@
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@200&family=Questrial&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
-    <style>
-        .badge{
-        padding: 3px 5px 2px;
-        position: absolute;
-        top: 0px;
-        left: 15px;
-        display: inline-block;
-        min-width: 10px;
-        font-size: 12px;
-        font-weight: bold;
-        color: #ffffff;
-        line-height: 1;
-        vertical-align: baseline;
-        white-space: nowrap;
-        text-align: center;
-        border-radius: 10px;
-    }
-    /* .container{
-        width: 90%;
-        padding:20px;
-        margin: 100px auto;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-    } */
-    .box {
-        box-shadow: 0 0 20px rgb(0,0,0, .1);
-        transition: 1s;
-    }
-
-    .box img{
-        display: block;
-        border-radius: 5px;
-
-    }
-
-    .box:hover{
-        transform:scale(1.1);
-        z-index: 2;
-    }
 
     </style>
-    <div class="row d-flex justify-content-around">
-    <nav class="navbar bg-white shadow fixed-top" data-bs-theme="light">
-                    <button class="btn btn-white" href="#offcanvasExample" aria-controls="offcanvasExample" data-bs-toggle="offcanvas"><i class="bi bi-list h1 text-dark " ></i></button>
-   
-                            <div class="col-3" >
-                                <a href="index.php" class="mx-2 text-dark" style="text-decoration: none">Home</a>
-                                <a href="about.php" class="mx-2 text-dark" style="text-decoration: none">About</a>
-                                <a href="login.php" class="mx-2 text-dark" style="text-decoration: none">Login</a>
-                                <a href="login.php" class="mx-2 text-dark" style="text-decoration: none">Signup</a>
-                            </div>
-                  </nav>
-            </div>
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
-                aria-labelledby="offcanvasExampleLabel" style="width: 280px;">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title h2" id="offcanvasExampleLabel">Menu <?php 
-                        if(isset($_SESSION['userType'])) { 
-                            echo "<label class='text-danger'>".$_SESSION['userType']."</label> ";
-                         } 
-                         ?></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body h6" >
-                <i class="bi bi-house h3 mx-2"></i><a href="index.php" style="text-decoration: none;color: black;">Home</a><br>
-                
-                </div>
-                                
-            </div >
-
+    
+        <?php require 'navbar.php'; ?>
             <div >
                     <div class="col-lg-11 mx-auto " style="margin-top:100px;">
                         <div class="text-white  shadow-sm rounded banner bg-info text-center p-4">
@@ -119,9 +54,6 @@
                 <img src="../images/per.jpg" alt="img" style="height: 380px; width:380px; ">
                 <img src="../images/pers.jpg" alt="img" style="height: 380px; width:380px; ">
             </div>
-
-            <script src="jquery.js"></script>
-            <script src="navbar.js"></script>
 
 </body>
 </html>
